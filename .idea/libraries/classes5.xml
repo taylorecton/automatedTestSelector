@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="classes5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/work/plugins/mailer/WEB-INF/lib/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

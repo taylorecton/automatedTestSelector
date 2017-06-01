@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ssh-slaves">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/work/plugins/ssh-slaves/WEB-INF/lib/ssh-slaves.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

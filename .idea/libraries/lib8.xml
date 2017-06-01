@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib8">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/svnkit-1.7.10-jenkins-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/antlr-runtime-3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/sequence-library-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/sqljet-1.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/subversion/WEB-INF/lib/trilead-ssh2-build217-jenkins-3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

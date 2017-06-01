@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="matrix-project">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/work/plugins/matrix-project/WEB-INF/lib/matrix-project.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

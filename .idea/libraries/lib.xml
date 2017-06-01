@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/work/plugins/pam-auth/WEB-INF/lib/libpam4j-1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/pam-auth/WEB-INF/lib/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/work/plugins/pam-auth/WEB-INF/lib/jna-3.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
