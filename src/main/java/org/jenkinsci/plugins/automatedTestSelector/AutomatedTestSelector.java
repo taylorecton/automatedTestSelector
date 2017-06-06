@@ -35,6 +35,8 @@ import java.util.Collection;
  * Last modified: 06-01-2017
  */
 
+//adding a comment
+
 public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
     /**
      * MEMBER VARIABLES WILL GO HERE
