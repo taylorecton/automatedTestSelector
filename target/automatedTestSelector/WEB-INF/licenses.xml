@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<l:dependencies xmlns:l='licenses' groupId='org.jenkins-ci.plugins' artifactId='automatedTestSelector' version='1.0-SNAPSHOT'><l:dependency name='Automated Test Selector' groupId='org.jenkins-ci.plugins' artifactId='automatedTestSelector' version='1.0-SNAPSHOT' url='https://wiki.jenkins-ci.org/display/JENKINS/TODO+Plugin'><l:description>This plugin automates selection of appropriate tests.</l:description><l:license name='MIT License' url='http://opensource.org/licenses/MIT'/></l:dependency></l:dependencies>

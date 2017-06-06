@@ -3,14 +3,18 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.561</version>
+        <version>2.26</version>
     </parent>
     <artifactId>matrix-project</artifactId>
-    <version>1.4.1</version>
+    <version>1.11</version>
     <packaging>hpi</packaging>
     <name>Matrix Project Plugin</name>
     <description>Multi-configuration (matrix) project type.</description>
     <url>https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Project+Plugin</url>
+    <properties>
+      <jenkins.version>1.609</jenkins.version>
+      <java.level>6</java.level>
+    </properties>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -21,7 +25,7 @@
         <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
-      <tag>matrix-project-1.4.1</tag>
+      <tag>matrix-project-1.11</tag>
   </scm>
     <repositories>
         <repository>
@@ -37,9 +41,26 @@
     </pluginRepositories>
     <dependencies>
         <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-test-harness-tools</artifactId>
+            <version>2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>junit</artifactId>
+            <version>1.20</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>matrix-auth</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.8.5</version>
+            <version>1.9.5</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -51,7 +72,7 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.4.10</version>
+            <version>1.6.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -63,7 +84,7 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito</artifactId>
-            <version>1.4.10</version>
+            <version>1.6.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -76,6 +97,12 @@
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>script-security</artifactId>
             <version>1.13</version>
+        </dependency>
+        <dependency>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>annotations</artifactId>
+          <version>3.0.0</version>
+          <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
@@ -95,6 +122,24 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-XX:MaxPermSize=128m</argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <!-- Can be removed once moved to 2.6 parent pom -->
+    <distributionManagement>
+        <repository>
+            <id>maven.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/snapshots/</url>
+        </snapshotRepository>
+   </distributionManagement>
 </project>

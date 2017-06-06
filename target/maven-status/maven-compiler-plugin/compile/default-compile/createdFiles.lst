@@ -1,9 +1,4 @@
-org/jenkinsci/plugins/automatedTestSelector/HelloWorldBuilder.stapler
-org/jenkinsci/plugins/automatedTestSelector/HelloWorldBuilder$DescriptorImpl.class
-org/jenkinsci/plugins/automatedTestSelector/SleepBuilder$DescriptorImpl.class
-org/jenkinsci/plugins/automatedTestSelector/HelloWorldBuilder.class
-org/jenkinsci/plugins/automatedTestSelector/SleepBuilder.class
-org/jenkinsci/plugins/automatedTestSelector/HelloWorldBuilder/DescriptorImpl/doCheckName.stapler
-org/jenkinsci/plugins/automatedTestSelector/Example.class
-org/jenkinsci/plugins/automatedTestSelector/SleepBuilder.stapler
+org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.stapler
+org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.class
+org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector$DescriptorImpl.class
 META-INF/annotations/hudson.Extension

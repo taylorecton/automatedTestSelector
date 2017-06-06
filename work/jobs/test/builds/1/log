@@ -1,0 +1,23 @@
+Started by user [8mha:AAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgYu/dLi1CL9vNKcHACFIKlWvwAAAA==[0manonymous
+Building in workspace /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test/workspace
+Cloning the remote Git repository
+Cloning repository https://github.com/BearEars/automatedTestSelector.git
+ > git init /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test/workspace # timeout=10
+Fetching upstream changes from https://github.com/BearEars/automatedTestSelector.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/BearEars/automatedTestSelector.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/BearEars/automatedTestSelector.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/BearEars/automatedTestSelector.git # timeout=10
+Fetching upstream changes from https://github.com/BearEars/automatedTestSelector.git
+ > git fetch --tags --progress https://github.com/BearEars/automatedTestSelector.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision dfe1a965690b1418d5fcd38d1caf8edb58be6eec (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f dfe1a965690b1418d5fcd38d1caf8edb58be6eec
+First time build. Skipping changelog.
+You set the failure window to 23
+You set the execution window to 2
+Started getChangedFiles()
+Finished: SUCCESS

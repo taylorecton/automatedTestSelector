@@ -1,0 +1,53 @@
+Jun 06, 2017 1:18:18 PM org.eclipse.jetty.util.log.Log initialized
+INFO: Logging initialized @395ms
+Picking up existing exploded jenkins.war at /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/target/jenkins-for-test
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.server.handler.ContextHandler setContextPath
+WARNING: Empty contextPath
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.server.Server doStart
+INFO: jetty-9.2.12.v20150709
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.webapp.StandardDescriptorProcessor visitServlet
+INFO: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.server.handler.ContextHandler doStart
+INFO: Started o.e.j.w.WebAppContext@ccb4b1b{/,file:/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/target/jenkins-for-test/,AVAILABLE}{/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/target/jenkins-for-test}
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.server.AbstractConnector doStart
+INFO: Started ServerConnector@54a67a45{HTTP/1.1}{localhost:56866}
+Jun 06, 2017 1:18:19 PM org.eclipse.jetty.server.Server doStart
+INFO: Started @1249ms
+Jun 06, 2017 1:18:19 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Started initialization
+Jun 06, 2017 1:18:28 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Listed all plugins
+Jun 06, 2017 1:18:28 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Prepared all plugins
+Jun 06, 2017 1:18:28 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Started all plugins
+Jun 06, 2017 1:18:28 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Augmented all extensions
+Jun 06, 2017 1:18:30 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Loaded all jobs
+Jun 06, 2017 1:18:31 PM org.jenkinsci.main.modules.sshd.SSHD start
+INFO: Started SSHD at port 56869
+Jun 06, 2017 1:18:31 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Completed initialization
+Jun 06, 2017 1:18:31 PM hudson.UDPBroadcastThread run
+WARNING: UDP handling problem
+java.net.SocketException: Can't assign requested address
+	at java.net.PlainDatagramSocketImpl.join(Native Method)
+	at java.net.AbstractPlainDatagramSocketImpl.join(AbstractPlainDatagramSocketImpl.java:178)
+	at java.net.MulticastSocket.joinGroup(MulticastSocket.java:323)
+	at hudson.UDPBroadcastThread.run(UDPBroadcastThread.java:77)
+
+Jun 06, 2017 1:18:31 PM org.eclipse.jetty.server.Server doStart
+INFO: jetty-9.2.12.v20150709
+Jun 06, 2017 1:18:31 PM org.eclipse.jetty.server.handler.ContextHandler doStart
+INFO: Started o.e.j.s.ServletContextHandler@5990e6c5{/,null,AVAILABLE}
+Jun 06, 2017 1:18:31 PM org.eclipse.jetty.server.AbstractConnector doStart
+INFO: Started ServerConnector@47289387{HTTP/1.1}{0.0.0.0:56871}
+Jun 06, 2017 1:18:31 PM org.eclipse.jetty.server.Server doStart
+INFO: Started @13079ms
+Jun 06, 2017 1:18:32 PM org.eclipse.jetty.server.AbstractConnector doStop
+INFO: Stopped ServerConnector@54a67a45{HTTP/1.1}{localhost:0}
+Jun 06, 2017 1:18:32 PM org.eclipse.jetty.server.handler.ContextHandler doStop
+INFO: Stopped o.e.j.w.WebAppContext@ccb4b1b{/,file:/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/target/jenkins-for-test/,UNAVAILABLE}{/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/target/jenkins-for-test}
+WARN: The method class org.apache.commons.logging.impl.SLF4JLogFactory#release() was invoked.
+WARN: Please see http://www.slf4j.org/codes.html#release for an explanation.
