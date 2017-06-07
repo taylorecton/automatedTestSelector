@@ -15,5 +15,7 @@
     <orderEntry type="library" name="winstone" level="project" />
     <orderEntry type="library" name="classes4" level="project" />
     <orderEntry type="library" name="Maven: org.jenkins-ci.main:jenkins-test-harness:2.11" level="project" />
+    <orderEntry type="library" name="Maven: org.jenkins-ci.main:jenkins-core:1.625.3" level="project" />
+    <orderEntry type="library" name="Maven: org.kohsuke.stapler:stapler:1.237" level="project" />
   </component>
 </module>

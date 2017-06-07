@@ -2,11 +2,372 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="188c1170-a840-4dd7-8f55-c5549b50d502" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jline_jline_0_9_94.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jna_jna_4_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_java_sezpoz_sezpoz_1_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_47.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_47.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_groovy_groovy_all_1_8_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_fusesource_jansi_jansi_1_9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_annotation_indexer_1_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_bytecode_compatibility_transformer_1_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_main_cli_1_625_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_main_jenkins_war_war_1_625_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_main_jenkins_war_war_for_test_1_625_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_main_remoting_2_53_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_modules_instance_identity_1_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jenkins_ci_modules_windows_slave_installer_1_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jvnet_tiger_types_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_kohsuke_stapler_stapler_groovy_1_237.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_kohsuke_stapler_stapler_jelly_1_237.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_kohsuke_stapler_stapler_jrebel_1_237.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_kohsuke_windows_package_checker_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/annotation-indexer-1.7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/bcpkix-jdk15on-1.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/bcprov-jdk15on-1.47.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/bytecode-compatibility-transformer-1.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/cli-1.625.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/commons-logging-1.1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/groovy-all-1.8.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/hamcrest-core-1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/instance-identity-1.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/jansi-1.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/jenkins-core-1.625.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/jline-0.9.94.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/jna-4.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/junit-4.11.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/remoting-2.53.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/sezpoz-1.9.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/stapler-1.237.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/stapler-groovy-1.237.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/stapler-jelly-1.237.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/stapler-jrebel-1.237.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/tiger-types-1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/windows-package-checker-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/lib/windows-slave-installer-1.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/ant.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/antisamy-markup-formatter.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/credentials.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/cvs.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/external-monitor-job.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/javadoc.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/junit.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/ldap.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/mailer.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/matrix-auth.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/matrix-project.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/maven-plugin.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/pam-auth.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/script-security.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/ssh-credentials.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/ssh-slaves.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/subversion.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/translation.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/plugins/windows-slaves.hpi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_de.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_fr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_ja.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_pt_BR.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_ru.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_tr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/log-rotation_zh_TW.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build_de.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build_fr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build_ja.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build_tr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/parameterized-build_zh_TW.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/work/Download metadata.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/work/plugins/script-security/WEB-INF/lib/classes.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/work/plugins/script-security/WEB-INF/lib/groovy-sandbox-1.8.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector$DescriptorImpl.class" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector$DescriptorImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.class" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/ColorFormatter.class" afterPath="$PROJECT_DIR$/target/tmp/webapp/ColorFormatter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/META-INF/JENKINS.RSA" afterPath="$PROJECT_DIR$/target/tmp/webapp/META-INF/JENKINS.RSA" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/Main$FileAndDescription.class" afterPath="$PROJECT_DIR$/target/tmp/webapp/Main$FileAndDescription.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/Main.class" afterPath="$PROJECT_DIR$/target/tmp/webapp/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/jenkins-cli.jar" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/jenkins-cli.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/remoting.jar" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/remoting.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/slave.jar" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/slave.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/aborted.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/aborted.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/accept.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/accept.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/attribute.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/attribute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/blue.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/blue.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/clock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/clock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/collapse.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/collapse.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/computer-x.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/computer-x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/computer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_add.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_add.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_delete.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_delete.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_edit.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/document_edit.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/edit-delete.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/edit-delete.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/edit-select-all.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/edit-select-all.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/empty.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/error.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/error.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/expand.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/expand.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/fingerprint.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/fingerprint.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder-error.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder-error.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder-open.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder-open.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/gear2.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/gear2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/go-next.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/go-next.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-00to19.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-00to19.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-20to39.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-20to39.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-40to59.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-40to59.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-60to79.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-60to79.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-80plus.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/health-80plus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/help.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/help.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/hourglass.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/hourglass.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/lock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/lock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/nobuilt.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/nobuilt.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/notepad.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/notepad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/orange-square.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/orange-square.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/package.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/package.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/person.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/person.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/plugin.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/plugin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/red.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/redo.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/save.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/save.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/search.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/search.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/secure.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/secure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/setting.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/setting.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/star-gold.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/star-gold.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/star.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/stop.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/stop.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/terminal.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/terminal.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/text-error.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/text-error.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/text.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/text.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/user.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/user.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/warning.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/warning.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/yellow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/16x16/yellow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/aborted.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/aborted.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/accept.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/accept.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/attribute.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/attribute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/blue.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/blue.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/clipboard.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/clipboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/clock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/clock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/delete-document.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/delete-document.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/document-properties.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/document-properties.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/empty.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/fingerprint.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/fingerprint.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/folder-delete.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/folder-delete.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/folder.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/gear.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/gear.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/gear2.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/gear2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/graph.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/graph.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-20to39.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-20to39.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-40to59.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-40to59.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-60to79.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-60to79.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-80plus.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/health-80plus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/help.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/help.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/installer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/installer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/lock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/lock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/monitor.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/monitor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-computer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-document.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-document.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-package.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-package.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-user.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/new-user.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/next.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/next.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/nobuilt.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/nobuilt.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/notepad.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/notepad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/orange-square.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/orange-square.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/package.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/package.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/plugin.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/plugin.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/previous.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/previous.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/red.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/redo.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/refresh.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/refresh.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/save.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/save.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/secure.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/secure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/setting.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/setting.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/star-gold.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/star-gold.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/star.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/terminal.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/terminal.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/up.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/user.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/user.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/yellow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/24x24/yellow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/aborted.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/aborted.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/attribute.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/attribute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/blue.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/blue.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/clipboard.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/clipboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/clock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/clock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/computer-x.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/computer-x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/computer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/empty.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/error.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/error.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/folder.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/gear2.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/gear2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/graph.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/graph.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/health-40to59.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/health-40to59.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/health-80plus.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/health-80plus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/lock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/lock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/nobuilt.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/nobuilt.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/orange-square.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/orange-square.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/package.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/package.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/secure.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/secure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/star-gold.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/star-gold.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/star.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/user.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/user.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/yellow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/32x32/yellow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/aborted.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/aborted.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/accept.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/accept.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/attribute.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/attribute.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/blue.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/blue.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/clipboard.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/clipboard.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/computer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/computer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/empty.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/empty.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/error.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/error.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/fingerprint.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/fingerprint.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/folder.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/folder.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/gear2.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/gear2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/graph.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/graph.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/grey.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/grey.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/help.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/help.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/installer.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/installer.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/lock.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/lock.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/monitor.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/monitor.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/network.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/network.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/nobuilt.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/nobuilt.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/notepad.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/notepad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/orange-square.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/orange-square.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/package.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/package.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/red.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/redo.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/redo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/refresh.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/refresh.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/search.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/search.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/secure.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/secure.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/star-gold.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/star-gold.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/star.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/star.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/system-log-out.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/system-log-out.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/terminal.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/terminal.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/user.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/user.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/yellow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/48x48/yellow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/bottom-sticker-top-edge.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/bottom-sticker-top-edge.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/grip.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/grip.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/headless.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/headless.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/jenkins-redbg.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/jenkins-redbg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/rage.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/rage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/title.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/title.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/top-sticker-bottom-edge.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/top-sticker-bottom-edge.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/images/topbar.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/images/topbar.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/back-h.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/back-h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/back-v.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/back-v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/bar-h.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/bar-h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/bar-v.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/bar-v.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/blankimage.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/blankimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/dt-arrow-dn.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/dt-arrow-dn.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/dt-arrow-up.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/dt-arrow-up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/header_background.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/header_background.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/hue_bg.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/hue_bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/layout_sprite.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/layout_sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menu-button-arrow-disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menu-button-arrow-disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menu-button-arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menu-button-arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menubaritem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menubaritem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menubaritem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menubaritem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_checkbox.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_checkbox.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_checkbox_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_checkbox_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/menuitem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/picker_mask.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/picker_mask.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-active.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-active.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-focus.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-focus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-hover.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow-hover.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/split-button-arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/sprite.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/assets/skins/sam/sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/menu-button-arrow-disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/menu-button-arrow-disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/menu-button-arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/menu-button-arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-active.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-active.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-focus.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-focus.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-hover.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow-hover.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/button/assets/skins/sam/split-button-arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/editor/assets/skins/sam/blankimage.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/editor/assets/skins/sam/blankimage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_down_arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_down_arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_down_arrow_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_down_arrow_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_up_arrow.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_up_arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_up_arrow_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menu_up_arrow_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator_selected.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menubaritem_submenuindicator_selected.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox_selected.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_checkbox_selected.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator_selected.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/menuitem_submenuindicator_selected.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menubaritem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menubaritem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_checkbox.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_checkbox.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_checkbox_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_checkbox_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_submenuindicator.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_submenuindicator.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_submenuindicator_disabled.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/menu/assets/skins/sam/menuitem_submenuindicator_disabled.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/resize/assets/skins/sam/layout_sprite.png" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/yui/resize/assets/skins/sam/layout_sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/winstone.jar" afterPath="$PROJECT_DIR$/target/tmp/webapp/winstone.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test/builds/lastStableBuild" afterPath="$PROJECT_DIR$/work/jobs/test/builds/lastStableBuild" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test/builds/lastSuccessfulBuild" afterPath="$PROJECT_DIR$/work/jobs/test/builds/lastSuccessfulBuild" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test/workspace" afterPath="$PROJECT_DIR$/work/jobs/test/workspace" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/script-security.jpi" afterPath="$PROJECT_DIR$/work/plugins/script-security.jpi" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/automatedTestSelector.iml" afterPath="$PROJECT_DIR$/automatedTestSelector.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java" afterPath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/main.iml" afterPath="$PROJECT_DIR$/src/main/main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.stapler" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.stapler" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/allclasses-frame.html" afterPath="$PROJECT_DIR$/target/site/apidocs/allclasses-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/allclasses-noframe.html" afterPath="$PROJECT_DIR$/target/site/apidocs/allclasses-noframe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/constant-values.html" afterPath="$PROJECT_DIR$/target/site/apidocs/constant-values.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/deprecated-list.html" afterPath="$PROJECT_DIR$/target/site/apidocs/deprecated-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/help-doc.html" afterPath="$PROJECT_DIR$/target/site/apidocs/help-doc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/index-all.html" afterPath="$PROJECT_DIR$/target/site/apidocs/index-all.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/index.html" afterPath="$PROJECT_DIR$/target/site/apidocs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.DescriptorImpl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/AutomatedTestSelector.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/AutomatedTestSelector.DescriptorImpl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/AutomatedTestSelector.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/AutomatedTestSelector.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-frame.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-summary.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-tree.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-use.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-use.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/overview-tree.html" afterPath="$PROJECT_DIR$/target/site/apidocs/overview-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/META-INF/JENKINS.SF" afterPath="$PROJECT_DIR$/target/tmp/webapp/META-INF/JENKINS.SF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/target/tmp/webapp/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/META-INF/maven/org.jenkins-ci.main/jenkins-war/pom.properties" afterPath="$PROJECT_DIR$/target/tmp/webapp/META-INF/maven/org.jenkins-ci.main/jenkins-war/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/META-INF/maven/org.jenkins-ci.main/jenkins-war/pom.xml" afterPath="$PROJECT_DIR$/target/tmp/webapp/META-INF/maven/org.jenkins-ci.main/jenkins-war/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/META-INF/licenses.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/META-INF/licenses.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/META-INF/licenses.xml" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/META-INF/licenses.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/dependencies.txt" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/classes/dependencies.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/security/AbstractPasswordBasedSecurityRealm.groovy" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/security/AbstractPasswordBasedSecurityRealm.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/css/style.css" afterPath="$PROJECT_DIR$/target/tmp/webapp/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/custom-workspace.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/custom-workspace.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/disable.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/disable.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/downstream.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/downstream.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/scmCheckoutRetryCount.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/project-config/scmCheckoutRetryCount.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/defaultJobNamingStrategy.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/defaultJobNamingStrategy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/homeDirectory.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/homeDirectory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/availability.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/availability.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/demand/idleDelay.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/demand/idleDelay.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/demand/inDemandDelay.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/demand/inDemandDelay.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/description.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/description.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/usage.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/master-slave/usage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/nodeEnvironmentVariables.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/nodeEnvironmentVariables.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/systemMessage.html" afterPath="$PROJECT_DIR$/target/tmp/webapp/help/system-config/systemMessage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/combobox.js" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/combobox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/hudson-behavior.js" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/hudson-behavior.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/tmp/webapp/scripts/sortable.js" afterPath="$PROJECT_DIR$/target/tmp/webapp/scripts/sortable.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test/nextBuildNumber" afterPath="$PROJECT_DIR$/work/jobs/test/nextBuildNumber" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" afterPath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/script-security/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/work/plugins/script-security/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/script-security/META-INF/maven/org.jenkins-ci.plugins/script-security/pom.properties" afterPath="$PROJECT_DIR$/work/plugins/script-security/META-INF/maven/org.jenkins-ci.plugins/script-security/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/script-security/META-INF/maven/org.jenkins-ci.plugins/script-security/pom.xml" afterPath="$PROJECT_DIR$/work/plugins/script-security/META-INF/maven/org.jenkins-ci.plugins/script-security/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/script-security/WEB-INF/licenses.xml" afterPath="$PROJECT_DIR$/work/plugins/script-security/WEB-INF/licenses.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/secrets/filepath-filters.d/30-default.conf" afterPath="$PROJECT_DIR$/work/secrets/filepath-filters.d/30-default.conf" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,21 +384,31 @@
       <file leaf-file-name="AutomatedTestSelector.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+            <state relative-caret-position="265">
+              <caret line="94" column="10" lean-forward="false" selection-start-line="94" selection-start-column="10" selection-end-line="94" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1716#1717#0" expanded="true" />
-                <element signature="e#1754#1755#0" expanded="true" />
-                <element signature="e#1791#1792#0" expanded="true" />
-                <element signature="e#1827#1828#0" expanded="true" />
-                <element signature="e#3707#3708#0" expanded="true" />
-                <element signature="e#3767#3768#0" expanded="true" />
-                <element signature="e#3902#3903#0" expanded="true" />
-                <element signature="e#3932#3933#0" expanded="true" />
-                <element signature="e#4429#4430#0" expanded="true" />
-                <element signature="e#4486#4487#0" expanded="true" />
+                <element signature="e#1721#1722#0" expanded="true" />
+                <element signature="e#1759#1760#0" expanded="true" />
+                <element signature="e#1796#1797#0" expanded="true" />
+                <element signature="e#1832#1833#0" expanded="true" />
+                <element signature="e#4143#4144#0" expanded="true" />
+                <element signature="e#4203#4204#0" expanded="true" />
+                <element signature="e#4338#4339#0" expanded="true" />
+                <element signature="e#4368#4369#0" expanded="true" />
+                <element signature="e#4865#4866#0" expanded="true" />
+                <element signature="e#4919#4920#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-395">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,8 +477,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="71" />
-    <option name="y" value="150" />
+    <option name="x" value="55" />
+    <option name="y" value="23" />
     <option name="width" value="1398" />
     <option name="height" value="983" />
   </component>
@@ -310,6 +681,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="automatedTestSelector" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="automatedTestSelector" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="automatedTestSelector" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -561,7 +946,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="150" width="1398" height="983" extended-state="0" />
+    <frame x="55" y="23" width="1398" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -696,14 +1081,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/help-failureWindow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="78" lean-forward="false" selection-start-line="2" selection-start-column="78" selection-end-line="2" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/SleepBuilder/config.jelly">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -728,14 +1105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/help-executionWindow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/config.jelly">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -744,22 +1113,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12080">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/help-failureWindow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="78" lean-forward="false" selection-start-line="2" selection-start-column="78" selection-end-line="2" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/help-executionWindow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-395">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+        <state relative-caret-position="265">
+          <caret line="94" column="10" lean-forward="false" selection-start-line="94" selection-start-column="10" selection-end-line="94" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1716#1717#0" expanded="true" />
-            <element signature="e#1754#1755#0" expanded="true" />
-            <element signature="e#1791#1792#0" expanded="true" />
-            <element signature="e#1827#1828#0" expanded="true" />
-            <element signature="e#3707#3708#0" expanded="true" />
-            <element signature="e#3767#3768#0" expanded="true" />
-            <element signature="e#3902#3903#0" expanded="true" />
-            <element signature="e#3932#3933#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
-            <element signature="e#4486#4487#0" expanded="true" />
+            <element signature="e#1721#1722#0" expanded="true" />
+            <element signature="e#1759#1760#0" expanded="true" />
+            <element signature="e#1796#1797#0" expanded="true" />
+            <element signature="e#1832#1833#0" expanded="true" />
+            <element signature="e#4143#4144#0" expanded="true" />
+            <element signature="e#4203#4204#0" expanded="true" />
+            <element signature="e#4338#4339#0" expanded="true" />
+            <element signature="e#4368#4369#0" expanded="true" />
+            <element signature="e#4865#4866#0" expanded="true" />
+            <element signature="e#4919#4920#0" expanded="true" />
           </folding>
         </state>
       </provider>

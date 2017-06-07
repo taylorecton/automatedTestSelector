@@ -5,6 +5,7 @@ import hudson.Launcher;
 import hudson.Extension;
 import hudson.FilePath;
 // import hudson.util.FormValidation;
+
 import hudson.model.AbstractProject;
 import hudson.model.AbstractBuild;
 import hudson.model.Item;
@@ -12,10 +13,14 @@ import hudson.model.ItemGroup;
 import hudson.model.Job;
 import hudson.model.Run;
 import hudson.model.TaskListener;
+
 import hudson.scm.ChangeLogSet.Entry;
+
 import hudson.tasks.Builder;
 import hudson.tasks.BuildStepDescriptor;
+
 import jenkins.tasks.SimpleBuildStep;
+
 // import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 // import org.kohsuke.stapler.StaplerRequest;
@@ -72,16 +77,28 @@ public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
         listener.getLogger().println("You set the execution window to " + executionWindow);
 
         Collection<String> changedFiles = null;
+
+        if (build instanceof AbstractBuild) {
+            AbstractBuild<?,?> b = ((AbstractBuild) build);
+            for (Entry entry : b.getChangeSet()) {
+                if (entry.getAffectedPaths() != null) {
+                    changedFiles = entry.getAffectedPaths();
+                }
+            }
+        }
+        /*
         try {
             changedFiles = getChangedFiles(build, listener);
         } catch (AbortException e) {
             e.printStackTrace();
         }
-
+        */
         if (changedFiles != null) {
             for (String path : changedFiles) {
                 listener.getLogger().println("path: " + path);
             }
+        } else {
+            listener.getLogger().println("No changed files in repository");
         }
     }
 
@@ -136,7 +153,7 @@ public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
 
         @Override
         public String getDisplayName() {
-            return "Automated test selection";
+            return "Test Case Prioritizer";
         }
     }
 }

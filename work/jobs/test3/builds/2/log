@@ -1,0 +1,30 @@
+Started by user [8mha:AAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgYu/dLi1CL9vNKcHACFIKlWvwAAAA==[0manonymous
+Building in workspace /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test3/workspace
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/BearEars/learning_jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/BearEars/learning_jenkins.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/BearEars/learning_jenkins.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 57036a011259a2904558ff05c69e6f8c6423f0a8 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 57036a011259a2904558ff05c69e6f8c6423f0a8
+ > git rev-list f4d660c6f8dad6bf7e36601815c18330d16f0621 # timeout=10
+You set the failure window to 20
+You set the execution window to 50
+Started getChangedFiles()
+path: work/jobs/test/workspace
+path: work/jobs/test/nextBuildNumber
+path: work/jobs/test/builds/2/log
+path: work/users/taylor.ecton/config.xml
+path: .idea/workspace.xml
+path: work/jobs/test/builds/2/build.xml
+path: work/secrets/hudson.util.Secret
+path: src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java
+path: work/jobs/test/builds/lastStableBuild
+path: work/jobs/test/builds/2/changelog.xml
+path: work/jobs/test/builds/lastSuccessfulBuild
+path: work/secrets/jenkins.security.ApiTokenProperty.seed
+Finished: SUCCESS
