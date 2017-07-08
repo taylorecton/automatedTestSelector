@@ -1,58 +1,67 @@
 package org.jenkinsci.plugins.automatedTestSelector;
 
+import com.google.common.collect.ImmutableSet;
+
 import hudson.AbortException;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.FilePath;
 // import hudson.util.FormValidation;
 
-import hudson.model.AbstractProject;
-import hudson.model.AbstractBuild;
-import hudson.model.Item;
-import hudson.model.ItemGroup;
-import hudson.model.Job;
-import hudson.model.Run;
-import hudson.model.TaskListener;
+import hudson.model.*;
 
 import hudson.scm.ChangeLogSet.Entry;
 
 import hudson.tasks.Builder;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.junit.ClassResult;
+import hudson.tasks.test.AbstractTestResultAction;
+import hudson.tasks.test.TabulatedResult;
+import hudson.tasks.test.TestResult;
 
+import hudson.util.FormValidation;
 import jenkins.tasks.SimpleBuildStep;
 
 // import net.sf.json.JSONObject;
+import org.apache.commons.io.Charsets;
 import org.kohsuke.stapler.DataBoundConstructor;
-// import org.kohsuke.stapler.StaplerRequest;
-// import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.QueryParameter;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
 // import javax.servlet.ServletException;
 // import java.io.IOException;
 
 /**
- * File: AutomatedTestSelector.java
- * Author: Taylor Ecton
- * Class purpose: Extend Jenkins to allow automation of test selection;
- *                This plugin is designed to determine which test cases
- *                need to be run in order to reduce the amount of resources
- *                used in performing testing of builds.
- * Last modified: 06-01-2017
+ * @author Taylor Ecton
  */
 
-//adding a comment
-
-public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
+public class AutomatedTestSelector extends Builder {
     /**
      * MEMBER VARIABLES WILL GO HERE
      */
+    public static final ImmutableSet<Result> RESULTS_OF_BUILDS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
     private final int failureWindow;
     private final int executionWindow;
 
+    private final String testListFile;
+    private final String testReportDir;
+    private final String includesFile;
+
     @DataBoundConstructor
-    public AutomatedTestSelector(int failureWindow, int executionWindow) {
+    public AutomatedTestSelector(int failureWindow, int executionWindow, String testListFile, String testReportDir, String includesFile) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
+
+        this.testListFile = testListFile;
+        this.testReportDir = testReportDir;
+        this.includesFile = includesFile;
     }
 
     /**
@@ -66,33 +75,55 @@ public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
         return failureWindow;
     }
 
+    public String getTestListFile() {
+        return testListFile;
+    }
+
+    public String getTestReportDir() {
+        return testReportDir;
+    }
+
+    public String getIncludesFile() {
+        return includesFile;
+    }
+
 
     /**
      * internal classes and member functions
-     * (probably going to need @Override public boolean perform)
      */
     @Override
-    public void perform(Run<?,?> build, FilePath workspace, Launcher launcher, TaskListener listener) throws AbortException {
+    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws AbortException, InterruptedException, IOException {
         listener.getLogger().println("You set the failure window to " + failureWindow);
         listener.getLogger().println("You set the execution window to " + executionWindow);
 
-        Collection<String> changedFiles = null;
 
-        if (build instanceof AbstractBuild) {
-            AbstractBuild<?,?> b = ((AbstractBuild) build);
-            for (Entry entry : b.getChangeSet()) {
-                if (entry.getAffectedPaths() != null) {
-                    changedFiles = entry.getAffectedPaths();
-                }
+        FilePath workspace = build.getWorkspace();
+        FilePath reportDir = workspace.child(testReportDir);
+        reportDir.deleteContents();
+
+        ArrayList<String> passingWithinFailWindow = findFailingTests(build, listener);
+
+        try (OutputStream os = workspace.child(includesFile).write();
+             OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
+             PrintWriter pw = new PrintWriter(osw)) {
+            for (String fileName : passingWithinFailWindow) {
+                pw.println(fileName);
             }
         }
-        /*
-        try {
-            changedFiles = getChangedFiles(build, listener);
-        } catch (AbortException e) {
-            e.printStackTrace();
+/*
+        Collection<String> changedFiles = null;
+        TestList testList = new TestList(testListFile);
+
+        for (String test : testList.getTestList()) {
+            listener.getLogger().println("test: " + test);
         }
-        */
+
+        for (Entry entry : build.getChangeSet()) {
+            if (entry.getAffectedPaths() != null) {
+                changedFiles = entry.getAffectedPaths();
+            }
+        }
+
         if (changedFiles != null) {
             for (String path : changedFiles) {
                 listener.getLogger().println("path: " + path);
@@ -100,28 +131,59 @@ public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
         } else {
             listener.getLogger().println("No changed files in repository");
         }
+*/
+        return true;
     }
 
-    private Collection<String> getChangedFiles(Run<?,?> build, TaskListener listener) throws AbortException {
-        listener.getLogger().println("Started getChangedFiles()");
-        Collection<String> changedFiles = null;
-        ItemGroup<?> ig = build.getParent().getParent();
-        nextItem: for(Item item : ig.getItems()) {
-            for (Job<?, ?> job : item.getAllJobs()) {
-                if (job instanceof AbstractProject<?,?>) {
-                    AbstractProject<?,?> p = (AbstractProject<?,?>) job;
-                    for (AbstractBuild<?,?> b : p.getBuilds()) {
-                        for (Entry entry : b.getChangeSet()) {
-                            if (entry.getAffectedPaths() != null) {
-                                changedFiles = entry.getAffectedPaths();
-                                break nextItem;
-                            }
-                        }
-                    }
+    private ArrayList<String> findFailingTests(Run<?, ?> b, TaskListener listener) {
+        ArrayList<String> failingTests = new ArrayList<>();
+        for (int i = 0; i < this.getFailureWindow(); i++) {
+            b = b.getPreviousBuild();
+
+            if (b == null) break;
+            if (!RESULTS_OF_BUILDS_TO_CONSIDER.contains(b.getResult())) continue;
+
+            AbstractTestResultAction tra = b.getAction(AbstractTestResultAction.class);
+            if (tra == null) continue;
+
+            Object o = tra.getResult();
+            if (o instanceof TestResult) {
+                TestResult result = (TestResult) o;
+                ArrayList<String> testsFailedThisBuild = new ArrayList<>();
+                collect(result, testsFailedThisBuild);
+                for (String testName : testsFailedThisBuild) {
+                    if (!failingTests.contains(testName))
+                        failingTests.add(testName);
                 }
             }
         }
-        return changedFiles;
+
+        return failingTests;
+    }
+
+    static private void collect(TestResult r, ArrayList<String> names) {
+        if (r instanceof ClassResult) {
+            ClassResult cr = (ClassResult) r;
+
+            if (cr.getFailCount() > 0) {
+                String className;
+                String pkgName = cr.getParent().getName();
+                if (pkgName.equals("(root)"))   // UGH
+                    pkgName = "";
+                else
+                    pkgName += '.';
+                className = pkgName + cr.getName() + ".class";
+
+                names.add(className);
+            }
+            return; // no need to go deeper
+        }
+        if (r instanceof TabulatedResult) {
+            TabulatedResult tr = (TabulatedResult) r;
+            for (TestResult child : tr.getChildren()) {
+                collect(child, names);
+            }
+        }
     }
 
     @Override
@@ -143,7 +205,19 @@ public class AutomatedTestSelector extends Builder implements SimpleBuildStep {
                 throws IOException, ServletException {
 
         }
+
+        public FormValidation doCheckFailureWindow(@QueryParameter int value)
+                throws IOException, ServletException {
+
+         }
          */
+        public FormValidation doCheckTestListFile(@QueryParameter String value)
+                throws IOException, ServletException {
+            if (value.length() == 0)
+                return FormValidation.error("Please include a Test List File.");
+
+            return FormValidation.ok();
+        }
 
         @Override
         public boolean isApplicable(Class<? extends AbstractProject> aClass) {

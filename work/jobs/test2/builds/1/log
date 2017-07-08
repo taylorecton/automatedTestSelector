@@ -13,23 +13,27 @@ Fetching upstream changes from https://github.com/BearEars/learning_jenkins.git
  > git fetch --tags --progress https://github.com/BearEars/learning_jenkins.git +refs/heads/*:refs/remotes/origin/*
  > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
  > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
-Checking out Revision 6124b864185ce9ec17b7bd9a445d38dd76fca2c3 (refs/remotes/origin/master)
+Checking out Revision 36b905211df8727b2f028fba547cbba8ed1dc67a (refs/remotes/origin/master)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f 6124b864185ce9ec17b7bd9a445d38dd76fca2c3
+ > git checkout -f 36b905211df8727b2f028fba547cbba8ed1dc67a
 First time build. Skipping changelog.
-You set the failure window to 15
-You set the execution window to 23
-Started getChangedFiles()
-path: work/jobs/test/workspace
-path: work/jobs/test/nextBuildNumber
-path: work/jobs/test/builds/2/log
-path: work/jobs/test/builds/2/build.xml
-path: .idea/workspace.xml
-path: work/users/taylor.ecton/config.xml
-path: work/secrets/hudson.util.Secret
-path: src/main/java/org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.java
-path: work/jobs/test/builds/lastStableBuild
-path: work/jobs/test/builds/2/changelog.xml
-path: work/jobs/test/builds/lastSuccessfulBuild
-path: work/secrets/jenkins.security.ApiTokenProperty.seed
-Finished: SUCCESS
+[workspace] $ ant test
+Buildfile: /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/build.xml
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQT6jNKU4P0+vJLE4u1gvPjGvRM8xryQksSg9tcQvvyTVvqNr/s+Vl9uYGBgqihikoKqT8/OK83NS9ZwhNEghAwQwghQWAADROOumXQAAAA==[0mcompile:
+    [mkdir] Created dir: /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test
+    [javac] /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/build.xml:23: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 6 source files to /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQT6jNKU4P0+vJLE4u1gvPjGvRM8xryQksSg9tcQvvyTVvqNr/s+Vl9uYGBgqihikoKqT8/OK83NS9ZwhNEghAwQwghQWAADROOumXQAAAA==[0mtest:
+    [mkdir] Created dir: /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports
+[junitreport] Processing /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TESTS-TestSuites.xml to /var/folders/np/q065qryn0pnbl1pqpss1qmy40000gn/T/null500514037
+[junitreport] Loading stylesheet jar:file:/Users/taylorecton/Tools/apache-ant-1.10.1/lib/ant-junit.jar!/org/apache/tools/ant/taskdefs/optional/junit/xsl/junit-frames.xsl
+[junitreport] Transform time: 389ms
+[junitreport] Deleting: /var/folders/np/q065qryn0pnbl1pqpss1qmy40000gn/T/null500514037
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSGjNKU4P0+vJLE4u1gvPjGvRM8xr8S/tCQ5PzfVL78ktUuDM0uMry+HiYGhoohBCqo8OT+vOD8nVc8ZQoMUMkAAI0hhAQAUXUdTXgAAAA==[0mBUILD SUCCESSFUL
+Total time: 1 second
+Recording test results
+ERROR: Step ‘Publish JUnit test result report’ failed: None of the test reports contained any result
+[8mha:AAAAWB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P08vOT+vOD8nVc8DzHWtSE4tKMnMz/PLL0ldFVf2c+b/lb5MDAwVRQxSaBqcITRIIQMEMIIUFgAAckCEiWAAAAA=[0mFinished: FAILURE

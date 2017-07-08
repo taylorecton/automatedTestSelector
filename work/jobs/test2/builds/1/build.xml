@@ -2,9 +2,12 @@
 <build>
   <actions>
     <hudson.model.CauseAction>
-      <causes>
-        <hudson.model.Cause_-UserIdCause/>
-      </causes>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause/>
+          <int>1</int>
+        </entry>
+      </causeBag>
     </hudson.model.CauseAction>
     <hudson.plugins.git.util.BuildData plugin="git@3.3.0">
       <buildsByBranchName>
@@ -12,7 +15,7 @@
           <string>refs/remotes/origin/master</string>
           <hudson.plugins.git.util.Build>
             <marked plugin="git-client@2.4.6">
-              <sha1>6124b864185ce9ec17b7bd9a445d38dd76fca2c3</sha1>
+              <sha1>36b905211df8727b2f028fba547cbba8ed1dc67a</sha1>
               <branches class="list">
                 <hudson.plugins.git.Branch>
                   <sha1 reference="../../../sha1"/>
@@ -41,16 +44,16 @@
     </hudson.plugins.git.GitTagAction>
     <hudson.scm.SCMRevisionState_-None/>
   </actions>
-  <queueId>4</queueId>
-  <timestamp>1496770548112</timestamp>
-  <startTime>1496770548113</startTime>
-  <result>SUCCESS</result>
-  <duration>734</duration>
+  <queueId>1</queueId>
+  <timestamp>1499268838575</timestamp>
+  <startTime>1499268838580</startTime>
+  <result>FAILURE</result>
+  <duration>2199</duration>
   <charset>UTF-8</charset>
   <keepLog>false</keepLog>
   <builtOn></builtOn>
   <workspace>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace</workspace>
-  <hudsonVersion>1.625.3</hudsonVersion>
+  <hudsonVersion>2.11</hudsonVersion>
   <scm class="hudson.plugins.git.GitChangeLogParser" plugin="git@3.3.0">
     <authorOrCommitter>false</authorOrCommitter>
   </scm>

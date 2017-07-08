@@ -28,10 +28,23 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jenkinsci.plugins.automatedTestSelector.AutomatedTestSelector plugin="automatedTestSelector@1.0-SNAPSHOT">
-      <failureWindow>15</failureWindow>
-      <executionWindow>23</executionWindow>
+      <failureWindow>2</failureWindow>
+      <executionWindow>4</executionWindow>
+      <testListFile>a</testListFile>
+      <testReportDir>test-reports</testReportDir>
+      <includesFile>inclusions.txt</includesFile>
     </org.jenkinsci.plugins.automatedTestSelector.AutomatedTestSelector>
+    <hudson.tasks.Ant plugin="ant@1.2">
+      <targets>test</targets>
+    </hudson.tasks.Ant>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.20">
+      <testResults>**/test-reports/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <healthScaleFactor>1.0</healthScaleFactor>
+      <allowEmptyResults>false</allowEmptyResults>
+    </hudson.tasks.junit.JUnitResultArchiver>
+  </publishers>
   <buildWrappers/>
 </project>

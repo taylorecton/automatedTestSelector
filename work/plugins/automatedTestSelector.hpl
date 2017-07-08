@@ -3,9 +3,10 @@ Group-Id: org.jenkins-ci.plugins
 Short-Name: automatedTestSelector
 Long-Name: Automated Test Selector
 Url: https://wiki.jenkins-ci.org/display/JENKINS/TODO+Plugin
-Plugin-Version: 1.0-SNAPSHOT (private-e10534f5-taylorecton)
+Plugin-Version: 1.0-SNAPSHOT (private-0f154652-taylorecton)
 Hudson-Version: 2.11
 Jenkins-Version: 2.11
+Plugin-Dependencies: junit:1.15
 Plugin-Developers: Taylor Ecton::taylor.ecton@gmail.com
 Libraries: /Users/taylorecton/Documents/Automated-test-selector/automa
  tedTestSelector/src/main/resources,/Users/taylorecton/Documents/Autom

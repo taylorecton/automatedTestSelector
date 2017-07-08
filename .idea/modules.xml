@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/target/tmp/webapp/WEB-INF/WEB-INF.iml" filepath="$PROJECT_DIR$/target/tmp/webapp/WEB-INF/WEB-INF.iml" />
       <module fileurl="file://$PROJECT_DIR$/automatedTestSelector.iml" filepath="$PROJECT_DIR$/automatedTestSelector.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
     </modules>
   </component>
 </project>

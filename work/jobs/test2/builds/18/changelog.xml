@@ -1,0 +1,11 @@
+commit e12864ee4ef166a898415a0dde519fe988060bea
+tree 576e2b0f5b7427e502feba2bf38efaba797c0490
+parent 63ff952ab78dce5906d8f10b4d09e67ad27a2347
+author BearEars <taylor.ecton@gmail.com> 2017-07-05 12:11:54 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-05 12:11:54 -0400
+
+    updated TestJunit1 to pass again
+
+
+
+:100644 100644 15b16402323db75784151351d99dc75b0ffff0ae 68369bc696d7d9f06c901b38411c77111608dca6 M	src/TestJunit1.java

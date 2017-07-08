@@ -1,0 +1,11 @@
+commit f1e7b8130170ead29b598952df6ed4c954cd1e58
+tree 576e2b0f5b7427e502feba2bf38efaba797c0490
+parent 8de6c625790c73d206cb4f2cd7a53eb6605f2d50
+author BearEars <taylor.ecton@gmail.com> 2017-07-05 11:41:44 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-05 11:41:44 -0400
+
+    updated TestJunit2 to fail
+
+
+
+:100644 100644 1c3f773cfb50cc19c401d781ee2ddcaf85e54dfe 2e5cc3509c40dbc7d8a6f2fa8ba05efc0d450fb0 M	src/TestJunit2.java

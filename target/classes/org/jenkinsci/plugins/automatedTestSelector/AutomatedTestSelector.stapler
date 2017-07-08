@@ -1,2 +1,2 @@
-#Wed Jun 07 12:14:00 EDT 2017
-constructor=failureWindow,executionWindow
+#Sat Jul 08 12:00:54 EDT 2017
+constructor=failureWindow,executionWindow,testListFile,testReportDir,includesFile

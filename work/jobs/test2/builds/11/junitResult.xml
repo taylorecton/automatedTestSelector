@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.20">
+  <suites>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TEST-TestJunit2.xml</file>
+      <name>TestJunit2</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.035</duration>
+      <timestamp>2017-07-05T15:54:55</timestamp>
+      <time>5.035</time>
+      <cases>
+        <case>
+          <duration>0.006</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;
+	at TestJunit2.testSalutationMessage(TestJunit2.java:14)
+</errorStackTrace>
+          <errorDetails>expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;</errorDetails>
+          <failedSince>7</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TESTS-TestSuites.xml</file>
+      <name>TestJunit1</name>
+      <stdout>Inside testPrintMessage()
+Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.03</duration>
+      <timestamp>2017-07-05T15:42:24</timestamp>
+      <id>0</id>
+      <time>5.03</time>
+      <cases>
+        <case>
+          <duration>0.001</duration>
+          <className>TestJunit1</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TESTS-TestSuites.xml</file>
+      <name>TestJunit2</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.035</duration>
+      <timestamp>2017-07-05T15:54:55</timestamp>
+      <id>1</id>
+      <time>5.035</time>
+      <cases>
+        <case>
+          <duration>0.006</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;
+	at TestJunit2.testSalutationMessage(TestJunit2.java:14)
+</errorStackTrace>
+          <errorDetails>expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;</errorDetails>
+          <failedSince>7</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TESTS-TestSuites.xml</file>
+      <name>TestMessageUtil</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+Inside testPrintMessage()
+Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.006</duration>
+      <timestamp>2017-07-05T15:42:34</timestamp>
+      <id>2</id>
+      <time>5.006</time>
+      <cases>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>20.106</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

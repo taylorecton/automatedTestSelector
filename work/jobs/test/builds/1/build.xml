@@ -2,9 +2,12 @@
 <build>
   <actions>
     <hudson.model.CauseAction>
-      <causes>
-        <hudson.model.Cause_-UserIdCause/>
-      </causes>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause/>
+          <int>1</int>
+        </entry>
+      </causeBag>
     </hudson.model.CauseAction>
     <hudson.plugins.git.util.BuildData plugin="git@3.3.0">
       <buildsByBranchName>
@@ -12,7 +15,7 @@
           <string>refs/remotes/origin/master</string>
           <hudson.plugins.git.util.Build>
             <marked plugin="git-client@2.4.6">
-              <sha1>dfe1a965690b1418d5fcd38d1caf8edb58be6eec</sha1>
+              <sha1>44e9aad2fb206eba84c5f28ed3e4de7576f38847</sha1>
               <branches class="list">
                 <hudson.plugins.git.Branch>
                   <sha1 reference="../../../sha1"/>
@@ -27,7 +30,7 @@
       </buildsByBranchName>
       <lastBuild reference="../buildsByBranchName/entry/hudson.plugins.git.util.Build"/>
       <remoteUrls>
-        <string>https://github.com/BearEars/automatedTestSelector.git</string>
+        <string>https://github.com/BearEars/learning_jenkins.git</string>
       </remoteUrls>
     </hudson.plugins.git.util.BuildData>
     <hudson.plugins.git.GitTagAction plugin="git@3.3.0">
@@ -42,15 +45,15 @@
     <hudson.scm.SCMRevisionState_-None/>
   </actions>
   <queueId>1</queueId>
-  <timestamp>1496770020377</timestamp>
-  <startTime>1496770020381</startTime>
+  <timestamp>1497281316153</timestamp>
+  <startTime>1497281316159</startTime>
   <result>SUCCESS</result>
-  <duration>15218</duration>
+  <duration>1124</duration>
   <charset>UTF-8</charset>
   <keepLog>false</keepLog>
   <builtOn></builtOn>
   <workspace>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test/workspace</workspace>
-  <hudsonVersion>1.625.3</hudsonVersion>
+  <hudsonVersion>2.11</hudsonVersion>
   <scm class="hudson.plugins.git.GitChangeLogParser" plugin="git@3.3.0">
     <authorOrCommitter>false</authorOrCommitter>
   </scm>
