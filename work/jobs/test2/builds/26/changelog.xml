@@ -1,0 +1,11 @@
+commit 45f8cb4ef2a15f31cec6068810237c9f250afb20
+tree 817dfe4105d5baaf8e58325a347e80e915249ccf
+parent e12864ee4ef166a898415a0dde519fe988060bea
+author BearEars <taylor.ecton@gmail.com> 2017-07-08 12:46:42 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-08 12:46:42 -0400
+
+    changed test list file name
+
+
+
+:100644 100644 707f7f07110ffb6adce5f5849c4dd2428b417074 707f7f07110ffb6adce5f5849c4dd2428b417074 R100	tests.tlist	tests.txt

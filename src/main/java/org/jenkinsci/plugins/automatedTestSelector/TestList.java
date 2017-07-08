@@ -1,6 +1,7 @@
 package org.jenkinsci.plugins.automatedTestSelector;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,18 +9,18 @@ import java.util.List;
  * @author Taylor Ecton
  */
 public class TestList {
-    private List<String> testList;
+    private ArrayList<String> testList;
 
     public TestList(String filePath) {
         this.testList = getTestListFromFile(filePath);
     }
 
-    public List<String> getTestList() {
+    public ArrayList<String> getTestList() {
         return testList;
     }
 
-    private List<String> getTestListFromFile(String filePath) {
-        List<String> testList = new ArrayList<>();
+    private ArrayList<String> getTestListFromFile(String filePath) {
+        ArrayList<String> testList = new ArrayList<>();
         String test;
 
         if (filePath == null || filePath.isEmpty()) {

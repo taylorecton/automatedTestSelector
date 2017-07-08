@@ -27,13 +27,13 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.automatedTestSelector.AutomatedTestSelector plugin="automatedTestSelector@1.0-SNAPSHOT">
+    <org.jenkinsci.plugins.automatedTestSelector.RegressionTestSelector plugin="automatedTestSelector@1.0-SNAPSHOT">
       <failureWindow>2</failureWindow>
       <executionWindow>4</executionWindow>
-      <testListFile>a</testListFile>
+      <testListFile>tests.txt</testListFile>
       <testReportDir>test-reports</testReportDir>
       <includesFile>inclusions.txt</includesFile>
-    </org.jenkinsci.plugins.automatedTestSelector.AutomatedTestSelector>
+    </org.jenkinsci.plugins.automatedTestSelector.RegressionTestSelector>
     <hudson.tasks.Ant plugin="ant@1.2">
       <targets>test</targets>
     </hudson.tasks.Ant>

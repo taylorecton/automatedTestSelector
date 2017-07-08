@@ -28,10 +28,8 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +40,7 @@ import java.util.Collections;
  * @author Taylor Ecton
  */
 
-public class AutomatedTestSelector extends Builder {
+public class RegressionTestSelector extends Builder {
     /**
      * MEMBER VARIABLES WILL GO HERE
      */
@@ -55,7 +53,7 @@ public class AutomatedTestSelector extends Builder {
     private final String includesFile;
 
     @DataBoundConstructor
-    public AutomatedTestSelector(int failureWindow, int executionWindow, String testListFile, String testReportDir, String includesFile) {
+    public RegressionTestSelector(int failureWindow, int executionWindow, String testListFile, String testReportDir, String includesFile) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
@@ -101,12 +99,21 @@ public class AutomatedTestSelector extends Builder {
         FilePath reportDir = workspace.child(testReportDir);
         reportDir.deleteContents();
 
-        ArrayList<String> passingWithinFailWindow = findFailingTests(build, listener);
+        ArrayList<String> allTests = new ArrayList<>();
+        try (InputStream inputStream = workspace.child(testListFile).read();
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            String testName;
+            while ((testName = bufferedReader.readLine()) != null)
+                allTests.add(testName);
+        }
+
+        ArrayList<String> selectedTests = selectTests(build, listener, allTests);
 
         try (OutputStream os = workspace.child(includesFile).write();
              OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
              PrintWriter pw = new PrintWriter(osw)) {
-            for (String fileName : passingWithinFailWindow) {
+            for (String fileName : selectedTests) {
                 pw.println(fileName);
             }
         }
@@ -135,9 +142,11 @@ public class AutomatedTestSelector extends Builder {
         return true;
     }
 
-    private ArrayList<String> findFailingTests(Run<?, ?> b, TaskListener listener) {
-        ArrayList<String> failingTests = new ArrayList<>();
-        for (int i = 0; i < this.getFailureWindow(); i++) {
+    private ArrayList<String> selectTests(Run<?, ?> b, TaskListener listener, ArrayList<String> tests) {
+        ArrayList<String> selectedTests = new ArrayList<>();
+        ArrayList<String> foundTests = new ArrayList<>();
+
+        for (int i = 0; i < this.getFailureWindow() || i < this.getExecutionWindow(); i++) {
             b = b.getPreviousBuild();
 
             if (b == null) break;
@@ -150,38 +159,46 @@ public class AutomatedTestSelector extends Builder {
             if (o instanceof TestResult) {
                 TestResult result = (TestResult) o;
                 ArrayList<String> testsFailedThisBuild = new ArrayList<>();
-                collect(result, testsFailedThisBuild);
+                collect(result, testsFailedThisBuild, foundTests);
                 for (String testName : testsFailedThisBuild) {
-                    if (!failingTests.contains(testName))
-                        failingTests.add(testName);
+                    if (!selectedTests.contains(testName))
+                        selectedTests.add(testName);
                 }
             }
         }
 
-        return failingTests;
+        for (String test : tests) {
+            if (!foundTests.contains(test))
+                selectedTests.add(test);
+        }
+
+        return selectedTests;
     }
 
-    static private void collect(TestResult r, ArrayList<String> names) {
+    static private void collect(TestResult r, ArrayList<String> failed, ArrayList<String> found) {
         if (r instanceof ClassResult) {
             ClassResult cr = (ClassResult) r;
+            String className;
+            String pkgName = cr.getParent().getName();
 
-            if (cr.getFailCount() > 0) {
-                String className;
-                String pkgName = cr.getParent().getName();
-                if (pkgName.equals("(root)"))   // UGH
-                    pkgName = "";
-                else
-                    pkgName += '.';
-                className = pkgName + cr.getName() + ".class";
+            if (pkgName.equals("(root)"))   // UGH
+                pkgName = "";
+            else
+                pkgName += '.';
+            className = pkgName + cr.getName() + ".class";
 
-                names.add(className);
-            }
+            if (!found.contains(className))
+                found.add(className);
+
+            if (cr.getFailCount() > 0)
+                failed.add(className);
+
             return; // no need to go deeper
         }
         if (r instanceof TabulatedResult) {
             TabulatedResult tr = (TabulatedResult) r;
             for (TestResult child : tr.getChildren()) {
-                collect(child, names);
+                collect(child, failed, found);
             }
         }
     }
@@ -227,7 +244,7 @@ public class AutomatedTestSelector extends Builder {
 
         @Override
         public String getDisplayName() {
-            return "Test Case Prioritizer";
+            return "Regression Test Selector";
         }
     }
 }

@@ -1,4 +1,5 @@
 <?jelly escape-by-default='true'?>
 <div>
-  This plugin automatically selects appropriate tests to run based on changes.
+  This plugin utilizes a regression test selection (RTS) algorithm to automatically select appropriate tests
+  to run based on changes made to version control.
 </div>

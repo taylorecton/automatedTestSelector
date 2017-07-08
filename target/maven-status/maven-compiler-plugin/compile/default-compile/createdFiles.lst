@@ -1,6 +1,6 @@
-org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.stapler
-org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/DescriptorImpl/doCheckTestListFile.stapler
-org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector.class
-org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector$DescriptorImpl.class
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector/DescriptorImpl/doCheckTestListFile.stapler
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.class
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.stapler
 org/jenkinsci/plugins/automatedTestSelector/TestList.class
 META-INF/annotations/hudson.Extension
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector$DescriptorImpl.class
