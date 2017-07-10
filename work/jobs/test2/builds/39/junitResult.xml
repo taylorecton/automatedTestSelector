@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.20">
+  <suites>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TEST-TestJunit2.xml</file>
+      <name>TestJunit2</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.038</duration>
+      <timestamp>2017-07-10T15:42:45</timestamp>
+      <time>5.038</time>
+      <cases>
+        <case>
+          <duration>0.008</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;
+	at TestJunit2.testSalutationMessage(TestJunit2.java:14)
+</errorStackTrace>
+          <errorDetails>expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;</errorDetails>
+          <failedSince>7</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/test2/workspace/test-reports/TESTS-TestSuites.xml</file>
+      <name>TestJunit2</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.038</duration>
+      <timestamp>2017-07-10T15:42:45</timestamp>
+      <id>0</id>
+      <time>5.038</time>
+      <cases>
+        <case>
+          <duration>0.008</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;
+	at TestJunit2.testSalutationMessage(TestJunit2.java:14)
+</errorStackTrace>
+          <errorDetails>expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;</errorDetails>
+          <failedSince>7</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>10.076</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

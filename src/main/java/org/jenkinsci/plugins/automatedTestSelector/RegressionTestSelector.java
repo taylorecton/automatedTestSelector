@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.automatedTestSelector;
 
 import com.google.common.collect.ImmutableSet;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import hudson.AbortException;
 import hudson.Launcher;
 import hudson.Extension;
@@ -41,10 +42,9 @@ import java.util.Collections;
  */
 
 public class RegressionTestSelector extends Builder {
-    /**
-     * MEMBER VARIABLES WILL GO HERE
-     */
+
     public static final ImmutableSet<Result> RESULTS_OF_BUILDS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+
     private final int failureWindow;
     private final int executionWindow;
 
@@ -63,7 +63,7 @@ public class RegressionTestSelector extends Builder {
     }
 
     /**
-     * Getters and Setters
+     * Getter functions
      */
     public int getExecutionWindow() {
         return executionWindow;
@@ -87,43 +87,26 @@ public class RegressionTestSelector extends Builder {
 
 
     /**
-     * internal classes and member functions
+     * main function of the regression test selector
      */
     @Override
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws AbortException, InterruptedException, IOException {
-        listener.getLogger().println("You set the failure window to " + failureWindow);
-        listener.getLogger().println("You set the execution window to " + executionWindow);
-
+        listener.getLogger().println("Running regression test selector with a failure window of " + failureWindow);
+        listener.getLogger().println("and an execution window of " + executionWindow);
 
         FilePath workspace = build.getWorkspace();
+        if (workspace == null)
+            throw new AbortException("No workspace");
+
         FilePath reportDir = workspace.child(testReportDir);
         reportDir.deleteContents();
 
-        ArrayList<String> allTests = new ArrayList<>();
-        try (InputStream inputStream = workspace.child(testListFile).read();
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-            String testName;
-            while ((testName = bufferedReader.readLine()) != null)
-                allTests.add(testName);
-        }
-
+        ArrayList<String> allTests = getAllTests(workspace, testListFile);
         ArrayList<String> selectedTests = selectTests(build, listener, allTests);
 
-        try (OutputStream os = workspace.child(includesFile).write();
-             OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
-             PrintWriter pw = new PrintWriter(osw)) {
-            for (String fileName : selectedTests) {
-                pw.println(fileName);
-            }
-        }
-/*
-        Collection<String> changedFiles = null;
-        TestList testList = new TestList(testListFile);
+        buildIncludesFile(workspace, includesFile, selectedTests);
 
-        for (String test : testList.getTestList()) {
-            listener.getLogger().println("test: " + test);
-        }
+/*  LEAVING THIS BLOCK OF CODE AS AN EXAMPLE OF GETTING CHANGED FILES
 
         for (Entry entry : build.getChangeSet()) {
             if (entry.getAffectedPaths() != null) {
@@ -142,24 +125,53 @@ public class RegressionTestSelector extends Builder {
         return true;
     }
 
+    /**
+     * Creates a list of all tests from the testListFile provided by user
+     */
+    private ArrayList<String> getAllTests(FilePath workspace, String testListFile)
+            throws IOException, InterruptedException {
+
+        ArrayList<String> allTests = new ArrayList<>();
+
+        // try to read the file, read in all of the test names and add them to the list
+        try (InputStream inputStream = workspace.child(testListFile).read();
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            String testName;
+            while ((testName = bufferedReader.readLine()) != null)
+                allTests.add(testName);
+        }
+
+        return allTests;
+    }
+
+    /**
+     * Returns a list of tests selected for execution
+     */
     private ArrayList<String> selectTests(Run<?, ?> b, TaskListener listener, ArrayList<String> tests) {
         ArrayList<String> selectedTests = new ArrayList<>();
         ArrayList<String> foundTests = new ArrayList<>();
 
+        // continue iterating until i reaches failureWindow or executionWindow, whichever is larger
         for (int i = 0; i < this.getFailureWindow() || i < this.getExecutionWindow(); i++) {
             b = b.getPreviousBuild();
 
             if (b == null) break;
-            if (!RESULTS_OF_BUILDS_TO_CONSIDER.contains(b.getResult())) continue;
+            if (!RESULTS_OF_BUILDS_TO_CONSIDER.contains(b.getResult())) continue; // build failed = no test results
 
-            AbstractTestResultAction tra = b.getAction(AbstractTestResultAction.class);
-            if (tra == null) continue;
+            AbstractTestResultAction testResultAction = b.getAction(AbstractTestResultAction.class);
+            if (testResultAction == null) continue;
 
-            Object o = tra.getResult();
-            if (o instanceof TestResult) {
-                TestResult result = (TestResult) o;
+            Object object = testResultAction.getResult();
+            if (object instanceof TestResult) {
+                TestResult result = (TestResult) object;
                 ArrayList<String> testsFailedThisBuild = new ArrayList<>();
-                collect(result, testsFailedThisBuild, foundTests);
+
+                Boolean withinExecutionWindow = i < this.getExecutionWindow();
+                Boolean withinFailureWindow = i < this.getFailureWindow();
+                collect(result, testsFailedThisBuild, foundTests, withinExecutionWindow, withinFailureWindow);
+
+                // failing tests within failure window should be selected; don't add duplicates
                 for (String testName : testsFailedThisBuild) {
                     if (!selectedTests.contains(testName))
                         selectedTests.add(testName);
@@ -167,6 +179,7 @@ public class RegressionTestSelector extends Builder {
             }
         }
 
+        // tests not found have not been executed within execution window and should be selected
         for (String test : tests) {
             if (!foundTests.contains(test))
                 selectedTests.add(test);
@@ -175,7 +188,25 @@ public class RegressionTestSelector extends Builder {
         return selectedTests;
     }
 
-    static private void collect(TestResult r, ArrayList<String> failed, ArrayList<String> found) {
+    /**
+     * Generates includesFile to be used by build script
+     */
+    private void buildIncludesFile(FilePath workspace, String includesFile, ArrayList<String> selectedTests)
+            throws IOException, InterruptedException {
+        try (OutputStream os = workspace.child(includesFile).write();
+             OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
+             PrintWriter pw = new PrintWriter(osw)) {
+            for (String fileName : selectedTests) {
+                pw.println(fileName);
+            }
+        }
+    }
+
+    /**
+     * Collect test names from a build into two lists: found and failed
+     */
+    static private void collect(TestResult r, ArrayList<String> failed, ArrayList<String> found,
+                                Boolean withinExWindow, Boolean withinFailWindow) {
         if (r instanceof ClassResult) {
             ClassResult cr = (ClassResult) r;
             String className;
@@ -187,10 +218,10 @@ public class RegressionTestSelector extends Builder {
                 pkgName += '.';
             className = pkgName + cr.getName() + ".class";
 
-            if (!found.contains(className))
+            if (withinExWindow && !found.contains(className)) // don't add if outside of execution window
                 found.add(className);
 
-            if (cr.getFailCount() > 0)
+            if (withinFailWindow && cr.getFailCount() > 0) // don't add if outside of failure window
                 failed.add(className);
 
             return; // no need to go deeper
@@ -198,7 +229,7 @@ public class RegressionTestSelector extends Builder {
         if (r instanceof TabulatedResult) {
             TabulatedResult tr = (TabulatedResult) r;
             for (TestResult child : tr.getChildren()) {
-                collect(child, failed, found);
+                collect(child, failed, found, withinExWindow, withinFailWindow);
             }
         }
     }
