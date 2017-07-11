@@ -1,4 +1,6 @@
 org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector/DescriptorImpl/doCheckTestListFile.stapler
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector/DescriptorImpl/doCheckTestReportDir.stapler
+org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector/DescriptorImpl/doCheckIncludesFile.stapler
 org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.class
 org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.stapler
 org/jenkinsci/plugins/automatedTestSelector/TestList.class

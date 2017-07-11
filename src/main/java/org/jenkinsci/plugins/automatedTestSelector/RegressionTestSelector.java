@@ -2,12 +2,10 @@ package org.jenkinsci.plugins.automatedTestSelector;
 
 import com.google.common.collect.ImmutableSet;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import hudson.AbortException;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.FilePath;
-// import hudson.util.FormValidation;
 
 import hudson.model.*;
 
@@ -19,23 +17,15 @@ import hudson.tasks.junit.ClassResult;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.tasks.test.TabulatedResult;
 import hudson.tasks.test.TestResult;
-
 import hudson.util.FormValidation;
-import jenkins.tasks.SimpleBuildStep;
 
-// import net.sf.json.JSONObject;
 import org.apache.commons.io.Charsets;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
 import java.io.*;
-import java.nio.Buffer;
-import java.util.Collection;
 import java.util.ArrayList;
-import java.util.Collections;
-// import javax.servlet.ServletException;
-// import java.io.IOException;
 
 /**
  * @author Taylor Ecton
@@ -43,7 +33,7 @@ import java.util.Collections;
 
 public class RegressionTestSelector extends Builder {
 
-    public static final ImmutableSet<Result> RESULTS_OF_BUILDS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    public static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
 
     private final int failureWindow;
     private final int executionWindow;
@@ -53,7 +43,8 @@ public class RegressionTestSelector extends Builder {
     private final String includesFile;
 
     @DataBoundConstructor
-    public RegressionTestSelector(int failureWindow, int executionWindow, String testListFile, String testReportDir, String includesFile) {
+    public RegressionTestSelector(int failureWindow, int executionWindow, String testListFile,
+                                  String testReportDir, String includesFile) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
@@ -90,9 +81,11 @@ public class RegressionTestSelector extends Builder {
      * main function of the regression test selector
      */
     @Override
-    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws AbortException, InterruptedException, IOException {
-        listener.getLogger().println("Running regression test selector with a failure window of " + failureWindow);
-        listener.getLogger().println("and an execution window of " + executionWindow);
+    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener)
+            throws InterruptedException, IOException {
+        listener.getLogger().println("Running regression test selector...");
+        listener.getLogger().println("Failure window is set to: " + failureWindow);
+        listener.getLogger().println("Execution window is set to: " + executionWindow);
 
         FilePath workspace = build.getWorkspace();
         if (workspace == null)
@@ -103,6 +96,8 @@ public class RegressionTestSelector extends Builder {
 
         ArrayList<String> allTests = getAllTests(workspace, testListFile);
         ArrayList<String> selectedTests = selectTests(build, listener, allTests);
+
+        listener.getLogger().println(selectedTests.size() + " out of " + allTests.size() + " selected for execution");
 
         buildIncludesFile(workspace, includesFile, selectedTests);
 
@@ -148,18 +143,18 @@ public class RegressionTestSelector extends Builder {
     /**
      * Returns a list of tests selected for execution
      */
-    private ArrayList<String> selectTests(Run<?, ?> b, TaskListener listener, ArrayList<String> tests) {
+    private ArrayList<String> selectTests(Run<?, ?> build, TaskListener listener, ArrayList<String> tests) {
         ArrayList<String> selectedTests = new ArrayList<>();
         ArrayList<String> foundTests = new ArrayList<>();
 
         // continue iterating until i reaches failureWindow or executionWindow, whichever is larger
         for (int i = 0; i < this.getFailureWindow() || i < this.getExecutionWindow(); i++) {
-            b = b.getPreviousBuild();
+            build = build.getPreviousBuild();
 
-            if (b == null) break;
-            if (!RESULTS_OF_BUILDS_TO_CONSIDER.contains(b.getResult())) continue; // build failed = no test results
+            if (build == null) break;
+            if (!RESULTS_TO_CONSIDER.contains(build.getResult())) continue; // build failed = no test results
 
-            AbstractTestResultAction testResultAction = b.getAction(AbstractTestResultAction.class);
+            AbstractTestResultAction testResultAction = build.getAction(AbstractTestResultAction.class);
             if (testResultAction == null) continue;
 
             Object object = testResultAction.getResult();
@@ -205,30 +200,30 @@ public class RegressionTestSelector extends Builder {
     /**
      * Collect test names from a build into two lists: found and failed
      */
-    static private void collect(TestResult r, ArrayList<String> failed, ArrayList<String> found,
+    static private void collect(TestResult testResult, ArrayList<String> failed, ArrayList<String> found,
                                 Boolean withinExWindow, Boolean withinFailWindow) {
-        if (r instanceof ClassResult) {
-            ClassResult cr = (ClassResult) r;
+        if (testResult instanceof ClassResult) {
+            ClassResult classResult = (ClassResult) testResult;
             String className;
-            String pkgName = cr.getParent().getName();
+            String pkgName = classResult.getParent().getName();
 
             if (pkgName.equals("(root)"))   // UGH
                 pkgName = "";
             else
                 pkgName += '.';
-            className = pkgName + cr.getName() + ".class";
+            className = pkgName + classResult.getName() + ".class";
 
             if (withinExWindow && !found.contains(className)) // don't add if outside of execution window
                 found.add(className);
 
-            if (withinFailWindow && cr.getFailCount() > 0) // don't add if outside of failure window
+            if (withinFailWindow && classResult.getFailCount() > 0) // don't add if outside of failure window
                 failed.add(className);
 
             return; // no need to go deeper
         }
-        if (r instanceof TabulatedResult) {
-            TabulatedResult tr = (TabulatedResult) r;
-            for (TestResult child : tr.getChildren()) {
+        if (testResult instanceof TabulatedResult) {
+            TabulatedResult tabulatedResult = (TabulatedResult) testResult;
+            for (TestResult child : tabulatedResult.getChildren()) {
                 collect(child, failed, found, withinExWindow, withinFailWindow);
             }
         }
@@ -247,7 +242,7 @@ public class RegressionTestSelector extends Builder {
         }
 
         /*
-         * Validate numbers entered for failure and excution windows
+         * Validate numbers entered for failure and execution windows
          *
         public FormValidation doCheckWindow(@QueryParameter int value)
                 throws IOException, ServletException {
@@ -262,7 +257,23 @@ public class RegressionTestSelector extends Builder {
         public FormValidation doCheckTestListFile(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error("Please include a Test List File.");
+                return FormValidation.error("You must set a test list file for execution window to work.");
+
+            return FormValidation.ok();
+        }
+
+        public FormValidation doCheckTestReportDir(@QueryParameter String value)
+                throws IOException, ServletException {
+            if (value.length() == 0)
+                return FormValidation.error("You must set the directory containing test results.");
+
+            return FormValidation.ok();
+        }
+
+        public FormValidation doCheckIncludesFile(@QueryParameter String value)
+                throws IOException, ServletException {
+            if (value.length() == 0)
+                return FormValidation.error("You must set the name of includes file referred to by the build script.");
 
             return FormValidation.ok();
         }
