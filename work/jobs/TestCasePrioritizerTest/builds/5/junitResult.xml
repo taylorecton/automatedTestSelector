@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.20">
+  <suites>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/test-reports/TEST-TestJunit1.xml</file>
+      <name>TestJunit1</name>
+      <stdout>Inside testPrintMessage()
+Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.034</duration>
+      <timestamp>2017-07-12T17:46:52</timestamp>
+      <time>5.034</time>
+      <cases>
+        <case>
+          <duration>0.006</duration>
+          <className>TestJunit1</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;[Jim]&gt; but was:&lt;[Robert]&gt;
+	at TestJunit1.testPrintMessage(TestJunit1.java:14)
+</errorStackTrace>
+          <errorDetails>expected:&lt;[Jim]&gt; but was:&lt;[Robert]&gt;</errorDetails>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/test-reports/TEST-TestJunit2.xml</file>
+      <name>TestJunit2</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.005</duration>
+      <timestamp>2017-07-12T17:46:57</timestamp>
+      <time>5.005</time>
+      <cases>
+        <case>
+          <duration>0.0</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/test-reports/TEST-TestMessageUtil.xml</file>
+      <name>TestMessageUtil</name>
+      <stdout>Inside testSalutationMessage()
+Hi!Robert
+Inside testPrintMessage()
+Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.006</duration>
+      <timestamp>2017-07-12T17:47:02</timestamp>
+      <time>5.006</time>
+      <cases>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>15.045</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>

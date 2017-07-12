@@ -1,0 +1,13 @@
+commit c40be0586ba30b2e6751326e9db353bb8e9535c9
+tree 16fa0fb2eaafa3d0d2c506fc9dceee5f6e7729c4
+parent c494c966f3a3bb949393c9a218bda6ef0a9a3ed1
+author BearEars <taylor.ecton@gmail.com> 2017-07-12 13:45:32 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-12 13:45:32 -0400
+
+    changed which test will fail
+
+
+
+:100644 100644 68d014740e4fcbf8452310602adce3bde25f54a2 68012cbcbdfbda193804693d291bab73993a8bbf M	build.xml
+:100644 100644 68369bc696d7d9f06c901b38411c77111608dca6 d33308fb34e8ce2f61b611ea48d33c96f411c321 M	src/TestJunit1.java
+:100644 100644 2e5cc3509c40dbc7d8a6f2fa8ba05efc0d450fb0 1c3f773cfb50cc19c401d781ee2ddcaf85e54dfe M	src/TestJunit2.java

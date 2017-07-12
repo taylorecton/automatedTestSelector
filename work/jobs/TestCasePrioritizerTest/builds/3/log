@@ -1,0 +1,42 @@
+Started by user [8mha:AAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgYu/dLi1CL9vNKcHACFIKlWvwAAAA==[0manonymous
+Building in workspace /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/BearEars/learning_jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/BearEars/learning_jenkins.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/BearEars/learning_jenkins.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision c494c966f3a3bb949393c9a218bda6ef0a9a3ed1 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c494c966f3a3bb949393c9a218bda6ef0a9a3ed1
+ > git rev-list c494c966f3a3bb949393c9a218bda6ef0a9a3ed1 # timeout=10
+Running regression test selector...
+Failure window is set to: 2
+Execution window is set to: 2
+3 out of 3 selected for execution
+[workspace] $ ant test
+Buildfile: /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/build.xml
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQT6jNKU4P0+vJLE4u1gvPjGvRM8xryQksSg9tcQvvyTVvqNr/s+Vl9uYGBgqihikoKqT8/OK83NS9ZwhNEghAwQwghQWAADROOumXQAAAA==[0mcompile:
+    [javac] /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/build.xml:23: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQT6jNKU4P0+vJLE4u1gvPjGvRM8xryQksSg9tcQvvyTVvqNr/s+Vl9uYGBgqihikoKqT8/OK83NS9ZwhNEghAwQwghQWAADROOumXQAAAA==[0mtest:
+    [junit] Running TestJunit1
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.03 sec
+    [junit] Running TestJunit2
+    [junit] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 5.013 sec
+    [junit] Test TestJunit2 FAILED
+    [junit] Running TestMessageUtil
+    [junit] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.009 sec
+[junitreport] Processing /Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/test-reports/TESTS-TestSuites.xml to /var/folders/np/q065qryn0pnbl1pqpss1qmy40000gn/T/null310913309
+[junitreport] Loading stylesheet jar:file:/Users/taylorecton/Tools/apache-ant-1.10.1/lib/ant-junit.jar!/org/apache/tools/ant/taskdefs/optional/junit/xsl/junit-frames.xsl
+[junitreport] Transform time: 267ms
+[junitreport] Deleting: /var/folders/np/q065qryn0pnbl1pqpss1qmy40000gn/T/null310913309
+
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSGjNKU4P0+vJLE4u1gvPjGvRM8xr8S/tCQ5PzfVL78ktUuDM0uMry+HiYGhoohBCqo8OT+vOD8nVc8ZQoMUMkAAI0hhAQAUXUdTXgAAAA==[0mBUILD SUCCESSFUL
+Total time: 15 seconds
+Recording test results
+Build step 'Publish JUnit test result report' changed build result to UNSTABLE
+Finished: UNSTABLE
