@@ -9,14 +9,24 @@ be ignored; the relevant files are:
   - pom.xml
   + src/main/
     + java/org/jenkinsci/plugins/automatedTestSelector/
-      - AutomatedTestSelector.java
-      - TestList.java
+      - RegressionTestSelector.java
+      - TestList.java // <-- this file currently not being used; may be deleted
+      - TestCasePrioritizer.java
+      - TestPriority.java
     + resources/
       - index.jelly
-      + org/jenkinsci/plugins/automatedTestSelector/AutomatedTestSelector/
-        - config.jelly
-        - help-executionWindow.html
-        - help-failureWindow.html
-        - help-includesFile.html
-        - help-testListFile.html
-        - help-testReportDir.html
+      + org/jenkinsci/plugins/automatedTestSelector/
+        + RegressionTestSelector/
+          - config.jelly
+          - help-executionWindow.html
+          - help-failureWindow.html
+          - help-includesFile.html
+          - help-testListFile.html
+          - help-testReportDir.html
+        + TestCasePrioritizer
+          - config.jelly
+          - help-executionWindow.html
+          - help-failureWindow.html
+          - help-includesFile.html
+          - help-testListFile.html
+          - help-testReportDir.html
