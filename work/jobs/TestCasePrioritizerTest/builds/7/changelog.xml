@@ -1,0 +1,23 @@
+commit abf4d92df3e537a997213de37079e114e0844a3a
+tree 08192bbf4d9e920e392c29f0008113df52136f3e
+parent a9e2e1a86f8f8a0c68ae64c62554059935a230f5
+author BearEars <taylor.ecton@gmail.com> 2017-07-17 11:12:32 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-17 11:12:32 -0400
+
+    changed which test case fails
+
+
+
+:100644 100644 d33308fb34e8ce2f61b611ea48d33c96f411c321 93d42a86f6fbd3aa1fbb0061d4ca761cd92b5361 M	src/TestJunit1.java
+:100644 100644 1c3f773cfb50cc19c401d781ee2ddcaf85e54dfe 1374dd2e703ec0d2595ffb4c0638c8e82411d3e7 M	src/TestJunit2.java
+commit a9e2e1a86f8f8a0c68ae64c62554059935a230f5
+tree 7601d58a38e99c8975baf82e9cf7eb1776f2ff08
+parent c40be0586ba30b2e6751326e9db353bb8e9535c9
+author BearEars <taylor.ecton@gmail.com> 2017-07-12 14:10:26 -0400
+committer BearEars <taylor.ecton@gmail.com> 2017-07-12 14:10:26 -0400
+
+    temporarily changed build.xml to run tests separately
+
+
+
+:100644 100644 68012cbcbdfbda193804693d291bab73993a8bbf 33c6933fbbea661dc16eda1b1e06508264a29f62 M	build.xml

@@ -42,17 +42,24 @@ public class TestCasePrioritizer extends Builder {
 
     private final String testListFile;
     private final String testReportDir;
-    private final String includesFile;
+
+    private final String includesFileHigh;
+    private final String includesFileLow;
 
     @DataBoundConstructor
-    public TestCasePrioritizer(int failureWindow, int executionWindow, String testListFile,
-                                  String testReportDir, String includesFile) {
+    public TestCasePrioritizer(int failureWindow,
+                               int executionWindow,
+                               String testListFile,
+                               String testReportDir,
+                               String includesFileHigh,
+                               String includesFileLow) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
         this.testListFile = testListFile;
         this.testReportDir = testReportDir;
-        this.includesFile = includesFile;
+        this.includesFileHigh = includesFileHigh;
+        this.includesFileLow = includesFileLow;
     }
 
     /**
@@ -74,10 +81,13 @@ public class TestCasePrioritizer extends Builder {
         return testReportDir;
     }
 
-    public String getIncludesFile() {
-        return includesFile;
+    public String getIncludesFileHigh() {
+        return includesFileHigh;
     }
 
+    public String getIncludesFileLow() {
+        return includesFileLow;
+    }
 
     /**
      * main function of the regression test selector
@@ -101,7 +111,7 @@ public class TestCasePrioritizer extends Builder {
 
         listener.getLogger().println(sortedTests.size() + " out of " + allTests.size() + " selected for execution");
 
-        buildIncludesFile(workspace, includesFile, sortedTests);
+        buildInclusionFiles(workspace, includesFileHigh, includesFileLow, sortedTests);
 
         return true;
     }
@@ -131,7 +141,9 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Returns a list of tests selected for execution
      */
-    private ArrayList<TestPriority> prioritizeTests(Run<?, ?> build, TaskListener listener, TreeMap<String, TestPriority> tests) {
+    private ArrayList<TestPriority> prioritizeTests(Run<?, ?> build,
+                                                    TaskListener listener,
+                                                    TreeMap<String, TestPriority> tests) {
         ArrayList<String> foundTests = new ArrayList<>();
         ArrayList<String> testNames = new ArrayList<>(tests.keySet());
 
@@ -177,13 +189,25 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Generates includesFile to be used by build script
      */
-    private void buildIncludesFile(FilePath workspace, String includesFile, ArrayList<TestPriority> sortedTests)
+    private void buildInclusionFiles(FilePath workspace,
+                                     String includesFileHigh,
+                                     String includesFileLow,
+                                     ArrayList<TestPriority> sortedTests)
             throws IOException, InterruptedException {
-        try (OutputStream os = workspace.child(includesFile).write();
-             OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
-             PrintWriter pw = new PrintWriter(osw)) {
+
+        try (OutputStream osIncludesHigh = workspace.child(includesFileHigh).write();
+             OutputStreamWriter oswIncludesHigh = new OutputStreamWriter(osIncludesHigh, Charsets.UTF_8);
+             PrintWriter pwIncludesHigh = new PrintWriter(oswIncludesHigh);
+
+             OutputStream osIncludesLow = workspace.child(includesFileLow).write();
+             OutputStreamWriter oswIncludesLow = new OutputStreamWriter(osIncludesLow, Charsets.UTF_8);
+             PrintWriter pwIncludesLow = new PrintWriter(oswIncludesLow)) {
+
             for (TestPriority testPriority : sortedTests) {
-                pw.println(testPriority.getClassName());
+                if (testPriority.getPriority() == 0)
+                    pwIncludesHigh.println(testPriority.getClassName());
+                else
+                    pwIncludesLow.println(testPriority.getClassName());
             }
         }
     }
@@ -191,8 +215,11 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Collect test names from a build into two lists: found and failed
      */
-    static private void collect(TestResult testResult, ArrayList<String> failed, ArrayList<String> found,
-                                Boolean withinExWindow, Boolean withinFailWindow) {
+    static private void collect(TestResult testResult,
+                                ArrayList<String> failed,
+                                ArrayList<String> found,
+                                Boolean withinExWindow,
+                                Boolean withinFailWindow) {
         if (testResult instanceof ClassResult) {
             ClassResult classResult = (ClassResult) testResult;
             String className;
@@ -261,7 +288,15 @@ public class TestCasePrioritizer extends Builder {
             return FormValidation.ok();
         }
 
-        public FormValidation doCheckIncludesFile(@QueryParameter String value)
+        public FormValidation doCheckIncludesFileHigh(@QueryParameter String value)
+                throws IOException, ServletException {
+            if (value.length() == 0)
+                return FormValidation.error("You must set the name of includes file referred to by the build script.");
+
+            return FormValidation.ok();
+        }
+
+        public FormValidation doCheckIncludesFileLow(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
                 return FormValidation.error("You must set the name of includes file referred to by the build script.");

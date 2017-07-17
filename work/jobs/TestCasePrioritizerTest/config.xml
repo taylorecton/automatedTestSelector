@@ -32,7 +32,8 @@
       <executionWindow>2</executionWindow>
       <testListFile>tests.txt</testListFile>
       <testReportDir>test-reports</testReportDir>
-      <includesFile>inclusions.txt</includesFile>
+      <includesFileHigh>inclusions_high.txt</includesFileHigh>
+      <includesFileLow>inclusions_low.txt</includesFileLow>
     </org.jenkinsci.plugins.automatedTestSelector.TestCasePrioritizer>
     <hudson.tasks.Ant plugin="ant@1.2">
       <targets>test</targets>
