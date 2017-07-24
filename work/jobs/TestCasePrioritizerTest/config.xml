@@ -30,10 +30,9 @@
     <org.jenkinsci.plugins.automatedTestSelector.TestCasePrioritizer plugin="automatedTestSelector@1.0-SNAPSHOT">
       <failureWindow>2</failureWindow>
       <executionWindow>2</executionWindow>
-      <testListFile>tests.txt</testListFile>
+      <testListFile>src/TestSuite.java</testListFile>
       <testReportDir>test-reports</testReportDir>
-      <includesFileHigh>inclusions_high.txt</includesFileHigh>
-      <includesFileLow>inclusions_low.txt</includesFileLow>
+      <includesFile>inclusions.txt</includesFile>
     </org.jenkinsci.plugins.automatedTestSelector.TestCasePrioritizer>
     <hudson.tasks.Ant plugin="ant@1.2">
       <targets>test</targets>

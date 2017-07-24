@@ -43,23 +43,26 @@ public class TestCasePrioritizer extends Builder {
     private final String testListFile;
     private final String testReportDir;
 
-    private final String includesFileHigh;
-    private final String includesFileLow;
+    private final String includesFile;
+    //private final String includesFileHigh;
+    //private final String includesFileLow;
 
     @DataBoundConstructor
     public TestCasePrioritizer(int failureWindow,
                                int executionWindow,
                                String testListFile,
                                String testReportDir,
+                               String includesFile /*,
                                String includesFileHigh,
-                               String includesFileLow) {
+                               String includesFileLow */) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
         this.testListFile = testListFile;
         this.testReportDir = testReportDir;
-        this.includesFileHigh = includesFileHigh;
-        this.includesFileLow = includesFileLow;
+        this.includesFile = includesFile;
+        //this.includesFileHigh = includesFileHigh;
+        //this.includesFileLow = includesFileLow;
     }
 
     /**
@@ -81,6 +84,11 @@ public class TestCasePrioritizer extends Builder {
         return testReportDir;
     }
 
+    public String getIncludesFile() {
+        return includesFile;
+    }
+
+    /*
     public String getIncludesFileHigh() {
         return includesFileHigh;
     }
@@ -88,6 +96,7 @@ public class TestCasePrioritizer extends Builder {
     public String getIncludesFileLow() {
         return includesFileLow;
     }
+    */
 
     /**
      * main function of the regression test selector
@@ -109,9 +118,7 @@ public class TestCasePrioritizer extends Builder {
         TreeMap<String, TestPriority> allTests = getAllTests(workspace, testListFile);
         ArrayList<TestPriority> sortedTests = prioritizeTests(build, listener, allTests);
 
-        listener.getLogger().println(sortedTests.size() + " out of " + allTests.size() + " selected for execution");
-
-        buildInclusionFiles(workspace, includesFileHigh, includesFileLow, sortedTests);
+        buildInclusionFiles(workspace, includesFile, /* includesFileHigh, includesFileLow, */ sortedTests);
 
         return true;
     }
@@ -128,10 +135,19 @@ public class TestCasePrioritizer extends Builder {
         try (InputStream inputStream = workspace.child(testListFile).read();
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-            String testName;
-            while ((testName = bufferedReader.readLine()) != null) {
-                TestPriority testPriority = new TestPriority(testName);
-                allTests.put(testName, testPriority);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.trim().equals("@Suite.SuiteClasses({") || line.trim().equals("@SuiteClasses({")) {
+                    line = bufferedReader.readLine();
+                    while (!line.trim().equals("})")) {
+                        line = line.trim();
+                        if (line.contains(","))
+                            line = line.replace(",", "");
+                        TestPriority testPriority = new TestPriority(line);
+                        allTests.put(line, testPriority);
+                        line = bufferedReader.readLine();
+                    }
+                }
             }
         }
 
@@ -146,6 +162,11 @@ public class TestCasePrioritizer extends Builder {
                                                     TreeMap<String, TestPriority> tests) {
         ArrayList<String> foundTests = new ArrayList<>();
         ArrayList<String> testNames = new ArrayList<>(tests.keySet());
+
+        /* DEBUG CODE
+        for (String t : testNames)
+            System.out.println("keys: " + t);
+        */
 
         // continue iterating until i reaches failureWindow or executionWindow, whichever is larger
         for (int i = 0; i < this.getFailureWindow() || i < this.getExecutionWindow(); i++) {
@@ -168,6 +189,7 @@ public class TestCasePrioritizer extends Builder {
 
                 // failing tests within failure window should be selected; don't add duplicates
                 for (String testName : testsFailedThisBuild) {
+                    // System.out.println(testName); // <-- for debugging
                     tests.get(testName).setHighPriority();
                 }
             }
@@ -190,25 +212,33 @@ public class TestCasePrioritizer extends Builder {
      * Generates includesFile to be used by build script
      */
     private void buildInclusionFiles(FilePath workspace,
+                                     String includesFile, /*
                                      String includesFileHigh,
-                                     String includesFileLow,
+                                     String includesFileLow, */
                                      ArrayList<TestPriority> sortedTests)
             throws IOException, InterruptedException {
 
-        try (OutputStream osIncludesHigh = workspace.child(includesFileHigh).write();
+        try (OutputStream osIncludes = workspace.child(includesFile).write();
+             OutputStreamWriter oswIncludes = new OutputStreamWriter(osIncludes, Charsets.UTF_8);
+             PrintWriter pwIncludes = new PrintWriter(oswIncludes))
+            /*(OutputStream osIncludesHigh = workspace.child(includesFileHigh).write();
              OutputStreamWriter oswIncludesHigh = new OutputStreamWriter(osIncludesHigh, Charsets.UTF_8);
              PrintWriter pwIncludesHigh = new PrintWriter(oswIncludesHigh);
 
              OutputStream osIncludesLow = workspace.child(includesFileLow).write();
              OutputStreamWriter oswIncludesLow = new OutputStreamWriter(osIncludesLow, Charsets.UTF_8);
-             PrintWriter pwIncludesLow = new PrintWriter(oswIncludesLow)) {
+             PrintWriter pwIncludesLow = new PrintWriter(oswIncludesLow))*/ {
 
             for (TestPriority testPriority : sortedTests) {
+                pwIncludes.println(testPriority.getClassName() + ": " + testPriority.getPriority());
+                /*
                 if (testPriority.getPriority() == 0)
                     pwIncludesHigh.println(testPriority.getClassName());
                 else
                     pwIncludesLow.println(testPriority.getClassName());
+                */
             }
+
         }
     }
 
@@ -230,6 +260,7 @@ public class TestCasePrioritizer extends Builder {
             else
                 pkgName += '.';
             className = pkgName + classResult.getName() + ".class";
+            // System.out.println("Collect: " + className); // <-- for debugging
 
             if (withinExWindow && !found.contains(className)) // don't add if outside of execution window
                 found.add(className);

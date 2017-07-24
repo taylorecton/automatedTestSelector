@@ -22,10 +22,7 @@
   <f:entry title="Test Report Directory" field="testReportDir">
     <f:textbox />
   </f:entry>
-  <f:entry title="Includes File - High Priority" field="includesFileHigh">
-    <f:textbox />
-  </f:entry>
-  <f:entry title="Includes File - Low Priority" field="includesFileLow">
+  <f:entry title="Includes File" field="includesFile">
     <f:textbox />
   </f:entry>
 </j:jelly>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result plugin="junit@1.20">
+  <suites>
+    <suite>
+      <file>/Users/taylorecton/Documents/Automated-test-selector/automatedTestSelector/work/jobs/TestCasePrioritizerTest/workspace/test-reports/TEST-TestSuite.xml</file>
+      <name>TestSuite</name>
+      <stdout>Inside testPrintMessage()
+Robert
+Inside testSalutationMessage()
+Hi!Robert
+Inside testSalutationMessage()
+Hi!Robert
+Inside testPrintMessage()
+Robert
+</stdout>
+      <stderr></stderr>
+      <duration>5.04</duration>
+      <timestamp>2017-07-24T18:53:14</timestamp>
+      <time>5.04</time>
+      <cases>
+        <case>
+          <duration>0.001</duration>
+          <className>TestJunit1</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>0.005</duration>
+          <className>TestJunit2</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <errorStackTrace>junit.framework.AssertionFailedError: expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;
+	at TestJunit2.testSalutationMessage(TestJunit2.java:15)
+</errorStackTrace>
+          <errorDetails>expected:&lt;Hi[]Robert&gt; but was:&lt;Hi[!]Robert&gt;</errorDetails>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testSalutationMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+        <case>
+          <duration>0.0</duration>
+          <className>TestMessageUtil</className>
+          <testName>testPrintMessage</testName>
+          <skipped>false</skipped>
+          <failedSince>0</failedSince>
+        </case>
+      </cases>
+    </suite>
+  </suites>
+  <duration>5.04</duration>
+  <keepLongStdio>false</keepLongStdio>
+</result>
