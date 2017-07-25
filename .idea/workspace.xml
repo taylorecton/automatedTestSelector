@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df9002ad-4d68-4bba-8f07-7819fac31a28" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFile.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-testListFile.html" afterPath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-testSuiteFile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/workspace" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/workspace" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest2/workspace" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest2/workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test2/workspace" afterPath="$PROJECT_DIR$/work/jobs/test2/workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test3/workspace" afterPath="$PROJECT_DIR$/work/jobs/test3/workspace" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" afterPath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" afterPath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.1" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.2" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.3" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.4" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.5" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" afterPath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/updates/default.json" afterPath="$PROJECT_DIR$/work/updates/default.json" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +20,8 @@
       <file leaf-file-name="RegressionTestSelector.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-512">
-              <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+            <state relative-caret-position="343">
+              <caret line="107" column="56" lean-forward="true" selection-start-line="107" selection-start-column="56" selection-end-line="107" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,6 +105,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="140" />
     <option name="y" value="23" />
     <option name="width" value="1339" />
     <option name="height" value="991" />
@@ -446,7 +435,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1339" height="991" extended-state="0" />
+    <frame x="140" y="23" width="1339" height="991" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -895,8 +884,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-512">
-          <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+        <state relative-caret-position="343">
+          <caret line="107" column="56" lean-forward="true" selection-start-line="107" selection-start-column="56" selection-end-line="107" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
