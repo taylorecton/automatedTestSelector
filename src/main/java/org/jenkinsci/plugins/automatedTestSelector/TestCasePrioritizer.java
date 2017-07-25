@@ -36,33 +36,30 @@ import java.util.TreeMap;
 public class TestCasePrioritizer extends Builder {
 
     public static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    public static final String ANNOTATION_START_1 = "@SuiteClasses({";
+    public static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
+    public static final String ANNOTATION_END = "})";
 
     private final int failureWindow;
     private final int executionWindow;
 
-    private final String testListFile;
+    private final String testSuiteFile;
     private final String testReportDir;
 
-    private final String includesFile;
-    //private final String includesFileHigh;
-    //private final String includesFileLow;
+    //private final String includesFile;
 
     @DataBoundConstructor
     public TestCasePrioritizer(int failureWindow,
                                int executionWindow,
-                               String testListFile,
-                               String testReportDir,
-                               String includesFile /*,
-                               String includesFileHigh,
-                               String includesFileLow */) {
+                               String testSuiteFile,
+                               String testReportDir /* ,
+                               String includesFile */) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
-        this.testListFile = testListFile;
+        this.testSuiteFile = testSuiteFile;
         this.testReportDir = testReportDir;
-        this.includesFile = includesFile;
-        //this.includesFileHigh = includesFileHigh;
-        //this.includesFileLow = includesFileLow;
+        // this.includesFile = includesFile;
     }
 
     /**
@@ -76,25 +73,17 @@ public class TestCasePrioritizer extends Builder {
         return failureWindow;
     }
 
-    public String getTestListFile() {
-        return testListFile;
+    public String getTestSuiteFile() {
+        return testSuiteFile;
     }
 
     public String getTestReportDir() {
         return testReportDir;
     }
 
+    /*
     public String getIncludesFile() {
         return includesFile;
-    }
-
-    /*
-    public String getIncludesFileHigh() {
-        return includesFileHigh;
-    }
-
-    public String getIncludesFileLow() {
-        return includesFileLow;
     }
     */
 
@@ -115,10 +104,11 @@ public class TestCasePrioritizer extends Builder {
         FilePath reportDir = workspace.child(testReportDir);
         reportDir.deleteContents();
 
-        TreeMap<String, TestPriority> allTests = getAllTests(workspace, testListFile);
+        ArrayList<String> linesForFile = new ArrayList<>();
+        TreeMap<String, TestPriority> allTests = getAllTests(workspace, testSuiteFile, linesForFile);
         ArrayList<TestPriority> sortedTests = prioritizeTests(build, listener, allTests);
 
-        buildInclusionFiles(workspace, includesFile, /* includesFileHigh, includesFileLow, */ sortedTests);
+        buildTestSuiteFile(workspace, testSuiteFile, sortedTests, linesForFile);
 
         return true;
     }
@@ -126,20 +116,23 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Creates a list of all tests from the testListFile provided by user
      */
-    private TreeMap<String, TestPriority> getAllTests(FilePath workspace, String testListFile)
+    private TreeMap<String, TestPriority> getAllTests(FilePath workspace,
+                                                      String testSuiteFile,
+                                                      ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
 
         TreeMap<String, TestPriority> allTests = new TreeMap<>();
 
         // try to read the file, read in all of the test names and add them to the list
-        try (InputStream inputStream = workspace.child(testListFile).read();
+        try (InputStream inputStream = workspace.child(testSuiteFile).read();
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.trim().equals("@Suite.SuiteClasses({") || line.trim().equals("@SuiteClasses({")) {
+                linesForFile.add(line);
+                if (line.trim().equals(ANNOTATION_START_1) || line.trim().equals(ANNOTATION_START_2)) {
                     line = bufferedReader.readLine();
-                    while (!line.trim().equals("})")) {
+                    while (!line.trim().equals(ANNOTATION_END)) {
                         line = line.trim();
                         if (line.contains(","))
                             line = line.replace(",", "");
@@ -150,6 +143,11 @@ public class TestCasePrioritizer extends Builder {
                 }
             }
         }
+
+        /* FOR DEBUG
+        for (String line : linesForFile)
+            System.out.println(line);
+        */
 
         return allTests;
     }
@@ -211,34 +209,30 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Generates includesFile to be used by build script
      */
-    private void buildInclusionFiles(FilePath workspace,
-                                     String includesFile, /*
-                                     String includesFileHigh,
-                                     String includesFileLow, */
-                                     ArrayList<TestPriority> sortedTests)
+    private void buildTestSuiteFile(FilePath workspace,
+                                     String testSuiteFile,
+                                     ArrayList<TestPriority> sortedTests,
+                                     ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
 
-        try (OutputStream osIncludes = workspace.child(includesFile).write();
-             OutputStreamWriter oswIncludes = new OutputStreamWriter(osIncludes, Charsets.UTF_8);
-             PrintWriter pwIncludes = new PrintWriter(oswIncludes))
-            /*(OutputStream osIncludesHigh = workspace.child(includesFileHigh).write();
-             OutputStreamWriter oswIncludesHigh = new OutputStreamWriter(osIncludesHigh, Charsets.UTF_8);
-             PrintWriter pwIncludesHigh = new PrintWriter(oswIncludesHigh);
+        try (OutputStream osSuiteFile = workspace.child(testSuiteFile).write();
+             OutputStreamWriter oswSuiteFile = new OutputStreamWriter(osSuiteFile, Charsets.UTF_8);
+             PrintWriter pwSuiteFile = new PrintWriter(oswSuiteFile)) {
 
-             OutputStream osIncludesLow = workspace.child(includesFileLow).write();
-             OutputStreamWriter oswIncludesLow = new OutputStreamWriter(osIncludesLow, Charsets.UTF_8);
-             PrintWriter pwIncludesLow = new PrintWriter(oswIncludesLow))*/ {
+            for (String line : linesForFile) {
+                pwSuiteFile.println(line);
 
-            for (TestPriority testPriority : sortedTests) {
-                pwIncludes.println(testPriority.getClassName() + ": " + testPriority.getPriority());
-                /*
-                if (testPriority.getPriority() == 0)
-                    pwIncludesHigh.println(testPriority.getClassName());
-                else
-                    pwIncludesLow.println(testPriority.getClassName());
-                */
+                if (line.equals(ANNOTATION_START_1) || line.equals(ANNOTATION_START_2)) {
+                    TestPriority testPriority;
+                    for (int i = 0; i < sortedTests.size() - 1; i++) {
+                        testPriority = sortedTests.get(i);
+                        pwSuiteFile.println(testPriority.getClassName() + ",");
+                    }
+                    testPriority = sortedTests.get(sortedTests.size()-1);
+                    pwSuiteFile.println(testPriority.getClassName());
+                    pwSuiteFile.println(ANNOTATION_END);
+                }
             }
-
         }
     }
 

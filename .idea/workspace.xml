@@ -2,52 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df9002ad-4d68-4bba-8f07-7819fac31a28" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileHigh.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileLow.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileHigh.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileLow.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer$DescriptorImpl.class" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer$DescriptorImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.class" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastFailedBuild" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastFailedBuild" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastSuccessfulBuild" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastSuccessfulBuild" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastUnstableBuild" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastUnstableBuild" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastUnsuccessfulBuild" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/builds/lastUnsuccessfulBuild" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFile.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-testListFile.html" afterPath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-testSuiteFile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/workspace" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test2/workspace" afterPath="$PROJECT_DIR$/work/jobs/test2/workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/test3/workspace" afterPath="$PROJECT_DIR$/work/jobs/test3/workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" afterPath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" afterPath="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.stapler" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.stapler" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.stapler" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.stapler" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" afterPath="$PROJECT_DIR$/target/classes/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/allclasses-frame.html" afterPath="$PROJECT_DIR$/target/site/apidocs/allclasses-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/allclasses-noframe.html" afterPath="$PROJECT_DIR$/target/site/apidocs/allclasses-noframe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/constant-values.html" afterPath="$PROJECT_DIR$/target/site/apidocs/constant-values.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/deprecated-list.html" afterPath="$PROJECT_DIR$/target/site/apidocs/deprecated-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/help-doc.html" afterPath="$PROJECT_DIR$/target/site/apidocs/help-doc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/index-all.html" afterPath="$PROJECT_DIR$/target/site/apidocs/index-all.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/index.html" afterPath="$PROJECT_DIR$/target/site/apidocs/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.DescriptorImpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.DescriptorImpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestList.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestPriority.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/TestPriority.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/RegressionTestSelector.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/RegressionTestSelector.DescriptorImpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/RegressionTestSelector.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/RegressionTestSelector.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestCasePrioritizer.DescriptorImpl.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestCasePrioritizer.DescriptorImpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestCasePrioritizer.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestCasePrioritizer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestList.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestPriority.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/class-use/TestPriority.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-frame.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-summary.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-tree.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-use.html" afterPath="$PROJECT_DIR$/target/site/apidocs/org/jenkinsci/plugins/automatedTestSelector/package-use.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/site/apidocs/overview-tree.html" afterPath="$PROJECT_DIR$/target/site/apidocs/overview-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/.owner" afterPath="$PROJECT_DIR$/work/.owner" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/config.xml" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/nextBuildNumber" afterPath="$PROJECT_DIR$/work/jobs/TestCasePrioritizerTest/nextBuildNumber" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.1" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.1" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.2" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.2" />
@@ -56,7 +18,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.5" afterPath="$PROJECT_DIR$/work/logs/tasks/Download metadata.log.5" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" afterPath="$PROJECT_DIR$/work/plugins/automatedTestSelector.hpl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/updates/default.json" afterPath="$PROJECT_DIR$/work/updates/default.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/work/updates/hudson.tools.JDKInstaller" afterPath="$PROJECT_DIR$/work/updates/hudson.tools.JDKInstaller" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,10 +29,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RegressionTestSelector.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RegressionTestSelector.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
+            <state relative-caret-position="-512">
               <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -80,22 +41,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCasePrioritizer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestCasePrioritizer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="232" column="98" lean-forward="false" selection-start-line="232" selection-start-column="98" selection-end-line="232" selection-end-column="98" />
+            <state relative-caret-position="571">
+              <caret line="232" column="56" lean-forward="false" selection-start-line="232" selection-start-column="56" selection-end-line="232" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-                <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+                <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-                <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-                <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-                <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-                <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -104,8 +61,8 @@
       <file leaf-file-name="config.jelly" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+            <state relative-caret-position="270">
+              <caret line="18" column="51" lean-forward="false" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -182,7 +139,6 @@
     <panes>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,6 +209,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -490,6 +447,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1339" height="991" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -498,18 +456,18 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24794623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24794623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -557,12 +515,8 @@
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -594,12 +548,8 @@
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -631,12 +581,8 @@
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -689,12 +635,8 @@
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -747,12 +689,8 @@
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -913,22 +851,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/TestCasePrioritizer/config.jelly" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileHigh.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileHigh.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-excludesFileLow.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-excludesFileHigh.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileLow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileLow.html" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestPriority.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -941,43 +867,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+        <state relative-caret-position="270">
+          <caret line="18" column="51" lean-forward="false" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="232" column="98" lean-forward="false" selection-start-line="232" selection-start-column="98" selection-end-line="232" selection-end-column="98" />
+        <state relative-caret-position="571">
+          <caret line="232" column="56" lean-forward="false" selection-start-line="232" selection-start-column="56" selection-end-line="232" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#perform#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="docComment;method#buildInclusionFiles#0;class#TestCasePrioritizer#0" expanded="false" />
+            <element signature="docComment;method#buildTestSuiteFile#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <marker date="1500922659000" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2536:2542" ph=" }" />
-            <marker date="1500922659000" expanded="false" signature="2582:2593" ph=" { " />
-            <marker date="1500922659000" expanded="false" signature="2616:2622" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-512">
+          <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

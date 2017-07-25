@@ -16,13 +16,10 @@
   <f:entry title="Failure Window" field="failureWindow">
     <f:textbox />
   </f:entry>
-  <f:entry title="Test List File" field="testListFile">
+  <f:entry title="Test Suite File" field="testSuiteFile">
     <f:textbox />
   </f:entry>
   <f:entry title="Test Report Directory" field="testReportDir">
-    <f:textbox />
-  </f:entry>
-  <f:entry title="Includes File" field="includesFile">
     <f:textbox />
   </f:entry>
 </j:jelly>
