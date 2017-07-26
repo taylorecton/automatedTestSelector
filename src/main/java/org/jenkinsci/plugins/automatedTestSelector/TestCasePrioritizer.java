@@ -20,6 +20,7 @@ import hudson.tasks.test.TestResult;
 import hudson.util.FormValidation;
 
 import org.apache.commons.io.Charsets;
+import org.jaxen.pantry.Test;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
@@ -39,9 +40,11 @@ public class TestCasePrioritizer extends Builder {
     public static final String ANNOTATION_START_1 = "@SuiteClasses({";
     public static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
     public static final String ANNOTATION_END = "})";
+    public static final String LAST_PRIORITIZED_FILE = "build_when_previously_prioritized.txt";
 
     private final int failureWindow;
     private final int executionWindow;
+    private final int prioritizationWindow;
 
     private final String testSuiteFile;
     private final String testReportDir;
@@ -51,11 +54,12 @@ public class TestCasePrioritizer extends Builder {
     @DataBoundConstructor
     public TestCasePrioritizer(int failureWindow,
                                int executionWindow,
+                               int prioritizationWindow,
                                String testSuiteFile,
-                               String testReportDir /* ,
-                               String includesFile */) {
+                               String testReportDir) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
+        this.prioritizationWindow = prioritizationWindow;
 
         this.testSuiteFile = testSuiteFile;
         this.testReportDir = testReportDir;
@@ -97,6 +101,7 @@ public class TestCasePrioritizer extends Builder {
         listener.getLogger().println("Failure window is set to: " + failureWindow);
         listener.getLogger().println("Execution window is set to: " + executionWindow);
 
+        int currentBuildNumber = build.getNumber();
         FilePath workspace = build.getWorkspace();
         if (workspace == null)
             throw new AbortException("No workspace");
@@ -106,9 +111,10 @@ public class TestCasePrioritizer extends Builder {
 
         ArrayList<String> linesForFile = new ArrayList<>();
         TreeMap<String, TestPriority> allTests = getAllTests(workspace, testSuiteFile, linesForFile);
-        ArrayList<TestPriority> sortedTests = prioritizeTests(build, listener, allTests);
+        setPreviousPrioritizedBuildNums(workspace, listener, allTests);
+        ArrayList<TestPriority> sortedTests = prioritizeTests(build, currentBuildNumber, listener, allTests);
 
-        buildTestSuiteFile(workspace, testSuiteFile, sortedTests, linesForFile);
+        buildFiles(workspace, testSuiteFile, sortedTests, linesForFile);
 
         return true;
     }
@@ -156,6 +162,7 @@ public class TestCasePrioritizer extends Builder {
      * Returns a list of tests selected for execution
      */
     private ArrayList<TestPriority> prioritizeTests(Run<?, ?> build,
+                                                    int currentBuildNumber,
                                                     TaskListener listener,
                                                     TreeMap<String, TestPriority> tests) {
         ArrayList<String> foundTests = new ArrayList<>();
@@ -163,7 +170,7 @@ public class TestCasePrioritizer extends Builder {
 
         /* DEBUG CODE
         for (String t : testNames)
-            System.out.println("keys: " + t);
+            listener.getLogger().println("keys: " + t);
         */
 
         // continue iterating until i reaches failureWindow or executionWindow, whichever is larger
@@ -187,20 +194,44 @@ public class TestCasePrioritizer extends Builder {
 
                 // failing tests within failure window should be selected; don't add duplicates
                 for (String testName : testsFailedThisBuild) {
-                    // System.out.println(testName); // <-- for debugging
-                    tests.get(testName).setHighPriority();
+
+                    listener.getLogger().println(testName + " failed a build"); // <-- for debugging
+                    listener.getLogger().println("Prioritizing " + testName);   // <-- for debugging
+                    listener.getLogger().println();                             // <-- for debugging
+
+                    TestPriority testPriority = tests.get(testName);
+                    testPriority.setHighPriority();
+                    testPriority.setPreviousPrioritizedBuildNum(currentBuildNumber);
                 }
             }
         }
 
         // tests not found have not been executed within execution window and should be selected
         for (String test : testNames) {
-            if (!foundTests.contains(test))
+            if (!foundTests.contains(test)) {
+
+                listener.getLogger().println(test + " not found within execution window"); // <-- for debugging
+                listener.getLogger().println("Prioritizing " + test);                      // <-- for debugging
+                listener.getLogger().println();                                            // <-- for debugging
+
                 tests.get(test).setHighPriority();
+            }
         }
 
-        // sort the tests
         ArrayList<TestPriority> sortedTests = new ArrayList<>(tests.values());
+
+        for (TestPriority testPriority : sortedTests) {
+            if ((currentBuildNumber - testPriority.getPreviousPrioritizedBuildNum()) > prioritizationWindow) {
+
+                listener.getLogger().println(testPriority.getClassName() + " not prioritized w/in window"); // <-- for debugging
+                listener.getLogger().println("Prioritizing " + testPriority.getClassName());                // <-- for debugging
+                listener.getLogger().println();                                                             // <-- for debugging
+
+                testPriority.setHighPriority();
+                testPriority.setPreviousPrioritizedBuildNum(currentBuildNumber);
+            }
+        }
+
         Collections.sort(sortedTests);
 
         return sortedTests;
@@ -209,7 +240,7 @@ public class TestCasePrioritizer extends Builder {
     /**
      * Generates includesFile to be used by build script
      */
-    private void buildTestSuiteFile(FilePath workspace,
+    private void buildFiles(FilePath workspace,
                                      String testSuiteFile,
                                      ArrayList<TestPriority> sortedTests,
                                      ArrayList<String> linesForFile)
@@ -217,7 +248,11 @@ public class TestCasePrioritizer extends Builder {
 
         try (OutputStream osSuiteFile = workspace.child(testSuiteFile).write();
              OutputStreamWriter oswSuiteFile = new OutputStreamWriter(osSuiteFile, Charsets.UTF_8);
-             PrintWriter pwSuiteFile = new PrintWriter(oswSuiteFile)) {
+             PrintWriter pwSuiteFile = new PrintWriter(oswSuiteFile);
+
+             OutputStream osPriorityWindowFile = workspace.child(LAST_PRIORITIZED_FILE).write();
+             OutputStreamWriter oswPriorityWindowFile = new OutputStreamWriter(osPriorityWindowFile, Charsets.UTF_8);
+             PrintWriter pwPriorityWindowFile = new PrintWriter(oswPriorityWindowFile)) {
 
             for (String line : linesForFile) {
                 pwSuiteFile.println(line);
@@ -227,12 +262,34 @@ public class TestCasePrioritizer extends Builder {
                     for (int i = 0; i < sortedTests.size() - 1; i++) {
                         testPriority = sortedTests.get(i);
                         pwSuiteFile.println(testPriority.getClassName() + ",");
+                        pwPriorityWindowFile.println(testPriority.getClassName()
+                                + ":" + testPriority.getPreviousPrioritizedBuildNum());
                     }
                     testPriority = sortedTests.get(sortedTests.size()-1);
                     pwSuiteFile.println(testPriority.getClassName());
+                    pwPriorityWindowFile.println(testPriority.getClassName()
+                            + ":" + testPriority.getPreviousPrioritizedBuildNum());
                     pwSuiteFile.println(ANNOTATION_END);
                 }
             }
+        }
+    }
+
+    private void setPreviousPrioritizedBuildNums(FilePath workspace,
+                                                 BuildListener listener,
+                                                 TreeMap<String, TestPriority> tests)
+            throws IOException, InterruptedException {
+        try (InputStream inputStream = workspace.child(LAST_PRIORITIZED_FILE).read();
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] splitLine = line.split(":");
+                tests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
+            }
+        } catch (FileNotFoundException e) {
+            listener.getLogger().println(LAST_PRIORITIZED_FILE + " not found.");
+            listener.getLogger().println("Using 0 as previous prioritized build number.");
         }
     }
 

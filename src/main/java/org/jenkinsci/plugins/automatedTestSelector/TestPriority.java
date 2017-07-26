@@ -6,10 +6,12 @@ package org.jenkinsci.plugins.automatedTestSelector;
 public class TestPriority implements Comparable<TestPriority> {
     private String className;
     private int priority;
+    private int previousPrioritizedBuildNum;
 
     public TestPriority(String name) {
         className = name;
         priority = 1;
+        previousPrioritizedBuildNum = 0;
     }
 
     public String getClassName() {
@@ -20,8 +22,16 @@ public class TestPriority implements Comparable<TestPriority> {
         return priority;
     }
 
+    public int getPreviousPrioritizedBuildNum() {
+        return previousPrioritizedBuildNum;
+    }
+
     public void setHighPriority() {
         priority = 0;
+    }
+
+    public void setPreviousPrioritizedBuildNum(int buildNum) {
+        previousPrioritizedBuildNum = buildNum;
     }
 
     public int compareTo(TestPriority that) {

@@ -16,6 +16,9 @@
   <f:entry title="Failure Window" field="failureWindow">
     <f:textbox />
   </f:entry>
+  <f:entry title="Prioritization Window" field="prioritizationWindow">
+    <f:textbox />
+  </f:entry>
   <f:entry title="Test Suite File" field="testSuiteFile">
     <f:textbox />
   </f:entry>
