@@ -11,7 +11,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///Applications/Understand.app/Contents/MacOS/Java" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///Applications/Understand.app/Contents/MacOS/Java" recursive="false" />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: org.jenkins-ci.plugins:junit:1.15" level="project" />
+    <orderEntry type="library" name="Maven: com.scitools.understand:understand:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.findbugs:annotations:3.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />

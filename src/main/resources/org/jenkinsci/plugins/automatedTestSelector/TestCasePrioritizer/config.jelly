@@ -25,4 +25,10 @@
   <f:entry title="Test Report Directory" field="testReportDir">
     <f:textbox />
   </f:entry>
+  <f:entry title="Use Dependency Analysis?" field="useDependencyAnalysis">
+    <f:checkbox checked="false" />
+  </f:entry>
+  <f:entry title="Understand Database Path" field="understandDatabasePath">
+    <f:textbox />
+  </f:entry>
 </j:jelly>
