@@ -40,7 +40,6 @@ public class DependencyAnalysis {
             Entity[] classes = db.ents("class");
             TreeMap<String, Entity> classTree = getClassTree(classes);
 
-            // essentially treat the class dependencies as a graph and use DFS
             for (String module : changedModules) {
                 if (!dependentModules.contains(module)) {
                     dependentModules.add(module);
@@ -56,24 +55,22 @@ public class DependencyAnalysis {
     }
 
     /**
-     * Basically DFS through class dependencies
+     * Get all dependencies for a class
      * @param targetClass = class you want dependencies for
      * @param classTree = TreeMap containing database Entity objects for quick access
      * @param entsWeCareAbout = entities we want to consider
-     * @param visited = all of the dependent modules visited so far
+     * @param dependencies = all of the dependent modules visited so far
      */
     private void getReferences(String targetClass,
                                TreeMap<String, Entity> classTree,
                                ArrayList<String> entsWeCareAbout,
-                               ArrayList<String> visited) {
+                               ArrayList<String> dependencies) {
         Entity c = classTree.get(targetClass);
         Reference[] refs = c.refs(null, "class", true);
         for (Reference ref : refs) {
             String entityName = ref.ent().name();
-            if (entsWeCareAbout.contains(entityName) && !visited.contains(entityName)) {
-                visited.add(entityName);
-                getReferences(entityName, classTree, entsWeCareAbout, visited);
-            }
+            if (entsWeCareAbout.contains(entityName) && !dependencies.contains(entityName))
+                dependencies.add(entityName);
         }
 
     }
