@@ -19,7 +19,7 @@ The relevant files to my work:
           - config.jelly
           - help-executionWindow.html
           - help-failureWindow.html
-          - help-includesFile.html
+          - help-testSuiteFile.html
           - help-testListFile.html
           - help-testReportDir.html
         + TestCasePrioritizer

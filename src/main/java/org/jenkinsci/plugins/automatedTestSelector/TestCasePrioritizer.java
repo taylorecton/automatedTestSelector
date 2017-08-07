@@ -20,7 +20,6 @@ import hudson.tasks.test.TestResult;
 import hudson.util.FormValidation;
 
 import org.apache.commons.io.Charsets;
-import org.jaxen.pantry.Test;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
@@ -92,12 +91,6 @@ public class TestCasePrioritizer extends Builder {
         return testReportDir;
     }
 
-    /*
-    public String getIncludesFile() {
-        return includesFile;
-    }
-    */
-
     /**
      * main function of the regression test selector
      */
@@ -119,20 +112,20 @@ public class TestCasePrioritizer extends Builder {
         reportDir.deleteContents();
 
         ArrayList<String> linesForFile = new ArrayList<>();
-        TreeMap<String, TestPriority> allTests = getAllTests(workspace, testSuiteFile, linesForFile);
-        TreeMap<String, TestPriority> dependentTests;
+        TreeMap<String, TestPriority> allTests = getAllTests(workspace, linesForFile);
+        TreeMap<String, TestPriority> relevantTests;
 
         if (useDependencyAnalysis) {
-            dependentTests = doDependencyAnalysis(build, listener, allTests);
+            relevantTests = doDependencyAnalysis(build, listener, allTests);
         } else {
-            dependentTests = allTests;
+            relevantTests = allTests;
         }
 
         if (!allTests.isEmpty()) {
-            setPreviousPrioritizedBuildNums(workspace, listener, dependentTests, allTests);
-            ArrayList<TestPriority> sortedTests = prioritizeTests(build, currentBuildNum, listener, dependentTests);
+            setPreviousPrioritizedBuildNums(workspace, listener, relevantTests, allTests);
+            ArrayList<TestPriority> sortedTests = prioritizeTests(build, currentBuildNum, listener, relevantTests);
             ArrayList<TestPriority> testList = updateAllTestPriorities(allTests, sortedTests, currentBuildNum);
-            buildFiles(workspace, testSuiteFile, sortedTests, testList, linesForFile);
+            buildFiles(workspace, sortedTests, testList, linesForFile);
         } else {
             listener.getLogger().println("Error: allTests is empty. Cannot prioritize tests.");
         }
@@ -140,17 +133,24 @@ public class TestCasePrioritizer extends Builder {
         return true;
     }
 
+    /**
+     * Uses SciTools Understand to determine which files are relevant to changes made in version control
+     * @param build The current build
+     * @param listener BuildListener used to write to Jenkins console output
+     * @param allTests TreeMpa of all tests
+     * @return TreeMap containing only the tests relevant to changes
+     */
     private TreeMap<String, TestPriority> doDependencyAnalysis(AbstractBuild<?,?> build,
                                            BuildListener listener,
                                            TreeMap<String, TestPriority> allTests) {
-        TreeMap<String, TestPriority> updatedAllTests = new TreeMap<>();
+        TreeMap<String, TestPriority> relevantTests = new TreeMap<>();
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
         DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath);
         ArrayList<String> allChangedFiles = new ArrayList<>();
         ArrayList<String> changedSourceFiles = new ArrayList<>();
-        ArrayList<String> dependentModules = new ArrayList<>();
+        ArrayList<String> dependentModules;
 
         for (Entry entry : build.getChangeSet()) {
             if (entry.getAffectedPaths() != null)
@@ -178,25 +178,27 @@ public class TestCasePrioritizer extends Builder {
                 listener.getLogger().println(file);
                 file += ".class";
                 if (allTests.containsKey(file)) {
-                    updatedAllTests.put(file, allTests.get(file));
+                    relevantTests.put(file, allTests.get(file));
                 }
             }
             listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         } else {
             listener.getLogger().println("No changed files detected...");
             listener.getLogger().println("Using all tests in Test Suite File");
-            updatedAllTests = allTests;
+            relevantTests = allTests;
         }
 
-        return updatedAllTests;
+        return relevantTests;
     }
 
     /**
-     * Creates a list of all tests from the testListFile provided by user
+     * Creates a list of all tests from the testSuiteFile provided by user
+     *
+     * @param workspace FilePath for current build workspace
+     * @param linesForFile list containing lines from the test suite file; used to rewrite the file later
+     * @return A TreeMap of all tests found in the test suite file
      */
-    private TreeMap<String, TestPriority> getAllTests(FilePath workspace,
-                                                      String testSuiteFile,
-                                                      ArrayList<String> linesForFile)
+    private TreeMap<String, TestPriority> getAllTests(FilePath workspace, ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
 
         TreeMap<String, TestPriority> allTests = new TreeMap<>();
@@ -231,9 +233,18 @@ public class TestCasePrioritizer extends Builder {
         return allTests;
     }
 
+    /**
+     * Updates the last prioritized build number for tests prioritized this build
+     *
+     * @param allTests TreeMap of all tests from test suite file
+     * @param sortedTests list of TestPriority objects sorted by priority
+     * @param currentBuildNum the current build number
+     *
+     * @return A list of all tests with their last prioritized build number up to date
+     */
     private ArrayList<TestPriority> updateAllTestPriorities(TreeMap<String, TestPriority> allTests,
-                                         ArrayList<TestPriority> sortedTests,
-                                         int currentBuildNum) {
+                                                            ArrayList<TestPriority> sortedTests,
+                                                            int currentBuildNum) {
         for (TestPriority test : sortedTests) {
             allTests.get(test.getClassName()).setPreviousPrioritizedBuildNum(currentBuildNum);
         }
@@ -243,11 +254,18 @@ public class TestCasePrioritizer extends Builder {
     }
 
     /**
-     * Returns a list of tests selected for execution
+     * Returns a list of tests sorted by priority
+     *
+     * @param build The current build
+     * @param currentBuildNumber The build number of the current build
+     * @param listener BuildListener used for writing to logger
+     * @param tests TreeMap of all the tests being considered for prioritization
+     *
+     * @return ArrayList of TestPriority objects sorted with high priority tests at the beginning of the list
      */
     private ArrayList<TestPriority> prioritizeTests(Run<?, ?> build,
                                                     int currentBuildNumber,
-                                                    TaskListener listener,
+                                                    BuildListener listener,
                                                     TreeMap<String, TestPriority> tests) {
         ArrayList<String> foundTests = new ArrayList<>();
         ArrayList<String> testNames = new ArrayList<>(tests.keySet());
@@ -324,12 +342,16 @@ public class TestCasePrioritizer extends Builder {
 
     /**
      * Generates includesFile to be used by build script
+     *
+     * @param workspace FilePath of build workspace
+     * @param sortedTests ArrayList of TestPriority objects sorted by priority
+     * @param testList ArrayList of TestPriority objects containing all tests from test suite file
+     * @param linesForFile ArrayList of lines for test suite file to rewrite the file
      */
     private void buildFiles(FilePath workspace,
-                                     String testSuiteFile,
-                                     ArrayList<TestPriority> sortedTests,
-                                     ArrayList<TestPriority> testList,
-                                     ArrayList<String> linesForFile)
+                            ArrayList<TestPriority> sortedTests,
+                            ArrayList<TestPriority> testList,
+                            ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
 
         try (OutputStream osSuiteFile = workspace.child(testSuiteFile).write();
@@ -365,9 +387,16 @@ public class TestCasePrioritizer extends Builder {
         }
     }
 
+    /**
+     *
+     * @param workspace FilePath for current build workspace
+     * @param listener BuildListener object; used to write to build's logger
+     * @param relevantTests TreeMap containing tests relevant to changes to version control
+     * @param allTests TreeMap containing all tests found in Test Suite File
+     */
     private void setPreviousPrioritizedBuildNums(FilePath workspace,
                                                  BuildListener listener,
-                                                 TreeMap<String, TestPriority> dependentTests,
+                                                 TreeMap<String, TestPriority> relevantTests,
                                                  TreeMap<String, TestPriority> allTests)
             throws IOException, InterruptedException {
         try (InputStream inputStream = workspace.child(LAST_PRIORITIZED_FILE).read();
@@ -376,8 +405,8 @@ public class TestCasePrioritizer extends Builder {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
-                if (dependentTests.containsKey(splitLine[0]))
-                    dependentTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
+                if (relevantTests.containsKey(splitLine[0]))
+                    relevantTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
                 if (allTests.containsKey(splitLine[0]))
                     allTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
             }
@@ -390,6 +419,12 @@ public class TestCasePrioritizer extends Builder {
 
     /**
      * Collect test names from a build into two lists: found and failed
+     *
+     * @param testResult TestResult object from the current build
+     * @param failed ArrayList that will hold names of tests found to be failing
+     * @param found ArrayList holding all tests discovered in the collection process
+     * @param withinExWindow Boolean value specifying if current iteration is within the execution window
+     * @param withinFailWindow Boolean value specifying if iteration is within failure window
      */
     static private void collect(TestResult testResult,
                                 ArrayList<String> failed,

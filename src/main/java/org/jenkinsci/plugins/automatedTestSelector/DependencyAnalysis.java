@@ -21,8 +21,8 @@ public class DependencyAnalysis {
 
     /**
      * Main function for class
-     * @param changedModules = a list of files that have been changed in version control
-     * @return list of all files in project related to the changed source files
+     * @param changedModules List of files that have been changed in version control
+     * @return List of all files in project related to the changed source files
      */
     public ArrayList<String> getDependentModules (ArrayList<String> changedModules) {
         setLibPath();
@@ -47,8 +47,7 @@ public class DependencyAnalysis {
                 }
             }
         } catch (UnderstandException exception) {
-            System.out.println("Failed opening Database:"
-                    + exception.getMessage());
+            System.out.println("Failed opening Database:" + exception.getMessage());
         }
 
         return dependentModules;
@@ -56,10 +55,10 @@ public class DependencyAnalysis {
 
     /**
      * Get all dependencies for a class
-     * @param targetClass = class you want dependencies for
-     * @param classTree = TreeMap containing database Entity objects for quick access
-     * @param entsWeCareAbout = entities we want to consider
-     * @param dependencies = all of the dependent modules visited so far
+     * @param targetClass Class you want dependencies for
+     * @param classTree TreeMap containing database Entity objects for quick access
+     * @param entsWeCareAbout Entities we want to consider
+     * @param dependencies All of the dependent modules visited so far
      */
     private void getReferences(String targetClass,
                                TreeMap<String, Entity> classTree,
@@ -77,8 +76,8 @@ public class DependencyAnalysis {
 
     /**
      * Gets a TreeMap of class Entity objects
-     * Keys: Class names
-     * values: Entity objects from database
+     * @param classes An array of Entity objects containing all classes in project
+     * @return TreeMap with: Keys = Class name; values = Entity objects from database
      */
     private TreeMap<String, Entity> getClassTree(Entity[] classes) {
         TreeMap<String, Entity> classTree = new TreeMap<>();
@@ -89,6 +88,7 @@ public class DependencyAnalysis {
     }
 
     /**
+     * @param files Array of Entity objects containing all files in project
      * @return a list of the java source files from the project without the .java extension
      */
     private ArrayList<String> getProjFileNamesWithoutExtension(Entity[] files) {
