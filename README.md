@@ -19,9 +19,10 @@ The relevant files to my work:
           - config.jelly
           - help-executionWindow.html
           - help-failureWindow.html
-          - help-testSuiteFile.html
-          - help-testListFile.html
           - help-testReportDir.html
+          - help-testSuiteFile.html
+          - help-understandDatabasePath.html
+          - help-useDependencyAnalysis.html
         + TestCasePrioritizer
           - config.jelly
           - help-executionWindow.html
@@ -29,3 +30,5 @@ The relevant files to my work:
           - help-prioritizationWindow.html
           - help-testReportDir.html
           - help-testSuiteFile.html
+          - help-understandDatabasePath.html
+          - help-useDependencyAnalysis.html

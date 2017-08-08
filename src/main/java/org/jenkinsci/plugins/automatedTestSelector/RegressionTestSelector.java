@@ -187,16 +187,7 @@ public class RegressionTestSelector extends Builder {
             throws IOException, InterruptedException {
 
         ArrayList<String> allTests = new ArrayList<>();
-/*
-        // try to read the file, read in all of the test names and add them to the list
-        try (InputStream inputStream = workspace.child(testListFile).read();
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-            String testName;
-            while ((testName = bufferedReader.readLine()) != null)
-                allTests.add(testName);
-        }
-*/
+
         // try to read the file, read in all of the test names and add them to the list
         try (InputStream inputStream = workspace.child(testSuiteFile).read();
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
@@ -210,7 +201,6 @@ public class RegressionTestSelector extends Builder {
                         line = line.trim();
                         if (line.contains(","))
                             line = line.replace(",", "");
-                        TestPriority testPriority = new TestPriority(line);
                         allTests.add(line);
                         line = bufferedReader.readLine();
                     }
@@ -282,15 +272,7 @@ public class RegressionTestSelector extends Builder {
                                     ArrayList<String> selectedTests,
                                     ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
-/*
-        try (OutputStream os = workspace.child(testSuiteFile).write();
-             OutputStreamWriter osw = new OutputStreamWriter(os, Charsets.UTF_8);
-             PrintWriter pw = new PrintWriter(osw)) {
-            for (String fileName : selectedTests) {
-                pw.println(fileName);
-            }
-        }
-*/
+
         try (OutputStream osSuiteFile = workspace.child(testSuiteFile).write();
              OutputStreamWriter oswSuiteFile = new OutputStreamWriter(osSuiteFile, Charsets.UTF_8);
              PrintWriter pwSuiteFile = new PrintWriter(oswSuiteFile)) {
@@ -364,23 +346,36 @@ public class RegressionTestSelector extends Builder {
             load();
         }
 
-        /*
-         * Validate numbers entered for failure and execution windows
-         *
-        public FormValidation doCheckWindow(@QueryParameter int value)
+        public FormValidation doCheckExecutionWindow(@QueryParameter String value)
                 throws IOException, ServletException {
-
+            try {
+                int input = Integer.parseInt(value);
+                if (input >= 0)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error("Execution window must be a postive number.");
+            } catch (NumberFormatException e) {
+                return FormValidation.error("Execution window must be a number.");
+            }
         }
 
-        public FormValidation doCheckFailureWindow(@QueryParameter int value)
+        public FormValidation doCheckFailureWindow(@QueryParameter String value)
                 throws IOException, ServletException {
-
+            try {
+                int input = Integer.parseInt(value);
+                if (input >= 0)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error("Failure window must be a postive number.");
+            } catch (NumberFormatException e) {
+                return FormValidation.error("Failure window must be a number.");
+            }
          }
-         */
-        public FormValidation doCheckTestListFile(@QueryParameter String value)
+
+        public FormValidation doCheckTestSuiteFile(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error("You must set a test list file for execution window to work.");
+                return FormValidation.error("You must set the path of the test suite file for the project.");
 
             return FormValidation.ok();
         }
@@ -393,10 +388,14 @@ public class RegressionTestSelector extends Builder {
             return FormValidation.ok();
         }
 
-        public FormValidation doCheckIncludesFile(@QueryParameter String value)
+        public FormValidation doCheckUnderstandDatabasePath(@QueryParameter String understandDatabasePath,
+                                                            @QueryParameter Boolean useDependencyAnalysis)
                 throws IOException, ServletException {
-            if (value.length() == 0)
-                return FormValidation.error("You must set the name of includes file referred to by the build script.");
+
+            if (useDependencyAnalysis) {
+                if (understandDatabasePath.length() == 0)
+                    return FormValidation.error("To use dependency analysis, you must set this value.");
+            }
 
             return FormValidation.ok();
         }

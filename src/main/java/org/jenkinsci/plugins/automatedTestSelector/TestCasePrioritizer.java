@@ -101,7 +101,8 @@ public class TestCasePrioritizer extends Builder {
         listener.getLogger().println("Failure window is set to: " + failureWindow);
         listener.getLogger().println("Execution window is set to: " + executionWindow);
         listener.getLogger().println("Prioritization window is set to: " + prioritizationWindow);
-        listener.getLogger().println("Class path: " + System.getProperty("java.class.path"));
+        if (useDependencyAnalysis) listener.getLogger().println("UDB Path: " + understandDatabasePath);
+        // listener.getLogger().println("Class path: " + System.getProperty("java.class.path")); // <-- for debugging
 
         int currentBuildNum = build.getNumber();
         FilePath workspace = build.getWorkspace();
@@ -124,7 +125,7 @@ public class TestCasePrioritizer extends Builder {
         if (!allTests.isEmpty()) {
             setPreviousPrioritizedBuildNums(workspace, listener, relevantTests, allTests);
             ArrayList<TestPriority> sortedTests = prioritizeTests(build, currentBuildNum, listener, relevantTests);
-            ArrayList<TestPriority> testList = updateAllTestPriorities(allTests, sortedTests, currentBuildNum);
+            ArrayList<TestPriority> testList = updateAllLastPrioritizedNumbers(allTests, sortedTests, currentBuildNum);
             buildFiles(workspace, sortedTests, testList, linesForFile);
         } else {
             listener.getLogger().println("Error: allTests is empty. Cannot prioritize tests.");
@@ -242,9 +243,10 @@ public class TestCasePrioritizer extends Builder {
      *
      * @return A list of all tests with their last prioritized build number up to date
      */
-    private ArrayList<TestPriority> updateAllTestPriorities(TreeMap<String, TestPriority> allTests,
-                                                            ArrayList<TestPriority> sortedTests,
-                                                            int currentBuildNum) {
+    private ArrayList<TestPriority> updateAllLastPrioritizedNumbers(TreeMap<String,
+                                                                   TestPriority> allTests,
+                                                                   ArrayList<TestPriority> sortedTests,
+                                                                   int currentBuildNum) {
         for (TestPriority test : sortedTests) {
             allTests.get(test.getClassName()).setPreviousPrioritizedBuildNum(currentBuildNum);
         }
@@ -471,23 +473,49 @@ public class TestCasePrioritizer extends Builder {
             load();
         }
 
-        /*
-         * Validate numbers entered for failure and execution windows
-         *
-        public FormValidation doCheckWindow(@QueryParameter int value)
+        public FormValidation doCheckExecutionWindow(@QueryParameter String value)
                 throws IOException, ServletException {
-
+            try {
+                int input = Integer.parseInt(value);
+                if (input >= 0)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error("Execution window must be a positive number.");
+            } catch (NumberFormatException e) {
+                return FormValidation.error("Execution window must be a number.");
+            }
         }
 
-        public FormValidation doCheckFailureWindow(@QueryParameter int value)
+        public FormValidation doCheckFailureWindow(@QueryParameter String value)
                 throws IOException, ServletException {
-
+            try {
+                int input = Integer.parseInt(value);
+                if (input >= 0)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error("Failure window must be a positive number.");
+            } catch (NumberFormatException e) {
+                return FormValidation.error("Failure window must be a number.");
+            }
          }
-         */
-        public FormValidation doCheckTestListFile(@QueryParameter String value)
+
+        public FormValidation doCheckPrioritizationWindow(@QueryParameter String value)
+                throws IOException, ServletException {
+            try {
+                int input = Integer.parseInt(value);
+                if (input >= 0)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error("Prioritization window must be a positive number.");
+            } catch (NumberFormatException e) {
+                return FormValidation.error("Prioritization window must be a number.");
+            }
+        }
+
+        public FormValidation doCheckTestSuiteFile(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error("You must set a test list file for execution window to work.");
+                return FormValidation.error("You must set the path of the test suite file for the project.");
 
             return FormValidation.ok();
         }
@@ -500,18 +528,14 @@ public class TestCasePrioritizer extends Builder {
             return FormValidation.ok();
         }
 
-        public FormValidation doCheckIncludesFileHigh(@QueryParameter String value)
+        public FormValidation doCheckUnderstandDatabasePath(@QueryParameter String understandDatabasePath,
+                                                            @QueryParameter Boolean useDependencyAnalysis)
                 throws IOException, ServletException {
-            if (value.length() == 0)
-                return FormValidation.error("You must set the name of includes file referred to by the build script.");
 
-            return FormValidation.ok();
-        }
-
-        public FormValidation doCheckIncludesFileLow(@QueryParameter String value)
-                throws IOException, ServletException {
-            if (value.length() == 0)
-                return FormValidation.error("You must set the name of includes file referred to by the build script.");
+            if (useDependencyAnalysis) {
+                if (understandDatabasePath.length() == 0)
+                    return FormValidation.error("To use dependency analysis, you must set this value.");
+            }
 
             return FormValidation.ok();
         }
