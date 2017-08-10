@@ -96,7 +96,7 @@ public class TestCasePrioritizer extends Builder {
      */
     @Override
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener)
-            throws InterruptedException, IOException {
+            throws IOException, InterruptedException {
         listener.getLogger().println("Running regression test selector...");
         listener.getLogger().println("Failure window is set to: " + failureWindow);
         listener.getLogger().println("Execution window is set to: " + executionWindow);
@@ -108,6 +108,8 @@ public class TestCasePrioritizer extends Builder {
         FilePath workspace = build.getWorkspace();
         if (workspace == null)
             throw new AbortException("No workspace");
+
+        listener.getLogger().println("remote: " + workspace.getRemote());
 
         FilePath reportDir = workspace.child(testReportDir);
         reportDir.deleteContents();
@@ -142,13 +144,15 @@ public class TestCasePrioritizer extends Builder {
      * @return TreeMap containing only the tests relevant to changes
      */
     private TreeMap<String, TestPriority> doDependencyAnalysis(AbstractBuild<?,?> build,
-                                           BuildListener listener,
-                                           TreeMap<String, TestPriority> allTests) {
+                                                               BuildListener listener,
+                                                               TreeMap<String, TestPriority> allTests)
+            throws IOException, InterruptedException {
         TreeMap<String, TestPriority> relevantTests = new TreeMap<>();
+        String workspacePath = build.getWorkspace().getRemote();
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
-        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath);
+        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath, workspacePath, listener);
         ArrayList<String> allChangedFiles = new ArrayList<>();
         ArrayList<String> changedSourceFiles = new ArrayList<>();
         ArrayList<String> dependentModules;

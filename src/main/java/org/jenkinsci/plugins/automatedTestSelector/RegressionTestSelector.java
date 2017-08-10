@@ -127,12 +127,14 @@ public class RegressionTestSelector extends Builder {
      */
     private ArrayList<String> doDependencyAnalysis(AbstractBuild<?,?> build,
                                                    BuildListener listener,
-                                                   ArrayList<String> selectedTests) {
+                                                   ArrayList<String> selectedTests)
+            throws IOException, InterruptedException {
         ArrayList<String> relevantTests = new ArrayList<>();
+        String workspacePath = build.getWorkspace().getRemote();
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
-        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath);
+        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath, workspacePath, listener);
         ArrayList<String> allChangedFiles = new ArrayList<>();
         ArrayList<String> changedSourceFiles = new ArrayList<>();
         ArrayList<String> dependentModules;

@@ -1,8 +1,11 @@
 package org.jenkinsci.plugins.automatedTestSelector;
 
 import com.scitools.understand.*;
-import java.util.ArrayList;
+import hudson.model.BuildListener;
+
+import java.io.*;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
@@ -14,9 +17,13 @@ public class DependencyAnalysis {
     private static final String LIB_PATH = "/Applications/Understand.app/Contents/MacOS/Java";
 
     private String projectPath; // path of Understand database
+    private String workspacePath;
+    private BuildListener listener;
 
-    public DependencyAnalysis(String projectPath) {
+    public DependencyAnalysis(String projectPath, String workspacePath, BuildListener listener) {
         this.projectPath = projectPath;
+        this.workspacePath = workspacePath;
+        this.listener = listener;
     }
 
     /**
@@ -24,17 +31,31 @@ public class DependencyAnalysis {
      * @param changedModules List of files that have been changed in version control
      * @return List of all files in project related to the changed source files
      */
-    public ArrayList<String> getDependentModules (ArrayList<String> changedModules) {
+    public ArrayList<String> getDependentModules (ArrayList<String> changedModules)
+            throws IOException, InterruptedException {
         setLibPath();
 
-        ArrayList<String> dependentModules = new ArrayList<>(); // "visited" in DFS
+        ArrayList<String> dependentModules = new ArrayList<>();
+
+        // if the Understand Database does not already exist, create a new Understand Database
+        File file = new File(projectPath);
+        if (!file.exists()) {
+            String command = "und create -db " + projectPath + " -languages java add "
+                             + workspacePath + " analyze -all";
+
+            listener.getLogger().println("Understand Database does not exist...");
+            listener.getLogger().println("Attempting to create and analyze new database...");
+
+            Process createDatabase = Runtime.getRuntime().exec(command);
+            createDatabase.waitFor();
+        }
 
         try {
             Database db = Understand.open(projectPath);
 
             // entsWeCareAbout are files that are in the project; this prevents the program from looking at
-            // basic java classes (i.e. java.lang.*, etc)
-            Entity[] files = db.ents("files");
+            // references to basic java classes (i.e. java.lang.*, etc)
+            Entity[] files = db.ents("file");
             ArrayList<String> entsWeCareAbout = getProjFileNamesWithoutExtension(files);
 
             Entity[] classes = db.ents("class");
@@ -46,6 +67,8 @@ public class DependencyAnalysis {
                     getReferences(module, classTree, entsWeCareAbout, dependentModules);
                 }
             }
+
+            db.close();
         } catch (UnderstandException exception) {
             System.out.println("Failed opening Database:" + exception.getMessage());
         }

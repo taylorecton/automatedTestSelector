@@ -3,13 +3,12 @@
 I am currently working on a Jenkins plugin to study the effectiveness of regression test selection (RTS)
 and test case prioritization (TCP) techniques in continuous integration (CI) environments.
 
-The relevant files to my work:
+The project structure:
   - pom.xml
   + src/main/
     + java/org/jenkinsci/plugins/automatedTestSelector/
       - DependencyAnalysis.java
       - RegressionTestSelector.java
-      - TestList.java // <-- this file currently not being used; may be deleted
       - TestCasePrioritizer.java
       - TestPriority.java
     + resources/
