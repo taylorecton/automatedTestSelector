@@ -37,9 +37,9 @@ public class DependencyAnalysis {
 
         ArrayList<String> dependentModules = new ArrayList<>();
 
-        // if the Understand Database does not already exist, create a new Understand Database
         File file = new File(projectPath);
         if (!file.exists()) {
+            // if the Understand Database does not already exist, create a new Understand Database
             String command = "und create -db " + projectPath + " -languages java add "
                              + workspacePath + " analyze -all";
 
@@ -48,27 +48,50 @@ public class DependencyAnalysis {
 
             Process createDatabase = Runtime.getRuntime().exec(command);
             createDatabase.waitFor();
-        }
+        } /* else {
+            // scan for changed/added files and analyze files that have changed
+            String command = "und -db " + projectPath + " analyze -rescan -changed";
+
+            listener.getLogger().println("Rescanning Understand Database...");
+
+            Process analyzeDatabase = Runtime.getRuntime().exec(command);
+            analyzeDatabase.waitFor();
+        } */
 
         try {
+            listener.getLogger().println("Opening database: " + projectPath + " ..."); // <-- for debugging
+
             Database db = Understand.open(projectPath);
+
+            listener.getLogger().println("Database opened..."); // <-- for debugging
 
             // entsWeCareAbout are files that are in the project; this prevents the program from looking at
             // references to basic java classes (i.e. java.lang.*, etc)
             Entity[] files = db.ents("file");
             ArrayList<String> entsWeCareAbout = getProjFileNamesWithoutExtension(files);
 
+            for (String fileName : entsWeCareAbout) {              //
+                listener.getLogger().println("File: " + fileName); // <-- for debugging
+            }                                                      //
+
             Entity[] classes = db.ents("class");
+
+            for (Entity c : classes) {                              //
+                listener.getLogger().println("Class: " + c.name()); // <-- for debugging
+            }                                                       //
+
             TreeMap<String, Entity> classTree = getClassTree(classes);
 
             for (String module : changedModules) {
                 if (!dependentModules.contains(module)) {
+                    listener.getLogger().println("Adding " + module + " to dependentModules..."); // <-- for debugging
                     dependentModules.add(module);
                     getReferences(module, classTree, entsWeCareAbout, dependentModules);
                 }
             }
 
             db.close();
+            listener.getLogger().println("Database closed..."); // <-- for debugging
         } catch (UnderstandException exception) {
             System.out.println("Failed opening Database:" + exception.getMessage());
         }
@@ -87,14 +110,19 @@ public class DependencyAnalysis {
                                TreeMap<String, Entity> classTree,
                                ArrayList<String> entsWeCareAbout,
                                ArrayList<String> dependencies) {
+        listener.getLogger().println("Inside getReferences..."); // <-- for debugging
         Entity c = classTree.get(targetClass);
         Reference[] refs = c.refs(null, "class", true);
+        listener.getLogger().println("Iterating through references..."); // <-- for debugging
         for (Reference ref : refs) {
             String entityName = ref.ent().name();
-            if (entsWeCareAbout.contains(entityName) && !dependencies.contains(entityName))
+            listener.getLogger().println("Checking reference: " + entityName + "..."); // <-- for debugging
+            if (entsWeCareAbout.contains(entityName) && !dependencies.contains(entityName)) {
+                listener.getLogger().println("Adding " + entityName + "..."); // <-- for debugging
                 dependencies.add(entityName);
+            }
         }
-
+        listener.getLogger().println("getReferences() finishing...");
     }
 
     /**
@@ -103,10 +131,13 @@ public class DependencyAnalysis {
      * @return TreeMap with: Keys = Class name; values = Entity objects from database
      */
     private TreeMap<String, Entity> getClassTree(Entity[] classes) {
+        listener.getLogger().println("Inside getClassTree()..."); // <-- for debugging
+
         TreeMap<String, Entity> classTree = new TreeMap<>();
 
         for (Entity c : classes) classTree.put(c.name(), c);
 
+        listener.getLogger().println("Returning from getClassTree()..."); // <-- for debugging
         return classTree;
     }
 
@@ -115,13 +146,18 @@ public class DependencyAnalysis {
      * @return a list of the java source files from the project without the .java extension
      */
     private ArrayList<String> getProjFileNamesWithoutExtension(Entity[] files) {
+        listener.getLogger().println("Inside getProjFileNamesWithoutExtension..."); // <-- for debugging
         ArrayList<String> returnThis = new ArrayList<>();
         for (Entity file : files) {
+            listener.getLogger().println("Checking " + file.name() + "...");
             if (file.name().contains(".java")) {
+                listener.getLogger().println(file.name() + " contains '.java'..."); // <-- for debugging
                 String name = file.name().replace(".java", "");
+                listener.getLogger().println("Adding " + name + "...");
                 returnThis.add(name);
             }
         }
+        listener.getLogger().println("Returning from getProjFileNamesWithoutExtension..."); // <-- for debugging
         return returnThis;
     }
 

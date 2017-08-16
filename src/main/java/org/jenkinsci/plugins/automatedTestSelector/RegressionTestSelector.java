@@ -158,19 +158,27 @@ public class RegressionTestSelector extends Builder {
             }
             listener.getLogger().println("-------------------------------"); // <-- for debugging
 
-            dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+            if (!changedSourceFiles.isEmpty()) {
+                dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
 
-            listener.getLogger().println("All dependent files: "); // <-- for debugging
-            for (String file : dependentModules) {
-                listener.getLogger().println(file);
-                file += ".class";
-                if (selectedTests.contains(file)) {
-                    relevantTests.add(file);
+                listener.getLogger().println("All dependent files: "); // <-- for debugging
+                for (String file : dependentModules) {
+                    listener.getLogger().println(file);
+                    file += ".class";
+                    if (selectedTests.contains(file)) {
+                        relevantTests.add(file);
+                    }
                 }
+            } else {
+                listener.getLogger().println("No changed source code files. Utilizing all tests for prioritization.");
+                relevantTests = selectedTests;
             }
             listener.getLogger().println("**----------------------------------**"); // <-- for debugging
-        } else {
-            listener.getLogger().println("No changed files detected...");
+        }
+
+        if (relevantTests.isEmpty()){
+            listener.getLogger().println("List of relevant tests is empty. Tests may be unrelated to changes.");
+            listener.getLogger().println("Using all tests in Test Suite File");
             relevantTests = selectedTests;
         }
 

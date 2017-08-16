@@ -97,39 +97,58 @@ public class TestCasePrioritizer extends Builder {
     @Override
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener)
             throws IOException, InterruptedException {
-        listener.getLogger().println("Running regression test selector...");
+        // Print out user input parameters to verify they are set correctly
+        listener.getLogger().println("Running test case prioritizer...");
         listener.getLogger().println("Failure window is set to: " + failureWindow);
         listener.getLogger().println("Execution window is set to: " + executionWindow);
         listener.getLogger().println("Prioritization window is set to: " + prioritizationWindow);
         if (useDependencyAnalysis) listener.getLogger().println("UDB Path: " + understandDatabasePath);
         // listener.getLogger().println("Class path: " + System.getProperty("java.class.path")); // <-- for debugging
 
+        // get current build number for setting last prioritized build number on tests
         int currentBuildNum = build.getNumber();
+        // gets project workspace
         FilePath workspace = build.getWorkspace();
         if (workspace == null)
             throw new AbortException("No workspace");
 
-        listener.getLogger().println("remote: " + workspace.getRemote());
+        listener.getLogger().println("remote: " + workspace.getRemote()); // <-- for debugging
 
+        // clears the test report directory before running; plugin encounters an error if it does not do this
         FilePath reportDir = workspace.child(testReportDir);
         reportDir.deleteContents();
 
+        // linesForFile holds the lines to put in the test suite file, minus the tests
         ArrayList<String> linesForFile = new ArrayList<>();
+        // allTests holds all of the test classes found in the test suite file
         TreeMap<String, TestPriority> allTests = getAllTests(workspace, linesForFile);
+        // relevantTests will hold the tests found to be relevant to current code changes
         TreeMap<String, TestPriority> relevantTests;
 
+        // get relevant tests from dependency analysis if useDependencyAnalysis is true; use allTests otherwise
         if (useDependencyAnalysis) {
             relevantTests = doDependencyAnalysis(build, listener, allTests);
         } else {
             relevantTests = allTests;
         }
 
+        // checks to make sure allTests contains tests
         if (!allTests.isEmpty()) {
+            // read last prioritized build file and set prioritized build number for tests accordingly
             setPreviousPrioritizedBuildNums(workspace, listener, relevantTests, allTests);
+
+            // returns tests sorted by priority
             ArrayList<TestPriority> sortedTests = prioritizeTests(build, currentBuildNum, listener, relevantTests);
+
+            // get a list containing all tests with current previous prioritized build numbers
+            // used for writing to the previous prioritized build file
             ArrayList<TestPriority> testList = updateAllLastPrioritizedNumbers(allTests, sortedTests, currentBuildNum);
+
+            // write the test suite file with the sorted tests and write the previous prioritized build file
+            // with the list of all tests
             buildFiles(workspace, sortedTests, testList, linesForFile);
         } else {
+            // allTests does not contain any values
             listener.getLogger().println("Error: allTests is empty. Cannot prioritize tests.");
         }
 
@@ -176,19 +195,26 @@ public class TestCasePrioritizer extends Builder {
             }
             listener.getLogger().println("-------------------------------"); // <-- for debugging
 
-            dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+            if (!changedSourceFiles.isEmpty()) {
+                dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
 
-            listener.getLogger().println("All dependent files: "); // <-- for debugging
-            for (String file : dependentModules) {
-                listener.getLogger().println(file);
-                file += ".class";
-                if (allTests.containsKey(file)) {
-                    relevantTests.put(file, allTests.get(file));
+                listener.getLogger().println("All dependent files: "); // <-- for debugging
+                for (String file : dependentModules) {
+                    listener.getLogger().println(file);
+                    file += ".class";
+                    if (allTests.containsKey(file)) {
+                        relevantTests.put(file, allTests.get(file));
+                    }
                 }
+            } else {
+                listener.getLogger().println("No changed source code files. Utilizing all tests for prioritization.");
+                relevantTests = allTests;
             }
             listener.getLogger().println("**----------------------------------**"); // <-- for debugging
-        } else {
-            listener.getLogger().println("No changed files detected...");
+        }
+
+        if (relevantTests.isEmpty()) {
+            listener.getLogger().println("List of relevant tests is empty. Tests may be unrelated to changes.");
             listener.getLogger().println("Using all tests in Test Suite File");
             relevantTests = allTests;
         }
@@ -252,9 +278,12 @@ public class TestCasePrioritizer extends Builder {
                                                                    ArrayList<TestPriority> sortedTests,
                                                                    int currentBuildNum) {
         for (TestPriority test : sortedTests) {
-            allTests.get(test.getClassName()).setPreviousPrioritizedBuildNum(currentBuildNum);
+            // for each relevant test, update the previousPrioritizedBuildNumber for that test in the list of
+            // allTests
+            allTests.get(test.getClassName()).setPreviousPrioritizedBuildNum(test.getPreviousPrioritizedBuildNum());
         }
 
+        // get an ArrayList with the values in the allTests TreeMap
         ArrayList<TestPriority> testList = new ArrayList<>(allTests.values());
         return testList;
     }
@@ -331,16 +360,18 @@ public class TestCasePrioritizer extends Builder {
 
         for (TestPriority testPriority : sortedTests) {
             if ((currentBuildNumber - testPriority.getPreviousPrioritizedBuildNum()) > prioritizationWindow) {
-
+                // test has ot been prioritized within prioritizationWindow
                 listener.getLogger().println(testPriority.getClassName() + " not prioritized w/in window"); // <-- for debugging
                 listener.getLogger().println("Prioritizing " + testPriority.getClassName());                // <-- for debugging
                 listener.getLogger().println();                                                             // <-- for debugging
 
+                // prioritize test and set previous prioritized build number to currentBuildNum
                 testPriority.setHighPriority();
                 testPriority.setPreviousPrioritizedBuildNum(currentBuildNumber);
             }
         }
 
+        // sort the tests according to priority value
         Collections.sort(sortedTests);
 
         return sortedTests;
@@ -377,8 +408,10 @@ public class TestCasePrioritizer extends Builder {
                         testPriority = sortedTests.get(i);
                         pwSuiteFile.println(testPriority.getClassName() + ",");
                     }
-                    testPriority = sortedTests.get(sortedTests.size()-1);
-                    pwSuiteFile.println(testPriority.getClassName());
+                    if (!sortedTests.isEmpty()) {
+                        testPriority = sortedTests.get(sortedTests.size() - 1);
+                        pwSuiteFile.println(testPriority.getClassName());
+                    }
                     pwSuiteFile.println(ANNOTATION_END);
                 }
             }
