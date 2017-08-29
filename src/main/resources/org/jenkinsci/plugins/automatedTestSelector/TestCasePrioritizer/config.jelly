@@ -6,7 +6,7 @@
   <f:entry title="Failure Window" field="failureWindow">
     <f:textbox />
   </f:entry>
-  <f:entry title="Prioritization Window" field="prioritizationWindow">
+  <f:entry title="Prioritization Window" field="priorityWindow">
     <f:textbox />
   </f:entry>
   <f:entry title="Test Suite File" field="testSuiteFile">
@@ -15,10 +15,10 @@
   <f:entry title="Test Report Directory" field="testReportDir">
     <f:textbox />
   </f:entry>
-  <f:entry title="Use Dependency Analysis?" field="useDependencyAnalysis">
+  <f:entry title="Use Dependency Analysis?" field="useDepAnalysis">
     <f:checkbox checked="false" />
   </f:entry>
-  <f:entry title="Understand Database Path" field="understandDatabasePath">
+  <f:entry title="Understand Database Path" field="udbPath">
     <f:textbox />
   </f:entry>
 </j:jelly>

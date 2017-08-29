@@ -16,12 +16,16 @@ public class DependencyAnalysis {
     // Location of .jnlib file on my machine
     private static final String LIB_PATH = "/Applications/Understand.app/Contents/MacOS/Java";
 
-    private String projectPath; // path of Understand database
+    private String udbPath; // path of Understand database
     private String workspacePath;
     private BuildListener listener;
 
-    public DependencyAnalysis(String projectPath, String workspacePath, BuildListener listener) {
-        this.projectPath = projectPath;
+    private static Database db = null;
+
+    public DependencyAnalysis(String udbPath, String workspacePath, BuildListener listener) {
+        setLibPath();
+
+        this.udbPath = udbPath;
         this.workspacePath = workspacePath;
         this.listener = listener;
     }
@@ -33,14 +37,13 @@ public class DependencyAnalysis {
      */
     public ArrayList<String> getDependentModules (ArrayList<String> changedModules)
             throws IOException, InterruptedException {
-        setLibPath();
-
         ArrayList<String> dependentModules = new ArrayList<>();
 
-        File file = new File(projectPath);
+        File file = new File(udbPath);
+
         if (!file.exists()) {
             // if the Understand Database does not already exist, create a new Understand Database
-            String command = "und create -db " + projectPath + " -languages java add "
+            String command = "und create -db " + udbPath + " -languages java add "
                              + workspacePath + " analyze -all";
 
             listener.getLogger().println("Understand Database does not exist...");
@@ -48,20 +51,26 @@ public class DependencyAnalysis {
 
             Process createDatabase = Runtime.getRuntime().exec(command);
             createDatabase.waitFor();
-        } /* else {
+            listener.getLogger().println(udbPath + " created.");
+        } else {
             // scan for changed/added files and analyze files that have changed
-            String command = "und -db " + projectPath + " analyze -rescan -changed";
+            String command = "und -db " + udbPath + " analyze -rescan -changed";
 
-            listener.getLogger().println("Rescanning Understand Database...");
+            listener.getLogger().println("Re-scanning Understand Database...");
 
             Process analyzeDatabase = Runtime.getRuntime().exec(command);
             analyzeDatabase.waitFor();
-        } */
+            listener.getLogger().println(udbPath + " successfully re-scanned for changes.");
+        }
+
+        listener.getLogger().println(udbPath + " exists? = " + file.exists());
+        listener.getLogger().println(udbPath + " readable? = " + file.canRead());
+        listener.getLogger().println(udbPath + " writable? = " + file.canWrite());
 
         try {
-            listener.getLogger().println("Opening database: " + projectPath + " ..."); // <-- for debugging
+            listener.getLogger().println("Opening database: " + udbPath + " ..."); // <-- for debugging
 
-            Database db = Understand.open(projectPath);
+            db = Understand.open(udbPath);
 
             listener.getLogger().println("Database opened..."); // <-- for debugging
 
@@ -89,11 +98,17 @@ public class DependencyAnalysis {
                     getReferences(module, classTree, entsWeCareAbout, dependentModules);
                 }
             }
-
-            db.close();
-            listener.getLogger().println("Database closed..."); // <-- for debugging
         } catch (UnderstandException exception) {
-            System.out.println("Failed opening Database:" + exception.getMessage());
+            listener.getLogger().println("Failed opening Database:" + exception.getMessage());
+        } finally {
+            try {
+                if (db != null) {
+                    db.close();
+                    listener.getLogger().println("Database closed.");
+                }
+            } catch (Exception e) {
+                listener.getLogger().println(e.getMessage());
+            }
         }
 
         return dependentModules;

@@ -44,24 +44,24 @@ public class RegressionTestSelector extends Builder {
     private final String testReportDir;
     private final String testSuiteFile;
 
-    private final Boolean useDependencyAnalysis;
-    private final String understandDatabasePath;
+    private final Boolean useDepAnalysis;
+    private final String udbPath;
 
     @DataBoundConstructor
     public RegressionTestSelector(int failureWindow,
                                   int executionWindow,
                                   String testReportDir,
                                   String testSuiteFile,
-                                  Boolean useDependencyAnalysis,
-                                  String understandDatabasePath) {
+                                  Boolean useDepAnalysis,
+                                  String udbPath) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
 
         this.testReportDir = testReportDir;
         this.testSuiteFile = testSuiteFile;
 
-        this.useDependencyAnalysis = useDependencyAnalysis;
-        this.understandDatabasePath = understandDatabasePath;
+        this.useDepAnalysis = useDepAnalysis;
+        this.udbPath = udbPath;
     }
 
     /**
@@ -105,7 +105,7 @@ public class RegressionTestSelector extends Builder {
         ArrayList<String> allTests = getAllTests(workspace, linesForFile);
         ArrayList<String> selectedTests = selectTests(build, listener, allTests);
 
-        if (useDependencyAnalysis) {
+        if (useDepAnalysis) {
             selectedTests = doDependencyAnalysis(build, listener, selectedTests);
         }
 
@@ -134,7 +134,7 @@ public class RegressionTestSelector extends Builder {
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
-        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath, workspacePath, listener);
+        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
         ArrayList<String> allChangedFiles = new ArrayList<>();
         ArrayList<String> changedSourceFiles = new ArrayList<>();
         ArrayList<String> dependentModules;

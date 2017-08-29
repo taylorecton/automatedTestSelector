@@ -35,41 +35,41 @@ import java.util.TreeMap;
 
 public class TestCasePrioritizer extends Builder {
 
-    public static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
-    public static final String ANNOTATION_START_1 = "@SuiteClasses({";
-    public static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
-    public static final String ANNOTATION_END = "})";
-    public static final String LAST_PRIORITIZED_FILE = "build_when_previously_prioritized.txt";
+    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    private static final String ANNOTATION_START_1 = "@SuiteClasses({";
+    private static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
+    private static final String ANNOTATION_END = "})";
+    private static final String LAST_PRIORITIZED_FILE = "build_when_previously_prioritized.txt";
+    private static final String HANDOFF_FILE = "handoff.txt";
+
 
     private final int failureWindow;
     private final int executionWindow;
-    private final int prioritizationWindow;
+    private final int priorityWindow;
 
     private final String testSuiteFile;
     private final String testReportDir;
 
-    private final Boolean useDependencyAnalysis;
-    private final String understandDatabasePath;
-
-    //private final String includesFile;
+    private final Boolean useDepAnalysis;
+    private final String udbPath;
 
     @DataBoundConstructor
     public TestCasePrioritizer(int failureWindow,
                                int executionWindow,
-                               int prioritizationWindow,
+                               int priorityWindow,
                                String testSuiteFile,
                                String testReportDir,
-                               Boolean useDependencyAnalysis,
-                               String understandDatabasePath) {
+                               Boolean useDepAnalysis,
+                               String udbPath) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
-        this.prioritizationWindow = prioritizationWindow;
+        this.priorityWindow = priorityWindow;
 
         this.testSuiteFile = testSuiteFile;
         this.testReportDir = testReportDir;
 
-        this.useDependencyAnalysis = useDependencyAnalysis;
-        this. understandDatabasePath = understandDatabasePath;
+        this.useDepAnalysis = useDepAnalysis;
+        this.udbPath = udbPath;
     }
 
     /**
@@ -101,8 +101,8 @@ public class TestCasePrioritizer extends Builder {
         listener.getLogger().println("Running test case prioritizer...");
         listener.getLogger().println("Failure window is set to: " + failureWindow);
         listener.getLogger().println("Execution window is set to: " + executionWindow);
-        listener.getLogger().println("Prioritization window is set to: " + prioritizationWindow);
-        if (useDependencyAnalysis) listener.getLogger().println("UDB Path: " + understandDatabasePath);
+        listener.getLogger().println("Prioritization window is set to: " + priorityWindow);
+        if (useDepAnalysis) listener.getLogger().println("UDB Path: " + udbPath);
         // listener.getLogger().println("Class path: " + System.getProperty("java.class.path")); // <-- for debugging
 
         // get current build number for setting last prioritized build number on tests
@@ -125,8 +125,8 @@ public class TestCasePrioritizer extends Builder {
         // relevantTests will hold the tests found to be relevant to current code changes
         TreeMap<String, TestPriority> relevantTests;
 
-        // get relevant tests from dependency analysis if useDependencyAnalysis is true; use allTests otherwise
-        if (useDependencyAnalysis) {
+        // get relevant tests from dependency analysis if useDepAnalysis is true; use allTests otherwise
+        if (useDepAnalysis) {
             relevantTests = doDependencyAnalysis(build, listener, allTests);
         } else {
             relevantTests = allTests;
@@ -171,10 +171,12 @@ public class TestCasePrioritizer extends Builder {
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
-        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(understandDatabasePath, workspacePath, listener);
+
+        // DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
+
         ArrayList<String> allChangedFiles = new ArrayList<>();
         ArrayList<String> changedSourceFiles = new ArrayList<>();
-        ArrayList<String> dependentModules;
+        ArrayList<String> dependentModules = new ArrayList<>();
 
         for (Entry entry : build.getChangeSet()) {
             if (entry.getAffectedPaths() != null)
@@ -196,7 +198,55 @@ public class TestCasePrioritizer extends Builder {
             listener.getLogger().println("-------------------------------"); // <-- for debugging
 
             if (!changedSourceFiles.isEmpty()) {
-                dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+                // dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+
+                String handoffPath = workspacePath + "/" + HANDOFF_FILE;
+                listener.getLogger().println("handoffpath = " + handoffPath);
+                try {
+                    File file = new File(handoffPath);
+                    if (file.exists()) {
+                        listener.getLogger().println("Deleting old handoff file...");
+                        file.delete();
+                    }
+
+                    PrintWriter printWriter = new PrintWriter(handoffPath);
+
+                    listener.getLogger().println("Writing new handoff file...");
+                    for (String sourceFile : changedSourceFiles)
+                        printWriter.println(sourceFile);
+
+                    printWriter.close();
+                } catch (IOException exception) {
+                    listener.getLogger().println(exception.getMessage());
+                }
+
+                String command = "java DependencyAnalysis " + udbPath + " " + workspacePath + " " + handoffPath;
+                listener.getLogger().println("command = " + command);
+                Process dependencyAnalysis = Runtime.getRuntime().exec(command);
+                String output;
+                BufferedReader depAnalysisReader = new BufferedReader(
+                        new InputStreamReader(dependencyAnalysis.getInputStream()) );
+                while ((output = depAnalysisReader.readLine()) != null) {
+                    listener.getLogger().println(output);
+                }
+                depAnalysisReader.close();
+                dependencyAnalysis.waitFor();
+
+                try {
+                    InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                   String line;
+                   while((line = bufferedReader.readLine()) != null)
+                       dependentModules.add(line);
+
+                   bufferedReader.close();
+                   inputStreamReader.close();
+                   inputStream.close();
+                } catch (IOException exception) {
+                    listener.getLogger().println(exception.getMessage());
+                }
 
                 listener.getLogger().println("All dependent files: "); // <-- for debugging
                 for (String file : dependentModules) {
@@ -254,6 +304,8 @@ public class TestCasePrioritizer extends Builder {
                 }
             }
             bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
         }
 
         /* FOR DEBUG
@@ -359,8 +411,8 @@ public class TestCasePrioritizer extends Builder {
         ArrayList<TestPriority> sortedTests = new ArrayList<>(tests.values());
 
         for (TestPriority testPriority : sortedTests) {
-            if ((currentBuildNumber - testPriority.getPreviousPrioritizedBuildNum()) > prioritizationWindow) {
-                // test has ot been prioritized within prioritizationWindow
+            if ((currentBuildNumber - testPriority.getPreviousPrioritizedBuildNum()) > priorityWindow) {
+                // test has ot been prioritized within priorityWindow
                 listener.getLogger().println(testPriority.getClassName() + " not prioritized w/in window"); // <-- for debugging
                 listener.getLogger().println("Prioritizing " + testPriority.getClassName());                // <-- for debugging
                 listener.getLogger().println();                                                             // <-- for debugging
@@ -422,7 +474,12 @@ public class TestCasePrioritizer extends Builder {
             }
 
             pwSuiteFile.close();
+            oswSuiteFile.close();
+            osSuiteFile.close();
+
             pwPriorityWindowFile.close();
+            oswPriorityWindowFile.close();
+            osPriorityWindowFile.close();
         }
     }
 
@@ -450,6 +507,8 @@ public class TestCasePrioritizer extends Builder {
                     allTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
             }
             bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
         } catch (FileNotFoundException e) {
             listener.getLogger().println(LAST_PRIORITIZED_FILE + " not found.");
             listener.getLogger().println("Using 0 as previous prioritized build number.");
