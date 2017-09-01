@@ -35,22 +35,32 @@ import java.util.TreeMap;
 
 public class TestCasePrioritizer extends Builder {
 
+    // set of build results to consider; currently set to only consider successful and unstable builds
     private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+
+    // possible starts of @SuiteClasses annotation in test suite file, and the end of the annotation
     private static final String ANNOTATION_START_1 = "@SuiteClasses({";
     private static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
     private static final String ANNOTATION_END = "})";
+
+    // file to contain information about when a test was last prioritized
     private static final String LAST_PRIORITIZED_FILE = "build_when_previously_prioritized.txt";
+
+    // file for passing information between plugin and stand-alone dependency analysis program
     private static final String HANDOFF_FILE = "handoff.txt";
 
-
+    // parameters used for prioritizing tests
     private final int failureWindow;
     private final int executionWindow;
     private final int priorityWindow;
 
+    // name of the test suite file containing all tests and the directory storing test results
     private final String testSuiteFile;
     private final String testReportDir;
 
+    // boolean indicating if the user wants to use dependency analysis or not
     private final Boolean useDepAnalysis;
+    // path of Understand Database if dependency analysis is used
     private final String udbPath;
 
     @DataBoundConstructor
@@ -166,28 +176,42 @@ public class TestCasePrioritizer extends Builder {
                                                                BuildListener listener,
                                                                TreeMap<String, TestPriority> allTests)
             throws IOException, InterruptedException {
+        // TreeMap will hold tests relevant to files changed in version control
         TreeMap<String, TestPriority> relevantTests = new TreeMap<>();
+        // wokspacePath is the absolute path of the build workspace for this Jenkins job
         String workspacePath = build.getWorkspace().getRemote();
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
 
+        // ------------ DEPENDENCY ANALYSIS CLASS MOVED TO STAND-ALONE PROGRAM -----------------------------
+        // ------------ due to bug that has not yet been resolved... ---------------------------------------
         // DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
 
+        // allChangedFiles will hold EVERY file changed in version control since previous build
         ArrayList<String> allChangedFiles = new ArrayList<>();
+        // changedSourceFiles will hold only changed .java files
         ArrayList<String> changedSourceFiles = new ArrayList<>();
+        // dependentModules will hold all .java files related to changed files (including non-tests)
         ArrayList<String> dependentModules = new ArrayList<>();
 
+        // get allChangedFiles from version control
         for (Entry entry : build.getChangeSet()) {
             if (entry.getAffectedPaths() != null)
                 allChangedFiles.addAll(entry.getAffectedPaths());
         }
 
+        // do not enter the following block if no files have changed from previous build
         if (!allChangedFiles.isEmpty()) {
+
             listener.getLogger().println("-------------------------------"); // <-- for debugging
             listener.getLogger().println("All changed files: "); // <-- for debugging
+
+            // check each file name to see if it contains '.java'; add to changedSourceFiles if it does
             for (String file : allChangedFiles) {
+
                 listener.getLogger().println(file); // <-- for debugging
+
                 if (file.contains(".java")) {
                     String[] pathComponents = file.split("/");
                     file = pathComponents[pathComponents.length - 1];
@@ -195,23 +219,42 @@ public class TestCasePrioritizer extends Builder {
                     changedSourceFiles.add(file);
                 }
             }
+
             listener.getLogger().println("-------------------------------"); // <-- for debugging
 
+            // do not enter the following block if none of the changed files are .java files
             if (!changedSourceFiles.isEmpty()) {
+                // --------------- DEPENDENCY ANALYSIS CLASS MOVED TO STAND-ALONE PROGRAM -------
+                // --------------- due to issue opening Understand database more than once ------
                 // dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
 
+                // ----------------------------- TO-DO: --------------------------------------
+                // Move all of the following code inside of a function. All of the following
+                // is necessary to run dependency analysis independently of Jenkins due to the
+                // issue of opening the Understand Database more than once. Putting this in a
+                // separate function will allow it to be easily commented out if a way is found
+                // to resolve the bug that created the need for this.
+
+                // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
                 String handoffPath = workspacePath + "/" + HANDOFF_FILE;
-                listener.getLogger().println("handoffpath = " + handoffPath);
+
+                listener.getLogger().println("handoffpath = " + handoffPath); // <-- for debugging
+
+                // create the handoff file; if there is an old one, delete it first
                 try {
                     File file = new File(handoffPath);
                     if (file.exists()) {
-                        listener.getLogger().println("Deleting old handoff file...");
+
+                        listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
+
                         file.delete();
                     }
 
                     PrintWriter printWriter = new PrintWriter(handoffPath);
 
-                    listener.getLogger().println("Writing new handoff file...");
+                    listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
+
+                    // write each changed source file to the handoff file
                     for (String sourceFile : changedSourceFiles)
                         printWriter.println(sourceFile);
 
@@ -220,8 +263,12 @@ public class TestCasePrioritizer extends Builder {
                     listener.getLogger().println(exception.getMessage());
                 }
 
+                // command is the shell command to run DependencyAnalysis program
                 String command = "java DependencyAnalysis " + udbPath + " " + workspacePath + " " + handoffPath;
-                listener.getLogger().println("command = " + command);
+
+                listener.getLogger().println("command = " + command); // <-- for debugging
+
+                // run command using exec; output is redirected to listener.getLogger() for viewing in Jenkins
                 Process dependencyAnalysis = Runtime.getRuntime().exec(command);
                 String output;
                 BufferedReader depAnalysisReader = new BufferedReader(
@@ -230,8 +277,12 @@ public class TestCasePrioritizer extends Builder {
                     listener.getLogger().println(output);
                 }
                 depAnalysisReader.close();
+
+                // make sure dependencyAnalysis process terminates before proceeding
                 dependencyAnalysis.waitFor();
 
+                // try to read information from the handoff file; should now contain information from
+                // dependency analysis program
                 try {
                     InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
@@ -247,25 +298,41 @@ public class TestCasePrioritizer extends Builder {
                 } catch (IOException exception) {
                     listener.getLogger().println(exception.getMessage());
                 }
+                // ------------------------ END OF TO-DO ------------------------------------------------
 
                 listener.getLogger().println("All dependent files: "); // <-- for debugging
+
+                // iterate through dependentModules and add '.class' to the string for use in
+                // the re-written testSuiteFile
                 for (String file : dependentModules) {
-                    listener.getLogger().println(file);
+
+                    listener.getLogger().println(file); // <-- for debugging
+
                     file += ".class";
+
+                    // if the file is a test (determined by checking if it's contained in allTests),
+                    // then add it to relevantTests
                     if (allTests.containsKey(file)) {
                         relevantTests.put(file, allTests.get(file));
                     }
                 }
             } else {
+                // No changes found in version control since the previous build
                 listener.getLogger().println("No changed source code files. Utilizing all tests for prioritization.");
+                // set relevant tests to allTests and consider all tests for execution
                 relevantTests = allTests;
             }
+
             listener.getLogger().println("**----------------------------------**"); // <-- for debugging
+
         }
 
+        // the following is executed if none of the changed files relate to the tests,
+        // for example: if no changed files are source files
         if (relevantTests.isEmpty()) {
             listener.getLogger().println("List of relevant tests is empty. Tests may be unrelated to changes.");
             listener.getLogger().println("Using all tests in Test Suite File");
+            // set relevant tests to allTests and consider all tests for execution
             relevantTests = allTests;
         }
 
@@ -384,6 +451,7 @@ public class TestCasePrioritizer extends Builder {
                 // failing tests within failure window should be selected; don't add duplicates
                 for (String testName : testsFailedThisBuild) {
                     if (tests.containsKey(testName)) {
+
                         listener.getLogger().println(testName + " failed a build"); // <-- for debugging
                         listener.getLogger().println("Prioritizing " + testName);   // <-- for debugging
                         listener.getLogger().println();                             // <-- for debugging
@@ -412,7 +480,8 @@ public class TestCasePrioritizer extends Builder {
 
         for (TestPriority testPriority : sortedTests) {
             if ((currentBuildNumber - testPriority.getPreviousPrioritizedBuildNum()) > priorityWindow) {
-                // test has ot been prioritized within priorityWindow
+                // test has not been prioritized within priorityWindow
+
                 listener.getLogger().println(testPriority.getClassName() + " not prioritized w/in window"); // <-- for debugging
                 listener.getLogger().println("Prioritizing " + testPriority.getClassName());                // <-- for debugging
                 listener.getLogger().println();                                                             // <-- for debugging
@@ -442,7 +511,8 @@ public class TestCasePrioritizer extends Builder {
                             ArrayList<TestPriority> testList,
                             ArrayList<String> linesForFile)
             throws IOException, InterruptedException {
-
+        // try to re-write the testSuiteFile to use for this build
+        // and update the LAST_PRIORITIZED_FILE
         try (OutputStream osSuiteFile = workspace.child(testSuiteFile).write();
              OutputStreamWriter oswSuiteFile = new OutputStreamWriter(osSuiteFile, Charsets.UTF_8);
              PrintWriter pwSuiteFile = new PrintWriter(oswSuiteFile);
@@ -451,9 +521,12 @@ public class TestCasePrioritizer extends Builder {
              OutputStreamWriter oswPriorityWindowFile = new OutputStreamWriter(osPriorityWindowFile, Charsets.UTF_8);
              PrintWriter pwPriorityWindowFile = new PrintWriter(oswPriorityWindowFile)) {
 
+            // for each line that was originally in the test suite file, excluding the original ordering
+            // of tests, write the line into the new file
             for (String line : linesForFile) {
                 pwSuiteFile.println(line);
 
+                // after the start of the SuiteClasses annotation, write the tests in prioritized order
                 if (line.equals(ANNOTATION_START_1) || line.equals(ANNOTATION_START_2)) {
                     TestPriority testPriority;
                     for (int i = 0; i < sortedTests.size() - 1; i++) {
@@ -468,11 +541,13 @@ public class TestCasePrioritizer extends Builder {
                 }
             }
 
+            // for every test in the project, write the last build it was prioritized to a file
             for (TestPriority test : testList) {
                 pwPriorityWindowFile.println(test.getClassName()
                         + ":" + test.getPreviousPrioritizedBuildNum());
             }
 
+            // make sure to close all the things
             pwSuiteFile.close();
             oswSuiteFile.close();
             osSuiteFile.close();
@@ -495,17 +570,22 @@ public class TestCasePrioritizer extends Builder {
                                                  TreeMap<String, TestPriority> relevantTests,
                                                  TreeMap<String, TestPriority> allTests)
             throws IOException, InterruptedException {
+        // read LAST_PRIORITIZED_FILE to get the last build number where each test was prioritized
+        // used for the priority window check
         try (InputStream inputStream = workspace.child(LAST_PRIORITIZED_FILE).read();
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            // read and parse each line of the file
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
+                // set the build number in each of the TreeMaps holding TestPriority objects
                 if (relevantTests.containsKey(splitLine[0]))
                     relevantTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
                 if (allTests.containsKey(splitLine[0]))
                     allTests.get(splitLine[0]).setPreviousPrioritizedBuildNum(Integer.parseInt(splitLine[1]));
             }
+            // close all the things
             bufferedReader.close();
             inputStreamReader.close();
             inputStream.close();
