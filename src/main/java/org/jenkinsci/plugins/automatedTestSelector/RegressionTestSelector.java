@@ -33,10 +33,12 @@ import java.util.ArrayList;
 
 public class RegressionTestSelector extends Builder {
 
-    public static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
-    public static final String ANNOTATION_START_1 = "@SuiteClasses({";
-    public static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
-    public static final String ANNOTATION_END = "})";
+    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    private static final String ANNOTATION_START_1 = "@SuiteClasses({";
+    private static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
+    private static final String ANNOTATION_END = "})";
+
+    private static final String HANDOFF_FILE = "handoff.txt";
 
     private final int failureWindow;
     private final int executionWindow;
@@ -129,15 +131,17 @@ public class RegressionTestSelector extends Builder {
                                                    BuildListener listener,
                                                    ArrayList<String> selectedTests)
             throws IOException, InterruptedException {
+        // ------------ DEPENDENCY ANALYSIS CLASS MOVED TO STAND-ALONE PROGRAM -----------------------------
+        // ------------ due to bug that has not yet been resolved... ---------------------------------------
+        // DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
+
         ArrayList<String> relevantTests = new ArrayList<>();
-        String workspacePath = build.getWorkspace().getRemote();
+        ArrayList<String> allChangedFiles = new ArrayList<>();
+        ArrayList<String> changedSourceFiles = new ArrayList<>();
+        ArrayList<String> dependentModules = new ArrayList<>();
 
         listener.getLogger().println("**----------------------------------**"); // <-- for debugging
         listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
-        DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
-        ArrayList<String> allChangedFiles = new ArrayList<>();
-        ArrayList<String> changedSourceFiles = new ArrayList<>();
-        ArrayList<String> dependentModules;
 
         for (Entry entry : build.getChangeSet()) {
             if (entry.getAffectedPaths() != null)
@@ -159,7 +163,11 @@ public class RegressionTestSelector extends Builder {
             listener.getLogger().println("-------------------------------"); // <-- for debugging
 
             if (!changedSourceFiles.isEmpty()) {
-                dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+                // --------------- DEPENDENCY ANALYSIS CLASS MOVED TO STAND-ALONE PROGRAM -------
+                // --------------- due to issue opening Understand database more than once ------
+                // dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
+
+                runDependencyAnalysisJava(build, listener, changedSourceFiles, dependentModules);
 
                 listener.getLogger().println("All dependent files: "); // <-- for debugging
                 for (String file : dependentModules) {
@@ -183,6 +191,79 @@ public class RegressionTestSelector extends Builder {
         }
 
         return relevantTests;
+    }
+
+    private void runDependencyAnalysisJava(AbstractBuild<?,?> build,
+                                           BuildListener listener,
+                                           ArrayList<String> changedSourceFiles,
+                                           ArrayList<String> dependentModules)
+            throws IOException, InterruptedException {
+
+        // wokspacePath is the absolute path of the build workspace for this Jenkins job
+        String workspacePath = build.getWorkspace().getRemote();
+        // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
+        String handoffPath = workspacePath + "/" + HANDOFF_FILE;
+
+        // listener.getLogger().println("handoffpath = " + handoffPath); // <-- for debugging
+
+        // create the handoff file; if there is an old one, delete it first
+        try {
+            File file = new File(handoffPath);
+            if (file.exists()) {
+
+                listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
+
+                file.delete();
+            }
+
+            PrintWriter printWriter = new PrintWriter(handoffPath);
+
+            listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
+
+            // write each changed source file to the handoff file
+            for (String sourceFile : changedSourceFiles)
+                printWriter.println(sourceFile);
+
+            printWriter.close();
+        } catch (IOException exception) {
+            listener.getLogger().println(exception.getMessage());
+        }
+
+        // command is the shell command to run DependencyAnalysis program
+        String command = "java DependencyAnalysis " + udbPath + " " + workspacePath + " " + handoffPath;
+
+        // listener.getLogger().println("command = " + command); // <-- for debugging
+
+        // run command using exec; output is redirected to listener.getLogger() for viewing in Jenkins
+        Process dependencyAnalysis = Runtime.getRuntime().exec(command);
+        String output;
+        BufferedReader depAnalysisReader = new BufferedReader(
+                new InputStreamReader(dependencyAnalysis.getInputStream()) );
+        while ((output = depAnalysisReader.readLine()) != null) {
+            listener.getLogger().println(output);
+        }
+        depAnalysisReader.close();
+
+        // make sure dependencyAnalysis process terminates before proceeding
+        dependencyAnalysis.waitFor();
+
+        // try to read information from the handoff file; should now contain information from
+        // dependency analysis program
+        try {
+            InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String line;
+            while((line = bufferedReader.readLine()) != null)
+                dependentModules.add(line);
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+        } catch (IOException exception) {
+            listener.getLogger().println(exception.getMessage());
+        }
     }
 
 

@@ -176,24 +176,22 @@ public class TestCasePrioritizer extends Builder {
                                                                BuildListener listener,
                                                                TreeMap<String, TestPriority> allTests)
             throws IOException, InterruptedException {
-        // TreeMap will hold tests relevant to files changed in version control
-        TreeMap<String, TestPriority> relevantTests = new TreeMap<>();
-        // wokspacePath is the absolute path of the build workspace for this Jenkins job
-        String workspacePath = build.getWorkspace().getRemote();
-
-        listener.getLogger().println("**----------------------------------**"); // <-- for debugging
-        listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
 
         // ------------ DEPENDENCY ANALYSIS CLASS MOVED TO STAND-ALONE PROGRAM -----------------------------
         // ------------ due to bug that has not yet been resolved... ---------------------------------------
         // DependencyAnalysis dependencyAnalysis = new DependencyAnalysis(udbPath, workspacePath, listener);
 
+        // TreeMap will hold tests relevant to files changed in version control
+        TreeMap<String, TestPriority> relevantTests = new TreeMap<>();
         // allChangedFiles will hold EVERY file changed in version control since previous build
         ArrayList<String> allChangedFiles = new ArrayList<>();
         // changedSourceFiles will hold only changed .java files
         ArrayList<String> changedSourceFiles = new ArrayList<>();
         // dependentModules will hold all .java files related to changed files (including non-tests)
         ArrayList<String> dependentModules = new ArrayList<>();
+
+        listener.getLogger().println("**----------------------------------**"); // <-- for debugging
+        listener.getLogger().println("Running dependency analysis code..."); // <-- for debugging
 
         // get allChangedFiles from version control
         for (Entry entry : build.getChangeSet()) {
@@ -228,77 +226,7 @@ public class TestCasePrioritizer extends Builder {
                 // --------------- due to issue opening Understand database more than once ------
                 // dependentModules = dependencyAnalysis.getDependentModules(changedSourceFiles);
 
-                // ----------------------------- TO-DO: --------------------------------------
-                // Move all of the following code inside of a function. All of the following
-                // is necessary to run dependency analysis independently of Jenkins due to the
-                // issue of opening the Understand Database more than once. Putting this in a
-                // separate function will allow it to be easily commented out if a way is found
-                // to resolve the bug that created the need for this.
-
-                // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
-                String handoffPath = workspacePath + "/" + HANDOFF_FILE;
-
-                listener.getLogger().println("handoffpath = " + handoffPath); // <-- for debugging
-
-                // create the handoff file; if there is an old one, delete it first
-                try {
-                    File file = new File(handoffPath);
-                    if (file.exists()) {
-
-                        listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
-
-                        file.delete();
-                    }
-
-                    PrintWriter printWriter = new PrintWriter(handoffPath);
-
-                    listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
-
-                    // write each changed source file to the handoff file
-                    for (String sourceFile : changedSourceFiles)
-                        printWriter.println(sourceFile);
-
-                    printWriter.close();
-                } catch (IOException exception) {
-                    listener.getLogger().println(exception.getMessage());
-                }
-
-                // command is the shell command to run DependencyAnalysis program
-                String command = "java DependencyAnalysis " + udbPath + " " + workspacePath + " " + handoffPath;
-
-                listener.getLogger().println("command = " + command); // <-- for debugging
-
-                // run command using exec; output is redirected to listener.getLogger() for viewing in Jenkins
-                Process dependencyAnalysis = Runtime.getRuntime().exec(command);
-                String output;
-                BufferedReader depAnalysisReader = new BufferedReader(
-                        new InputStreamReader(dependencyAnalysis.getInputStream()) );
-                while ((output = depAnalysisReader.readLine()) != null) {
-                    listener.getLogger().println(output);
-                }
-                depAnalysisReader.close();
-
-                // make sure dependencyAnalysis process terminates before proceeding
-                dependencyAnalysis.waitFor();
-
-                // try to read information from the handoff file; should now contain information from
-                // dependency analysis program
-                try {
-                    InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                   String line;
-                   while((line = bufferedReader.readLine()) != null)
-                       dependentModules.add(line);
-
-                   bufferedReader.close();
-                   inputStreamReader.close();
-                   inputStream.close();
-                } catch (IOException exception) {
-                    listener.getLogger().println(exception.getMessage());
-                }
-                // ------------------------ END OF TO-DO ------------------------------------------------
+                runDependencyAnalysisJava(build, listener, changedSourceFiles, dependentModules);
 
                 listener.getLogger().println("All dependent files: "); // <-- for debugging
 
@@ -337,6 +265,79 @@ public class TestCasePrioritizer extends Builder {
         }
 
         return relevantTests;
+    }
+
+    private void runDependencyAnalysisJava(AbstractBuild<?,?> build,
+                                           BuildListener listener,
+                                           ArrayList<String> changedSourceFiles,
+                                           ArrayList<String> dependentModules)
+            throws IOException, InterruptedException {
+
+        // wokspacePath is the absolute path of the build workspace for this Jenkins job
+        String workspacePath = build.getWorkspace().getRemote();
+        // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
+        String handoffPath = workspacePath + "/" + HANDOFF_FILE;
+
+        // listener.getLogger().println("handoffpath = " + handoffPath); // <-- for debugging
+
+        // create the handoff file; if there is an old one, delete it first
+        try {
+            File file = new File(handoffPath);
+            if (file.exists()) {
+
+                listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
+
+                file.delete();
+            }
+
+            PrintWriter printWriter = new PrintWriter(handoffPath);
+
+            listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
+
+            // write each changed source file to the handoff file
+            for (String sourceFile : changedSourceFiles)
+                printWriter.println(sourceFile);
+
+            printWriter.close();
+        } catch (IOException exception) {
+            listener.getLogger().println(exception.getMessage());
+        }
+
+        // command is the shell command to run DependencyAnalysis program
+        String command = "java DependencyAnalysis " + udbPath + " " + workspacePath + " " + handoffPath;
+
+        // listener.getLogger().println("command = " + command); // <-- for debugging
+
+        // run command using exec; output is redirected to listener.getLogger() for viewing in Jenkins
+        Process dependencyAnalysis = Runtime.getRuntime().exec(command);
+        String output;
+        BufferedReader depAnalysisReader = new BufferedReader(
+                new InputStreamReader(dependencyAnalysis.getInputStream()) );
+        while ((output = depAnalysisReader.readLine()) != null) {
+            listener.getLogger().println(output);
+        }
+        depAnalysisReader.close();
+
+        // make sure dependencyAnalysis process terminates before proceeding
+        dependencyAnalysis.waitFor();
+
+        // try to read information from the handoff file; should now contain information from
+        // dependency analysis program
+        try {
+            InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            String line;
+            while((line = bufferedReader.readLine()) != null)
+                dependentModules.add(line);
+
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+        } catch (IOException exception) {
+            listener.getLogger().println(exception.getMessage());
+        }
     }
 
     /**
