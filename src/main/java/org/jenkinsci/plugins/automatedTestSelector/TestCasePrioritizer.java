@@ -20,11 +20,13 @@ import hudson.tasks.test.TestResult;
 import hudson.util.FormValidation;
 
 import org.apache.commons.io.Charsets;
+
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
 import javax.servlet.ServletException;
 import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeMap;
@@ -59,7 +61,7 @@ public class TestCasePrioritizer extends Builder {
     private final String testReportDir;
 
     // boolean indicating if the user wants to use dependency analysis or not
-    private final Boolean useDepAnalysis;
+    private final boolean useDepAnalysis;
     // path of Understand Database if dependency analysis is used
     private final String udbPath;
 
@@ -69,7 +71,7 @@ public class TestCasePrioritizer extends Builder {
                                int priorityWindow,
                                String testSuiteFile,
                                String testReportDir,
-                               Boolean useDepAnalysis,
+                               boolean useDepAnalysis,
                                String udbPath) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
@@ -93,12 +95,24 @@ public class TestCasePrioritizer extends Builder {
         return failureWindow;
     }
 
+    public int getPriorityWindow() {
+        return priorityWindow;
+    }
+
     public String getTestSuiteFile() {
         return testSuiteFile;
     }
 
     public String getTestReportDir() {
         return testReportDir;
+    }
+
+    /* public boolean getUseDepAnalysis() {
+        return useDepAnalysis;
+    } */
+
+    public String getUdbPath() {
+        return udbPath;
     }
 
     /**
@@ -274,7 +288,12 @@ public class TestCasePrioritizer extends Builder {
             throws IOException, InterruptedException {
 
         // wokspacePath is the absolute path of the build workspace for this Jenkins job
-        String workspacePath = build.getWorkspace().getRemote();
+        String workspacePath;
+        try {
+            workspacePath = build.getWorkspace().getRemote();
+        } catch (NullPointerException e) {
+            throw new AbortException("getRemote returned null");
+        }
         // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
         String handoffPath = workspacePath + "/" + HANDOFF_FILE;
 
@@ -287,10 +306,12 @@ public class TestCasePrioritizer extends Builder {
 
                 listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
 
-                file.delete();
+                if (file.delete()) listener.getLogger().println("File deleted.");
             }
 
-            PrintWriter printWriter = new PrintWriter(handoffPath);
+            OutputStream outputStream = new FileOutputStream(handoffPath);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter);
 
             listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
 
@@ -312,7 +333,7 @@ public class TestCasePrioritizer extends Builder {
         Process dependencyAnalysis = Runtime.getRuntime().exec(command);
         String output;
         BufferedReader depAnalysisReader = new BufferedReader(
-                new InputStreamReader(dependencyAnalysis.getInputStream()) );
+                new InputStreamReader(dependencyAnalysis.getInputStream(), Charsets.UTF_8) );
         while ((output = depAnalysisReader.readLine()) != null) {
             listener.getLogger().println(output);
         }
@@ -324,7 +345,12 @@ public class TestCasePrioritizer extends Builder {
         // try to read information from the handoff file; should now contain information from
         // dependency analysis program
         try {
-            InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            InputStream inputStream;
+            try {
+                inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            } catch (NullPointerException e) {
+                throw new AbortException("inputStream is null");
+            }
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -361,7 +387,7 @@ public class TestCasePrioritizer extends Builder {
                 linesForFile.add(line);
                 if (line.trim().equals(ANNOTATION_START_1) || line.trim().equals(ANNOTATION_START_2)) {
                     line = bufferedReader.readLine();
-                    while (!line.trim().equals(ANNOTATION_END)) {
+                    while (line != null && !line.trim().equals(ANNOTATION_END)) {
                         line = line.trim();
                         if (line.contains(","))
                             line = line.replace(",", "");
@@ -573,9 +599,11 @@ public class TestCasePrioritizer extends Builder {
             throws IOException, InterruptedException {
         // read LAST_PRIORITIZED_FILE to get the last build number where each test was prioritized
         // used for the priority window check
-        try (InputStream inputStream = workspace.child(LAST_PRIORITIZED_FILE).read();
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+        try {
+            InputStream inputStream = workspace.child(LAST_PRIORITIZED_FILE).read();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
             // read and parse each line of the file
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -593,6 +621,8 @@ public class TestCasePrioritizer extends Builder {
         } catch (FileNotFoundException e) {
             listener.getLogger().println(LAST_PRIORITIZED_FILE + " not found.");
             listener.getLogger().println("Using 0 as previous prioritized build number.");
+        } catch (NoSuchFileException e) {
+            listener.getLogger().println("no such file : " + LAST_PRIORITIZED_FILE);
         }
     }
 
@@ -727,5 +757,6 @@ public class TestCasePrioritizer extends Builder {
         public String getDisplayName() {
             return "Test Case Prioritizer";
         }
+
     }
 }

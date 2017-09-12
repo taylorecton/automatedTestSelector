@@ -46,7 +46,7 @@ public class RegressionTestSelector extends Builder {
     private final String testReportDir;
     private final String testSuiteFile;
 
-    private final Boolean useDepAnalysis;
+    private final boolean useDepAnalysis;
     private final String udbPath;
 
     @DataBoundConstructor
@@ -54,7 +54,7 @@ public class RegressionTestSelector extends Builder {
                                   int executionWindow,
                                   String testReportDir,
                                   String testSuiteFile,
-                                  Boolean useDepAnalysis,
+                                  boolean useDepAnalysis,
                                   String udbPath) {
         this.executionWindow = executionWindow;
         this.failureWindow = failureWindow;
@@ -85,6 +85,13 @@ public class RegressionTestSelector extends Builder {
         return testSuiteFile;
     }
 
+    public boolean getUseDepAnalysis() {
+        return useDepAnalysis;
+    }
+
+    public String getUdbPath() {
+        return udbPath;
+    }
 
     /**
      * main function of the regression test selector
@@ -200,7 +207,12 @@ public class RegressionTestSelector extends Builder {
             throws IOException, InterruptedException {
 
         // wokspacePath is the absolute path of the build workspace for this Jenkins job
-        String workspacePath = build.getWorkspace().getRemote();
+        String workspacePath;
+        try {
+            workspacePath = build.getWorkspace().getRemote();
+        } catch (NullPointerException e) {
+            throw new AbortException("getRemote returned null");
+        }
         // concatenate workspacePath and HANDOFF_FILE to get path of handoff file
         String handoffPath = workspacePath + "/" + HANDOFF_FILE;
 
@@ -213,10 +225,12 @@ public class RegressionTestSelector extends Builder {
 
                 listener.getLogger().println("Deleting old handoff file..."); // <-- for debugging
 
-                file.delete();
+                if (file.delete()) listener.getLogger().println("File deleted.");
             }
 
-            PrintWriter printWriter = new PrintWriter(handoffPath);
+            OutputStream outputStream = new FileOutputStream(handoffPath);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter);
 
             listener.getLogger().println("Writing new handoff file..."); // <-- for debugging
 
@@ -238,7 +252,7 @@ public class RegressionTestSelector extends Builder {
         Process dependencyAnalysis = Runtime.getRuntime().exec(command);
         String output;
         BufferedReader depAnalysisReader = new BufferedReader(
-                new InputStreamReader(dependencyAnalysis.getInputStream()) );
+                new InputStreamReader(dependencyAnalysis.getInputStream(), Charsets.UTF_8) );
         while ((output = depAnalysisReader.readLine()) != null) {
             listener.getLogger().println(output);
         }
@@ -250,7 +264,12 @@ public class RegressionTestSelector extends Builder {
         // try to read information from the handoff file; should now contain information from
         // dependency analysis program
         try {
-            InputStream inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            InputStream inputStream;
+            try {
+                inputStream = build.getWorkspace().child(HANDOFF_FILE).read();
+            } catch (NullPointerException e) {
+                throw new AbortException("inputStream is null");
+            }
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -288,7 +307,7 @@ public class RegressionTestSelector extends Builder {
                 linesForFile.add(line);
                 if (line.trim().equals(ANNOTATION_START_1) || line.trim().equals(ANNOTATION_START_2)) {
                     line = bufferedReader.readLine();
-                    while (!line.trim().equals(ANNOTATION_END)) {
+                    while (line != null && !line.trim().equals(ANNOTATION_END)) {
                         line = line.trim();
                         if (line.contains(","))
                             line = line.replace(",", "");

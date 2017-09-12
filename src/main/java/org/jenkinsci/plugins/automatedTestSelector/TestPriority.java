@@ -40,4 +40,24 @@ public class TestPriority implements Comparable<TestPriority> {
         if (p > 0) return 1;
         return 0;
     }
+
+    public boolean equals(Object that) {
+        // NEVER USED
+        // implemented to remove warning from findbugs
+        if (that instanceof TestPriority) {
+            TestPriority other = (TestPriority) that;
+            if ((this.className.equals(other.className)) &&
+                    (this.priority == other.priority) &&
+                    (this.previousPrioritizedBuildNum == other.previousPrioritizedBuildNum))
+                return true;
+        }
+        return false;
+    }
+
+    public int hashCode() {
+        // NEVER USED
+        // implemented to remove warning from findbugs
+        assert false : "hashCode not designed";
+        return 42; // any arbitrary constant will do
+    }
 }
