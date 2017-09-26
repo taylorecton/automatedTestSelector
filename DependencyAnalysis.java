@@ -49,6 +49,14 @@ public class DependencyAnalysis {
             System.out.println("Attempting to create and analyze new database...");
 
             Process createDatabase = Runtime.getRuntime().exec(command);
+
+            String output;
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(createDatabase.getInputStream()));
+            while ((output = bufferedReader.readLine()) != null) {
+                System.out.println(output);
+            }
+
             createDatabase.waitFor();
             System.out.println(udbPath + " created.");
         } else {
