@@ -66,6 +66,15 @@ public class DependencyAnalysis {
             System.out.println("Re-scanning Understand Database...");
 
             Process analyzeDatabase = Runtime.getRuntime().exec(command);
+
+            String output;
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(analyzeDatabase.getInputStream())
+            );
+            while ((output = bufferedReader.readLine()) != null) {
+                System.out.println(output);
+            }
+
             analyzeDatabase.waitFor();
             System.out.println(udbPath + " successfully re-scanned for changes.");
         }
