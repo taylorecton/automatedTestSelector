@@ -49,9 +49,9 @@ public class AllTestsCreator {
             importStatements.add("package " + testPackage + ";");
 
         // used for running the tests
-        importStatements.add("import org.junit.Runners.RunWith;");
-        importStatements.add("import org.junit.Runners.Suite;");
-        importStatements.add("import org.junit.Runners.Suite.SuiteClasses;");
+        importStatements.add("import org.junit.runner.RunWith;");
+        importStatements.add("import org.junit.runners.Suite;");
+        importStatements.add("import org.junit.runners.Suite.SuiteClasses;");
     }
 
     /**
@@ -74,7 +74,8 @@ public class AllTestsCreator {
                     File f = new File(dir.getAbsolutePath() + '/' + fileName);
 
                     // add it to the list of test files if its name matches the regex
-                    if (fileName.matches("[a-zA-Z0-9|/]*Test.java$|[a-zA-Z0-9|/]*Tests.java$"))
+                    if (fileName.matches("[a-zA-Z0-9|/|_]*Test.java$") || 
+                        fileName.matches("[a-zA-Z0-9|/|_]*Test[a-zA-Z0-9|_]*.java$"))
                         testFiles.add(f);
 
                     // make sure current directory and parent directory are not re-added to queue
@@ -121,6 +122,8 @@ public class AllTestsCreator {
 
                 // read all the lines in the file
                 while ((line = bReader.readLine()) != null) {
+                    if (line.startsWith("//"))
+                        continue;
                     // get the package name
                     if (line.contains("package ")) {
                         line = line.replace("package ", "");

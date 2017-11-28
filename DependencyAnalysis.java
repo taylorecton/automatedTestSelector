@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+
 /**
  * Class for utilizing SciTools Understand database for static code analysis;
  * This class will allow the test selector to only choose tests relevant to changed files.
@@ -16,6 +17,8 @@ public class DependencyAnalysis {
     private static String libPath;
 
     private static Database db;
+
+    private static final String LAST_ANALYSIS = "lastAnalysis.txt";
 
     /**
      * Main function for class
@@ -33,6 +36,10 @@ public class DependencyAnalysis {
         udbPath = args[0];
         workspacePath = args[1];
         changedFile = args[2];
+
+        // The line below is used to make analysis only run after a certain number of builds
+        // int buildNum = checkLastAnalysis();
+        // int numberOfBuildsToWait = 5;
 
         ArrayList<String> changedModules = getChangedModules();
 
@@ -59,7 +66,10 @@ public class DependencyAnalysis {
 
             createDatabase.waitFor();
             System.out.println(udbPath + " created.");
-        } else {
+        } else /* if (buildNum % numberOfBuildsToWait == 0) */ { /* uncommenting the condition and uncommenting the
+                                                                    assignment of buildNum above allows to only scan
+                                                                    database after a given number of builds */
+
             // scan for changed/added files and analyze files that have changed
             String command = "und -db " + udbPath + " analyze -rescan -changed";
 
@@ -98,6 +108,7 @@ public class DependencyAnalysis {
             */
 
             Entity[] classes = db.ents("class");
+            Entity[] interfaces = db.ents("interface");
 
             /*
             for (Entity c : classes) {                    //
@@ -105,7 +116,7 @@ public class DependencyAnalysis {
             }                                             //
             */
 
-            TreeMap<String, Entity> classTree = getClassTree(classes);
+            TreeMap<String, Entity> classTree = getClassInterfaceTree(classes, interfaces);
 
             for (String module : changedModules) {
                 if (!dependentModules.contains(module)) {
@@ -122,6 +133,8 @@ public class DependencyAnalysis {
         }
 
         writeDependentModules(dependentModules);
+
+        System.out.println("Inside DependencyAnalysis: DependencyAnalysis process successfully completed.");
     }
 
     private static ArrayList<String> getChangedModules() {
@@ -132,8 +145,12 @@ public class DependencyAnalysis {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line;
-            while ((line = bufferedReader.readLine()) != null)
+            System.out.println("Changed modules list received by dependency analysis program:"); // <-- for debugging
+            while ((line = bufferedReader.readLine()) != null) {
                 changedModules.add(line);
+                System.out.println(line);   // <-- for debugging
+            }
+            System.out.println();   // <-- for debugging
 
             bufferedReader.close();
             fileReader.close();
@@ -172,11 +189,15 @@ public class DependencyAnalysis {
                                ArrayList<String> entsWeCareAbout,
                                ArrayList<String> dependencies) {
         // System.out.println("Inside getReferences..."); // <-- for debugging
+        System.out.println(targetClass);
         Entity c = classTree.get(targetClass);
+        System.out.println(c.name());
         Reference[] refs = c.refs(null, "class", true);
         // System.out.println("Iterating through references..."); // <-- for debugging
+        System.out.println("All references for " + targetClass + ":"); // <-- for debugging
         for (Reference ref : refs) {
-            String entityName = ref.ent().name();
+            String entityName = ref.ent().simplename();
+            System.out.println(entityName);  // <-- for debugging
             // System.out.println("Checking reference: " + entityName + "..."); // <-- for debugging
             if (entsWeCareAbout.contains(entityName) && !dependencies.contains(entityName)) {
                 // System.out.println("Adding " + entityName + "..."); // <-- for debugging
@@ -184,6 +205,7 @@ public class DependencyAnalysis {
             }
         }
         // System.out.println("getReferences() finishing...");
+        System.out.println();
     }
 
     /**
@@ -191,15 +213,25 @@ public class DependencyAnalysis {
      * @param classes An array of Entity objects containing all classes in project
      * @return TreeMap with: Keys = Class name; values = Entity objects from database
      */
-    private static TreeMap<String, Entity> getClassTree(Entity[] classes) {
+    private static TreeMap<String, Entity> getClassInterfaceTree(Entity[] classes, Entity[] interfaces) {
         // System.out.println("Inside getClassTree()..."); // <-- for debugging
 
-        TreeMap<String, Entity> classTree = new TreeMap<>();
+        TreeMap<String, Entity> classInterfaceTree = new TreeMap<>();
 
-        for (Entity c : classes) classTree.put(c.name(), c);
+        // System.out.println("Building class tree"); // <-- for debugging
+
+        for (Entity c : classes) {
+//            System.out.println(c.simplename());   // <-- for debugging
+            classInterfaceTree.put(c.simplename(), c);
+        }
+
+        for (Entity i : interfaces) {
+//            System.out.println(i.simplename());
+            classInterfaceTree.put(i.simplename(), i);
+        }
 
         // System.out.println("Returning from getClassTree()..."); // <-- for debugging
-        return classTree;
+        return classInterfaceTree;
     }
 
     /**
@@ -220,6 +252,54 @@ public class DependencyAnalysis {
         }
         // System.out.println("Returning from getProjFileNamesWithoutExtension..."); // <-- for debugging
         return returnThis;
+    }
+
+    private static int checkLastAnalysis() {
+        int buildNum = 0;
+        String fname = workspacePath + "/" + LAST_ANALYSIS;
+        File lastAnalysis = new File(fname);
+
+        if (lastAnalysis.exists()) {
+            System.out.println("Last analysis file exists");
+
+            try {
+                FileReader fileReader = new FileReader(fname);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                String number;
+
+                number = bufferedReader.readLine();
+
+                try {
+                    buildNum = Integer.parseInt(number) + 1;
+                } catch (NumberFormatException e) {
+                    System.err.println(e.getMessage());
+                }
+
+                bufferedReader.close();
+                fileReader.close();
+                lastAnalysis.delete();
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+
+        try {
+            OutputStream outputStream = new FileOutputStream(fname);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter);
+
+            printWriter.println(buildNum);
+
+            printWriter.close();
+            outputStreamWriter.close();
+            outputStream.close();
+        } catch (IOException e) {
+            System.out.println("Error creating file");
+            System.err.println(e.getMessage());
+        }
+
+        return buildNum;
     }
 
     /*

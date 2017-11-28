@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class RegressionTestSelector extends Builder {
 
-    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE, Result.FAILURE);
     private static final String ANNOTATION_START_1 = "@SuiteClasses({";
     private static final String ANNOTATION_START_2 = "@Suite.SuiteClasses({";
     private static final String ANNOTATION_END = "})";

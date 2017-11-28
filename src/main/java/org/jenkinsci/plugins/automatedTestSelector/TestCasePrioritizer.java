@@ -38,7 +38,7 @@ import java.util.TreeMap;
 public class TestCasePrioritizer extends Builder {
 
     // set of build results to consider; currently set to only consider successful and unstable builds
-    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE);
+    private static final ImmutableSet<Result> RESULTS_TO_CONSIDER = ImmutableSet.of(Result.SUCCESS, Result.UNSTABLE, Result.FAILURE);
 
     // possible starts of @SuiteClasses annotation in test suite file, and the end of the annotation
     private static final String ANNOTATION_START_1 = "@SuiteClasses({";
@@ -121,6 +121,10 @@ public class TestCasePrioritizer extends Builder {
     @Override
     public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener)
             throws IOException, InterruptedException {
+        long startTime = System.currentTimeMillis();
+        long stopTime;
+        double elapsedTimeInSeconds;
+
         // Print out user input parameters to verify they are set correctly
         listener.getLogger().println("Running test case prioritizer...");
         listener.getLogger().println("Failure window is set to: " + failureWindow);
@@ -145,7 +149,7 @@ public class TestCasePrioritizer extends Builder {
         // linesForFile holds the lines to put in the test suite file, minus the tests
         ArrayList<String> linesForFile = new ArrayList<>();
         // allTests holds all of the test classes found in the test suite file
-        TreeMap<String, TestPriority> allTests = getAllTests(workspace, linesForFile);
+        TreeMap<String, TestPriority> allTests = getAllTests(workspace, linesForFile, listener);
         // relevantTests will hold the tests found to be relevant to current code changes
         TreeMap<String, TestPriority> relevantTests;
 
@@ -175,6 +179,11 @@ public class TestCasePrioritizer extends Builder {
             // allTests does not contain any values
             listener.getLogger().println("Error: allTests is empty. Cannot prioritize tests.");
         }
+
+        stopTime = System.currentTimeMillis();
+        elapsedTimeInSeconds = (stopTime - startTime) / 1000.0;
+
+        listener.getLogger().println("Test selection and prioritization took " + elapsedTimeInSeconds + " seconds.");
 
         return true;
     }
@@ -334,13 +343,16 @@ public class TestCasePrioritizer extends Builder {
         String output;
         BufferedReader depAnalysisReader = new BufferedReader(
                 new InputStreamReader(dependencyAnalysis.getInputStream(), Charsets.UTF_8) );
+
         while ((output = depAnalysisReader.readLine()) != null) {
             listener.getLogger().println(output);
         }
-        depAnalysisReader.close();
 
         // make sure dependencyAnalysis process terminates before proceeding
         dependencyAnalysis.waitFor();
+        depAnalysisReader.close();
+
+        listener.getLogger().println("Dependency analysis should have finished."); // <-- for debugging
 
         // try to read information from the handoff file; should now contain information from
         // dependency analysis program
@@ -373,10 +385,12 @@ public class TestCasePrioritizer extends Builder {
      * @param linesForFile list containing lines from the test suite file; used to rewrite the file later
      * @return A TreeMap of all tests found in the test suite file
      */
-    private TreeMap<String, TestPriority> getAllTests(FilePath workspace, ArrayList<String> linesForFile)
+    private TreeMap<String, TestPriority> getAllTests(FilePath workspace, ArrayList<String> linesForFile, BuildListener listener)
             throws IOException, InterruptedException {
 
         TreeMap<String, TestPriority> allTests = new TreeMap<>();
+
+        listener.getLogger().println("All tests: "); // <-- for debugging
 
         // try to read the file, read in all of the test names and add them to the list
         try (InputStream inputStream = workspace.child(testSuiteFile).read();
@@ -384,15 +398,24 @@ public class TestCasePrioritizer extends Builder {
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+                if (line.startsWith("//")) // ignore comment lines
+                    continue;
+
                 linesForFile.add(line);
                 if (line.trim().equals(ANNOTATION_START_1) || line.trim().equals(ANNOTATION_START_2)) {
                     line = bufferedReader.readLine();
                     while (line != null && !line.trim().equals(ANNOTATION_END)) {
+                        if (!line.contains(".class")) // ignore potential blank lines
+                            continue;
+
                         line = line.trim();
                         if (line.contains(","))
                             line = line.replace(",", "");
                         TestPriority testPriority = new TestPriority(line);
                         allTests.put(line, testPriority);
+
+                        listener.getLogger().println(line); // <-- for debugging
+
                         line = bufferedReader.readLine();
                     }
                 }
@@ -645,7 +668,7 @@ public class TestCasePrioritizer extends Builder {
             String className;
             String pkgName = classResult.getParent().getName();
 
-            if (pkgName.equals("(root)"))   // UGH
+            if (pkgName.equals("(root)"))
                 pkgName = "";
             else
                 pkgName += '.';

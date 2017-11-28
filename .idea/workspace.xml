@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df9002ad-4d68-4bba-8f07-7819fac31a28" name="Default" comment="" />
+    <list default="true" id="df9002ad-4d68-4bba-8f07-7819fac31a28" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DependencyAnalysis.class" afterPath="$PROJECT_DIR$/DependencyAnalysis.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AllTestsCreator.java" afterPath="$PROJECT_DIR$/AllTestsCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DependencyAnalysis.java" afterPath="$PROJECT_DIR$/DependencyAnalysis.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java" afterPath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" afterPath="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,8 +22,8 @@
       <file leaf-file-name="RegressionTestSelector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="55" column="52" lean-forward="false" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
+            <state relative-caret-position="270">
+              <caret line="43" column="28" lean-forward="false" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#doDependencyAnalysis#0;class#RegressionTestSelector#0" expanded="false" />
@@ -37,20 +44,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCasePrioritizer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestCasePrioritizer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4905">
-              <caret line="339" column="34" lean-forward="true" selection-start-line="339" selection-start-column="34" selection-end-line="339" selection-end-column="34" />
+            <state relative-caret-position="315">
+              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="38" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#updateAllLastPrioritizedNumbers#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#buildFiles#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#setPreviousPrioritizedBuildNums#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-                <element signature="method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="method#doCheckExecutionWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="method#doCheckFailureWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
                 <element signature="method#doCheckPrioritizationWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
@@ -63,32 +68,44 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DependencyAnalysis.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DependencyAnalysis.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.jelly" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="help-executionWindow.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-executionWindow.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="51" lean-forward="false" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="570">
               <caret line="38" column="79" lean-forward="false" selection-start-line="38" selection-start-column="79" selection-end-line="38" selection-end-column="79" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DependencyAnalysis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DependencyAnalysis.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2445">
-              <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
-              <folding>
-                <marker date="1506457175000" expanded="true" signature="2969:3136" ph="//..." />
-                <marker date="1506457175000" expanded="true" signature="4581:5146" ph="{...}" />
-                <marker date="1506457175000" expanded="true" signature="5230:5633" ph="{...}" />
-                <marker date="1506457175000" expanded="true" signature="5639:5962" ph="/**...*/" />
-                <marker date="1506457175000" expanded="true" signature="6216:6999" ph="{...}" />
-                <marker date="1506457175000" expanded="true" signature="7005:7231" ph="/**...*/" />
-                <marker date="1506457175000" expanded="true" signature="7306:7632" ph="{...}" />
-                <marker date="1506457175000" expanded="true" signature="7638:7817" ph="/**...*/" />
-                <marker date="1506457175000" expanded="true" signature="7904:8644" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -108,6 +125,9 @@
       <find>depende</find>
       <find>utf</find>
       <find>getDes</find>
+      <find>list of rel</find>
+      <find>wait</find>
+      <find>buildNum</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,11 +161,13 @@
         <option value="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/DependencyAnalysis.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/DependencyAnalysisOLD.java" />
-        <option value="$PROJECT_DIR$/DependencyAnalysis.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestPriority.java" />
         <option value="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly" />
+        <option value="$PROJECT_DIR$/MethodLevelDepAnalysis.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/MethodLevelDepAnalysis.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java" />
+        <option value="$PROJECT_DIR$/DependencyAnalysis.java" />
       </list>
     </option>
   </component>
@@ -157,10 +179,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="419" />
+    <option name="x" value="104" />
     <option name="y" value="22" />
-    <option name="width" value="1319" />
-    <option name="height" value="1022" />
+    <option name="width" value="1330" />
+    <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -178,6 +200,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -233,25 +256,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="automatedTestSelector" type="462c0819:PsiDirectoryNode" />
-              <item name="RegressionTestSelector" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="automatedTestSelector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="automatedTestSelector" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="automatedTestSelector" type="462c0819:PsiDirectoryNode" />
               <item name="TestCasePrioritizer" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -264,6 +277,7 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector" />
@@ -498,33 +512,33 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="419" y="22" width="1319" height="1022" extended-state="0" />
+    <frame x="104" y="22" width="1330" height="1027" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23957543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17744361" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -540,13 +554,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="2" lean-forward="false" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestList.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/index.jelly">
       <provider selected="true" editor-type-id="text-editor">
@@ -560,14 +567,12 @@
         <state relative-caret-position="345">
           <caret line="23" column="42" lean-forward="true" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#updateAllLastPrioritizedNumbers#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#buildFiles#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#setPreviousPrioritizedBuildNums#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckExecutionWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckFailureWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckPrioritizationWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
@@ -606,7 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -630,14 +634,12 @@
         <state relative-caret-position="225">
           <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#updateAllLastPrioritizedNumbers#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#buildFiles#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#setPreviousPrioritizedBuildNums#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckExecutionWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckFailureWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckPrioritizationWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
@@ -811,26 +813,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/index.jelly">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="108" lean-forward="false" selection-start-line="2" selection-start-column="108" selection-end-line="2" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/TestCasePrioritizer/config.jelly" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileHigh.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-excludesFileLow.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-excludesFileHigh.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFileLow.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-includesFile.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-executionWindow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="51" lean-forward="false" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-failureWindow.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -888,37 +876,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DependencyAnalysis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2445">
-          <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
-          <folding>
-            <marker date="1506457175000" expanded="true" signature="2969:3136" ph="//..." />
-            <marker date="1506457175000" expanded="true" signature="4581:5146" ph="{...}" />
-            <marker date="1506457175000" expanded="true" signature="5230:5633" ph="{...}" />
-            <marker date="1506457175000" expanded="true" signature="5639:5962" ph="/**...*/" />
-            <marker date="1506457175000" expanded="true" signature="6216:6999" ph="{...}" />
-            <marker date="1506457175000" expanded="true" signature="7005:7231" ph="/**...*/" />
-            <marker date="1506457175000" expanded="true" signature="7306:7632" ph="{...}" />
-            <marker date="1506457175000" expanded="true" signature="7638:7817" ph="/**...*/" />
-            <marker date="1506457175000" expanded="true" signature="7904:8644" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="79" lean-forward="false" selection-start-line="38" selection-start-column="79" selection-end-line="38" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestPriority.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
           <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -936,6 +897,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MethodLevelDepAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/index.jelly">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="108" lean-forward="false" selection-start-line="2" selection-start-column="108" selection-end-line="2" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/config.jelly">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -944,10 +919,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer/help-executionWindow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="51" lean-forward="false" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="79" lean-forward="false" selection-start-line="38" selection-start-column="79" selection-end-line="38" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/RegressionTestSelector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="55" column="52" lean-forward="false" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
+        <state relative-caret-position="270">
+          <caret line="43" column="28" lean-forward="false" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#doDependencyAnalysis#0;class#RegressionTestSelector#0" expanded="false" />
@@ -969,17 +960,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jenkinsci/plugins/automatedTestSelector/TestCasePrioritizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4905">
-          <caret line="339" column="34" lean-forward="true" selection-start-line="339" selection-start-column="34" selection-end-line="339" selection-end-column="34" />
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;method#getAllTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#updateAllLastPrioritizedNumbers#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#prioritizeTests#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#buildFiles#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#setPreviousPrioritizedBuildNums#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="docComment;method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
-            <element signature="method#collect#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckExecutionWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckFailureWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckPrioritizationWindow#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
@@ -987,6 +976,16 @@
             <element signature="method#doCheckTestReportDir#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#doCheckUnderstandDatabasePath#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
             <element signature="method#isApplicable#0;class#DescriptorImpl#0;class#TestCasePrioritizer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DependencyAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
