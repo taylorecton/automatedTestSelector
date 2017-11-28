@@ -160,8 +160,10 @@ public class TestCasePrioritizer extends Builder {
             relevantTests = allTests;
         }
 
+        /* TODO Remove if/else ---> it should be okay if allTests is empty
         // checks to make sure allTests contains tests
-        if (!allTests.isEmpty()) {
+        if (!allTests.isEmpty()) { */
+
             // read last prioritized build file and set prioritized build number for tests accordingly
             setPreviousPrioritizedBuildNums(workspace, listener, relevantTests, allTests);
 
@@ -175,10 +177,10 @@ public class TestCasePrioritizer extends Builder {
             // write the test suite file with the sorted tests and write the previous prioritized build file
             // with the list of all tests
             buildFiles(workspace, sortedTests, testList, linesForFile);
-        } else {
+        /* } else {
             // allTests does not contain any values
             listener.getLogger().println("Error: allTests is empty. Cannot prioritize tests.");
-        }
+        } */
 
         stopTime = System.currentTimeMillis();
         elapsedTimeInSeconds = (stopTime - startTime) / 1000.0;
@@ -278,6 +280,7 @@ public class TestCasePrioritizer extends Builder {
 
         }
 
+        /* ************** Uncomment the following block to use all tests if no relevant tests are found
         // the following is executed if none of the changed files relate to the tests,
         // for example: if no changed files are source files
         if (relevantTests.isEmpty()) {
@@ -286,6 +289,7 @@ public class TestCasePrioritizer extends Builder {
             // set relevant tests to allTests and consider all tests for execution
             relevantTests = allTests;
         }
+        */
 
         return relevantTests;
     }
@@ -579,9 +583,11 @@ public class TestCasePrioritizer extends Builder {
                 // after the start of the SuiteClasses annotation, write the tests in prioritized order
                 if (line.equals(ANNOTATION_START_1) || line.equals(ANNOTATION_START_2)) {
                     TestPriority testPriority;
-                    for (int i = 0; i < sortedTests.size() - 1; i++) {
-                        testPriority = sortedTests.get(i);
-                        pwSuiteFile.println(testPriority.getClassName() + ",");
+                    if (!sortedTests.isEmpty()) {
+                        for (int i = 0; i < sortedTests.size() - 1; i++) {
+                            testPriority = sortedTests.get(i);
+                            pwSuiteFile.println(testPriority.getClassName() + ",");
+                        }
                     }
                     if (!sortedTests.isEmpty()) {
                         testPriority = sortedTests.get(sortedTests.size() - 1);

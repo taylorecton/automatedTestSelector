@@ -74,8 +74,7 @@ public class AllTestsCreator {
                     File f = new File(dir.getAbsolutePath() + '/' + fileName);
 
                     // add it to the list of test files if its name matches the regex
-                    if (fileName.matches("[a-zA-Z0-9|/|_]*Test.java$") || 
-                        fileName.matches("[a-zA-Z0-9|/|_]*Test[a-zA-Z0-9|_]*.java$"))
+                    if (fileName.matches("[a-zA-Z0-9|/|_]*Test.java$"))
                         testFiles.add(f);
 
                     // make sure current directory and parent directory are not re-added to queue
